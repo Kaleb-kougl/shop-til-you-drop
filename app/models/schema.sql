@@ -1,0 +1,1 @@
+CREATE DATABASE shopping_app;

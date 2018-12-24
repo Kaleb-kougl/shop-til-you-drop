@@ -4,7 +4,8 @@
   "description": "An application that allows you to have groceries to you so that you don't drop",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,12 @@
     "url": "https://github.com/Kaleb-kougl/shop-til-you-drop/issues"
   },
   "homepage": "https://github.com/Kaleb-kougl/shop-til-you-drop#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  },
   "devDependencies": {
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
