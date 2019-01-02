@@ -3,10 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-let db = {};
+const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
@@ -32,5 +33,12 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.user = require('./user.js')(sequelize, Sequelize);
+db.cart = require('./cart.js')(sequelize, Sequelize);
+db.demo = require('./demo.js')(sequelize, Sequelize);
+
+db.user.hasMany(db.cart);
+db.cart.belongsTo(db.user);
 
 module.exports = db;
