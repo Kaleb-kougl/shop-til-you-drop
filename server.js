@@ -18,7 +18,7 @@ require("./app/controller/routes/html-routes.js")(app);
 
 db.sequelize.sync({ force: true }).then(() => {
     app.get("/", function (req, res) {
-        res.json({ 'hello': 'world' });
+        res.send({ 'hello': 'world' });
     });
 
     app.listen(PORT, () => {
