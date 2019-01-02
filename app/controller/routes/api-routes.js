@@ -1,7 +1,9 @@
+require('dotenv');
 const axios = require('axios');
 
 module.exports = app => {
     app.get("/api/items/:item", (req, res) => {
+        console.log(process.env);
         axios({
             method: "GET",
             url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/site/search?",
