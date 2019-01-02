@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Kaleb-kougl/shop-til-you-drop#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
