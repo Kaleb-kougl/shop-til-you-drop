@@ -38,7 +38,12 @@ db.user = require('./user.js')(sequelize, Sequelize);
 db.cart = require('./cart.js')(sequelize, Sequelize);
 db.demo = require('./demo.js')(sequelize, Sequelize);
 
+// user to cart:
 db.user.hasMany(db.cart);
 db.cart.belongsTo(db.user);
+
+// user to demo:
+db.user.hasOne(db.demo);
+db.demo.belongsTo(db.user);
 
 module.exports = db;
