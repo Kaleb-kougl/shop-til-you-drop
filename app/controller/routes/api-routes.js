@@ -11,11 +11,10 @@ module.exports = app => {
             },
             headers: { "X-RapidAPI-Key": process.env.SPOONACULAR_API_KEY }
         }).then(result => {
-            res.send(result.data.Recipes[0].kvtable);
+            res.send(result.data.Recipes);
         });
     })
     app.get("/api/orders", (req, res) => {
         res.status(300).json("");
     })
-    
 }
