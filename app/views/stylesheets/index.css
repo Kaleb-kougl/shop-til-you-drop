@@ -1,5 +1,10 @@
 body, html {
   height: 100%;
+  font-size: calc(1vw + 1vh + 1vmin);
+}
+
+h1 {
+  font-size: 2em;
 }
 
 .hero-image {
@@ -21,4 +26,16 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+}
+
+.description {
+  font-size: 0.8em;
+}
+
+#product-description {
+  margin-top: 1.5em;
+}
+
+#login-div {
+  margin-top: 2em;
 }
