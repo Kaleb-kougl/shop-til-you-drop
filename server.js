@@ -20,7 +20,7 @@ require('./app/controller/routes/api-routes.js')(app, db);
 require('./app/controller/routes/html-routes.js')(app);
 
 //change force true later
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
     app.get('/', (req, res) => {
         res.send({ hello: 'world' });
     });
