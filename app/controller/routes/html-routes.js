@@ -7,7 +7,7 @@ module.exports = app => {
 
     app.get('/signup', (req, res) => {
         res.status(300).sendFile(path.join(__dirname, '/../../views/html/signup.html'));
-      
+    });
     app.get('/searchResults/:search', (req, res) => {
         res.send(app.locals[req.params.search]);
     })
