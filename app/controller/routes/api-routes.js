@@ -79,7 +79,7 @@ module.exports = (app, db) => {
     app.get("/api/orders", (req, res) => {
         db.cart.findAll({
             where: {
-                username = req.body.username
+                username: req.body.username
             }
         }).then(cart => {
             if (cart) {
