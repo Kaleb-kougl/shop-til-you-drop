@@ -90,5 +90,22 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
-    })
+    });
+
+    //display active orders
+    app.get("/api/orders/active", (req, res) => {
+        db.cart.findAll({
+            where: {
+                pending: true
+            }
+        }).then(orders => {
+            if (orders) {
+                res.status(300).json(orders);
+            } else {
+                res.status(404).send('No active orders');
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    });
 };
