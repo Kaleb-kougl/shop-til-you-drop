@@ -17,14 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         username: {
             type: DataTypes.STRING
         },
-        cartname: {
-            type: DataTypes.STRING
+        orderNumber: {
+            type: DataTypes.INTEGER
         },
         shopper: {
             type: DataTypes.STRING
         },
-        pending: {
-            type: DataTypes.BOOLEAN
+        status: {
+            type: DataTypes.STRING
         }
     });
     return Cart;

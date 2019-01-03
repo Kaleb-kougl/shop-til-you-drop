@@ -30,8 +30,8 @@ module.exports = (app, db) => {
     //when purchase is complete
     app.put("/api/orders/", (req, res) => {
         db.cart.update({
-            pending: 0,
-            updatedAt: ''
+            status: "delivered",
+            updatedAt: ""
         }, {
             where: {
                 username: req.body.username
@@ -51,7 +51,7 @@ module.exports = (app, db) => {
             //username input placeholder
             username: req.body.username,
             shopper: req.body.shopper,
-            pending: 1
+            status: "cart"
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
@@ -92,11 +92,51 @@ module.exports = (app, db) => {
         })
     });
 
+    //make order active
+    app.post("/api/orders/active", (req, res) => {
+        const orderNbrGenerator = () => {
+            let randNbr = 0;
+            for (let i = 0; i < 10; i++) {
+                randNbr += Math.floor(Math.random() * 10);
+            }
+            db.cart.findAll({
+                where: {
+                    status: 'ordered'
+                }
+            }).then(orders => {
+                for (let i = 0; i < orders.length; i++) {
+                    if (orders[i].orderNumber === randNbr) {
+                        randNbr = 0;
+                        for (let i = 0; i < 10; i++) {
+                            randNbr += Math.floor(Math.random() * 10);
+                        }
+                        orderNbrGenerator();
+                    }
+                }
+                return randNbr;
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        db.cart.update({
+            orderNumber: orderNbrGenerator(),
+            status: "ordered"
+        }, {
+            where: {
+                username: req.body.username
+            }
+        }).then(cart => {
+            console.log(cart);
+        }).catch(err => {
+            console.log(err);
+        })
+    });
+
     //display active orders
     app.get("/api/orders/active", (req, res) => {
         db.cart.findAll({
             where: {
-                pending: true
+                status: 'ordered'
             }
         }).then(orders => {
             if (orders) {
