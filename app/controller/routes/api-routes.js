@@ -43,7 +43,7 @@ module.exports = (app, db) => {
         })
     });
 
-    app.post("/api/orders", (req, res) => {
+    app.post("/api/orders/", (req, res) => {
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
@@ -60,7 +60,7 @@ module.exports = (app, db) => {
         })
     });
 
-      app.post('/api/signup', function(req, res) {
+      app.post('/api/signup/', function(req, res) {
         console.log(req.body);
 
         db.User.create({
@@ -76,7 +76,7 @@ module.exports = (app, db) => {
     });
     
     //display user's cart
-    app.get("/api/orders", (req, res) => {
+    app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
                 username: req.body.username
