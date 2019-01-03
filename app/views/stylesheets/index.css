@@ -8,7 +8,7 @@ h1 {
 }
 
 .hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/burger-chips-dinner-70497.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://github.com/Kaleb-kougl/shop-til-you-drop/blob/master/app/views/images/burger-chips-dinner-70497.jpg?raw=true");
   height: 50%;
   min-width: 100%;
 
