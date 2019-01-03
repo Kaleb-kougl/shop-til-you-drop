@@ -28,13 +28,13 @@ module.exports = (app, db) => {
     });
 
     //when purchase is complete
-    app.update("/api/orders/", (req, res) => {
+    app.put("/api/orders/", (req, res) => {
         db.cart.update({
             pending: 0,
             updatedAt: ''
         }, {
             where: {
-                username = req.body.username
+                username: req.body.username
             }
         }).then(cartUpdate => {
             console.log(cartUpdate);
