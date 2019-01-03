@@ -38,8 +38,8 @@ module.exports = (app, db) => {
             }
         }).then(cartUpdate => {
             console.log(cartUpdate);
-        }).catch(er => {
-            console.log(error);
+        }).catch(err => {
+            console.log(err);
         })
     });
 
