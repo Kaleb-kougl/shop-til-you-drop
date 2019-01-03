@@ -1,7 +1,5 @@
 require('dotenv');
 const axios = require('axios');
-var db = require('../../models');
-
 
 module.exports = (app, db) => {
     app.get("/api/items/:item", (req, res) => {
@@ -48,10 +46,12 @@ module.exports = (app, db) => {
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
+            cartname: req.body.cartname,
             //username input placeholder
             username: req.body.username,
+            UserEmail: req.body.userEmail,
             shopper: req.body.shopper,
-            pending: 1
+            pending: true
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
