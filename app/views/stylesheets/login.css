@@ -1,0 +1,23 @@
+body, html {
+  height: 100vh;
+}
+
+body {
+  position: fixed;
+  top: 15vh;
+}
+
+#login-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#signup-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.txt {
+  margin: 0;
+}
