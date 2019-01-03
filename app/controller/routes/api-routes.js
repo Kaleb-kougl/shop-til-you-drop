@@ -1,7 +1,5 @@
 require('dotenv');
 const axios = require('axios');
-var db = require('../../models');
-
 
 module.exports = (app, db) => {
     app.get("/api/items/:item", (req, res) => {
@@ -43,15 +41,17 @@ module.exports = (app, db) => {
         })
     });
 
-    app.post("/api/orders", (req, res) => {
+    app.post("/api/orders/", (req, res) => {
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
+            cartname: req.body.cartname,
             //username input placeholder
             username: req.body.username,
+            UserEmail: req.body.userEmail,
             shopper: req.body.shopper,
-            pending: 1
+            pending: true
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
@@ -60,7 +60,7 @@ module.exports = (app, db) => {
         })
     });
 
-      app.post('/api/signup', function(req, res) {
+      app.post('/api/signup/', function(req, res) {
         console.log(req.body);
 
         db.User.create({
@@ -76,7 +76,7 @@ module.exports = (app, db) => {
     });
     
     //display user's cart
-    app.get("/api/orders", (req, res) => {
+    app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
                 username: req.body.username
