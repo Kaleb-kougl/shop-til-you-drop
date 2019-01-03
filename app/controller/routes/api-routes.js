@@ -2,6 +2,7 @@ require('dotenv');
 const axios = require('axios');
 
 module.exports = (app, db) => {
+    // uses axios to get search results and puts results in app api
     app.get("/api/items/:item", (req, res) => {
         const query = req.params.item;
         axios({
@@ -25,11 +26,10 @@ module.exports = (app, db) => {
         });
     });
 
-    //when purchase is complete
+    // when purchase is complete
     app.put("/api/orders/", (req, res) => {
         db.cart.update({
             status: "delivered",
-            updatedAt: ""
         }, {
             where: {
                 username: req.body.username
@@ -41,6 +41,7 @@ module.exports = (app, db) => {
         })
     });
 
+    // add item to cart
     app.post("/api/orders/", (req, res) => {
         db.cart.create({
             item: req.body.item,
@@ -51,8 +52,7 @@ module.exports = (app, db) => {
             username: req.body.username,
             UserEmail: req.body.userEmail,
             shopper: req.body.shopper,
-            status: "cart"
-
+            status: "inCart"
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
@@ -84,7 +84,7 @@ module.exports = (app, db) => {
             }
         }).then(cart => {
             if (cart) {
-                res.status(300).json(cart);
+                res.status(200).json(cart);
             } else {
                 res.status(404).send('Nothing is in your cart');
             }
@@ -94,7 +94,7 @@ module.exports = (app, db) => {
     });
 
     //make order active
-    app.post("/api/orders/active", (req, res) => {
+    app.post("/api/orders/active/", (req, res) => {
         const orderNbrGenerator = () => {
             let randNbr = '';
             for (let i = 0; i < 10; i++) {
@@ -122,8 +122,6 @@ module.exports = (app, db) => {
                 }).catch(err => {
                     console.log(err);
                 })
-                console.log(randNbr);
-                return randNbr;
             }).catch(err => {
                 console.log(err);
             })
@@ -132,17 +130,30 @@ module.exports = (app, db) => {
     });
 
     //display active orders
-    app.get("/api/orders/active", (req, res) => {
+    app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
             where: {
                 status: 'ordered'
             }
         }).then(orders => {
-            if (orders) {
-                res.status(300).json(orders);
-            } else {
+            if (orders[0] === 0) {
                 res.status(404).send('No active orders');
+            } else {
+                res.status(200).json(orders);
             }
+        }).catch(err => {
+            console.log(err);
+        })
+    });
+
+    //delete order from active api when claimed by shopper
+    app.put("/api/orders/active/", (req, res) => {
+        db.cart.destroy({
+            where: {
+                orderNumber: req.body.orderNumber
+            }
+        }).then(order => {
+            res.status(200).json(order);
         }).catch(err => {
             console.log(err);
         })
