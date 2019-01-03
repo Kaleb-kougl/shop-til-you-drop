@@ -5,7 +5,11 @@ module.exports = app => {
         res.status(300).sendFile(path.join(__dirname, '/../../views/html/index.html'));
     });
 
-    app.get('*', (req, res) => {
-        res.status(404).send('File not found');
+    app.get('/signup', (req, res) => {
+        res.status(300).sendFile(path.join(__dirname, '/../../views/html/signup.html'));
     });
+
+    // app.get('*', (req, res) => {
+    //     res.status(404).send('File not found');
+    // });
 };

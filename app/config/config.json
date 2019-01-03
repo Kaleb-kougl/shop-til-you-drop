@@ -1,14 +1,14 @@
 {
-  "development": {
-      "username": "root",
-      "password": "root",
-      "database": "shopping_app",
-      "host": "127.0.0.1",
-      "port": 3307,
-      "dialect": "mysql"
-  },
-  "production": {
-      "use_env_variable": "JAWSDB_URL",
-      "dialect": "mysql"
-  }
+    "development": {
+        "username": "root",
+        "password": "rootpass",
+        "database": "shopping_app",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "dialect": "mysql"
+    },
+    "production": {
+        "use_env_variable": "JAWSDB_URL",
+        "dialect": "mysql"
+    }
 }
