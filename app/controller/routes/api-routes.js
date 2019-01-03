@@ -95,7 +95,7 @@ module.exports = (app, db) => {
     //make order active
     app.post("/api/orders/active", (req, res) => {
         const orderNbrGenerator = () => {
-            let randNbr = 0;
+            let randNbr = '';
             for (let i = 0; i < 10; i++) {
                 randNbr += Math.floor(Math.random() * 10);
             }
@@ -106,30 +106,28 @@ module.exports = (app, db) => {
             }).then(orders => {
                 for (let i = 0; i < orders.length; i++) {
                     if (orders[i].orderNumber === randNbr) {
-                        randNbr = 0;
-                        for (let i = 0; i < 10; i++) {
-                            randNbr += Math.floor(Math.random() * 10);
-                        }
                         orderNbrGenerator();
                     }
                 }
+                db.cart.update({
+                    orderNumber: parseInt(randNbr),
+                    status: "ordered"
+                }, {
+                    where: {
+                        username: req.body.username
+                    }
+                }).then(cart => {
+                    res.json(cart);
+                }).catch(err => {
+                    console.log(err);
+                })
+                console.log(randNbr);
                 return randNbr;
             }).catch(err => {
                 console.log(err);
             })
         }
-        db.cart.update({
-            orderNumber: orderNbrGenerator(),
-            status: "ordered"
-        }, {
-            where: {
-                username: req.body.username
-            }
-        }).then(cart => {
-            console.log(cart);
-        }).catch(err => {
-            console.log(err);
-        })
+        orderNbrGenerator();
     });
 
     //display active orders
