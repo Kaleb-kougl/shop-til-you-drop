@@ -1,0 +1,21 @@
+body, html {
+  height: 100vh;
+}
+
+body {
+  position: fixed;
+  top: 15vh;
+}
+
+#login-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#signup-container {
+  margin-top: 18vh;
+}
+
+.txt {
+  margin: 0;
+}
