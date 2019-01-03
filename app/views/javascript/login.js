@@ -1,3 +1,4 @@
+
 $('#login-btn').on('click', function(event) {
     event.preventDefault();
     var email = $('#email-input').val();
