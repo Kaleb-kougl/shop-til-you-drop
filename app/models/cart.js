@@ -3,28 +3,38 @@ module.exports = (sequelize, DataTypes) => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
         item: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         price: {
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
+            allowNull: false
         },
         quantity: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         username: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         orderNumber: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 777,
+            allowNull: false
         },
         shopper: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         status: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: 'inCart',
+            allowNull: false
         }
     });
     return Cart;
