@@ -26,11 +26,29 @@ module.exports = (app, db) => {
             res.redirect(`/searchResults/${req.params.item}`);
         });
     });
+
+    //when purchase is complete
+    app.update("/api/orders/", (req, res) => {
+        db.cart.update({
+            pending: 0,
+            updatedAt: ''
+        }, {
+            where: {
+                username = req.body.username
+            }
+        }).then(cartUpdate => {
+            console.log(cartUpdate);
+        }).catch(err => {
+            console.log(err);
+        })
+    });
+
     app.post("/api/orders", (req, res) => {
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
+            //username input placeholder
             username: req.body.username,
             shopper: req.body.shopper,
             pending: 1
@@ -40,7 +58,8 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
-    })
+    });
+
       app.post('/api/signup', function(req, res) {
         console.log(req.body);
 
@@ -55,8 +74,21 @@ module.exports = (app, db) => {
             res.status(200);
         });
     });
-};
+    
+    //display user's cart
     app.get("/api/orders", (req, res) => {
-        res.status(300).json("");
+        db.cart.findAll({
+            where: {
+                username = req.body.username
+            }
+        }).then(cart => {
+            if (cart) {
+                res.status(300).json(cart);
+            } else {
+                res.status(404).send('Nothing is in your cart');
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     })
-}
+};
