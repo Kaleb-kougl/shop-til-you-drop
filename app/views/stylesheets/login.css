@@ -13,9 +13,7 @@ body {
 }
 
 #signup-container {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
+  margin-top: 18vh;
 }
 
 .txt {
