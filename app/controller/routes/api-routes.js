@@ -1,17 +1,20 @@
 require('dotenv');
+var passport = require('passport');
 const axios = require('axios');
 
 module.exports = (app, db) => {
+
     // uses axios to get search results and puts results in app api
-    app.get("/api/items/:item", (req, res) => {
+    app.get('/api/items/:item', (req, res) => {
+
         const query = req.params.item;
         axios({
             method: 'GET',
             url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/site/search?',
             params: {
-              query: query
+                query: query
             },
-            headers: { "X-RapidAPI-Key": process.env.SPOONACULAR_API_KEY }
+            headers: { 'X-RapidAPI-Key': process.env.SPOONACULAR_API_KEY }
         }).then(results => {
             let data = [];
             for (let i = 0; i < results.data.Recipes.length; i++) {
@@ -19,7 +22,7 @@ module.exports = (app, db) => {
                     name: results.data.Recipes[i].name,
                     cost: results.data.Recipes[i].dataPoints[0].value,
                     imageUrl: results.data.Recipes[i].image
-                }
+                };
             }
             app.locals[query] = data;
             res.redirect(`/searchResults/${req.params.item}`);
@@ -61,8 +64,9 @@ module.exports = (app, db) => {
         })
     });
 
-      app.post('/api/signup/', function(req, res) {
+    app.post('/api/signup/', function(req, res) {
         console.log(req.body);
+        console.log('HI');
 
         db.User.create({
             email: req.body.email,
@@ -75,8 +79,22 @@ module.exports = (app, db) => {
             res.status(200);
         });
     });
-    
+
+    app.post(
+        '/api/login',
+        passport.authenticate('local', {
+            failureRedirect: '/signup'
+        }),
+        function(req, res) {
+            // console.log('user', req.user);
+            // res.send('hi');
+            res.json('/loggedin');
+            // res.redirect('/loggedin');
+        }
+    );
+
     //display user's cart
+
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
@@ -95,41 +113,29 @@ module.exports = (app, db) => {
 
     //make order active
     app.post("/api/orders/active/", (req, res) => {
+
         const orderNbrGenerator = () => {
             let randNbr = '';
             for (let i = 0; i < 10; i++) {
                 randNbr += Math.floor(Math.random() * 10);
             }
-            db.cart.findAll({
-                where: {
-                    status: 'ordered'
-                }
-            }).then(orders => {
-                for (let i = 0; i < orders.length; i++) {
-                    if (orders[i].orderNumber === randNbr) {
-                        orderNbrGenerator();
-                    }
-                }
-                db.cart.update({
-                    orderNumber: parseInt(randNbr),
-                    status: "ordered"
-                }, {
+            db.cart
+                .findAll({
                     where: {
-                        username: req.body.username
+                        status: 'ordered'
                     }
-                }).then(cart => {
-                    res.json(cart);
-                }).catch(err => {
-                    console.log(err);
                 })
+
             }).catch(err => {
                 console.log(err);
             })
         }
+
         orderNbrGenerator();
     });
 
     //display active orders
+
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
             where: {
@@ -157,5 +163,6 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
+
     });
 };
