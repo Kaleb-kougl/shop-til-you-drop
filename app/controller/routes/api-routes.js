@@ -1,7 +1,7 @@
 require('dotenv');
 const axios = require('axios');
 
-module.exports = app => {
+module.exports = (app, db) => {
     app.get("/api/items/:item", (req, res) => {
         const query = req.params.item;
         axios({
@@ -23,6 +23,21 @@ module.exports = app => {
             app.locals[query] = data;
             res.redirect(`/searchResults/${req.params.item}`);
         });
+    });
+    app.post("/api/orders", (req, res) => {
+        db.cart.create({
+            item: req.body.item,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            username: req.body.username,
+            shopper: req.body.shopper,
+            pending: 1
+        }).then(cart => {
+            console.log(cart);
+            res.send('Hey');
+        }).catch(err => {
+            console.log(err);
+        })
     })
     app.get("/api/orders", (req, res) => {
         res.status(300).json("");
