@@ -20,8 +20,4 @@ module.exports = app => {
     app.get('*', (req, res) => {
         res.status(404).send('File not found');
     });
-
-    // app.get('*', (req, res) => {
-    //     res.status(404).send('File not found');
-    // });
 };

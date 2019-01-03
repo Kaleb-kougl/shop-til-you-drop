@@ -1,7 +1,5 @@
 require('dotenv');
 const axios = require('axios');
-var db = require('../../models');
-
 
 module.exports = (app, db) => {
     app.get("/api/items/:item", (req, res) => {
@@ -30,8 +28,8 @@ module.exports = (app, db) => {
     //when purchase is complete
     app.put("/api/orders/", (req, res) => {
         db.cart.update({
-            pending: 0,
-            updatedAt: ''
+            status: "delivered",
+            updatedAt: ""
         }, {
             where: {
                 username: req.body.username
@@ -43,15 +41,18 @@ module.exports = (app, db) => {
         })
     });
 
-    app.post("/api/orders", (req, res) => {
+    app.post("/api/orders/", (req, res) => {
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
+            cartname: req.body.cartname,
             //username input placeholder
             username: req.body.username,
+            UserEmail: req.body.userEmail,
             shopper: req.body.shopper,
-            pending: 1
+            status: "cart"
+
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
@@ -60,7 +61,7 @@ module.exports = (app, db) => {
         })
     });
 
-      app.post('/api/signup', function(req, res) {
+      app.post('/api/signup/', function(req, res) {
         console.log(req.body);
 
         db.User.create({
@@ -76,7 +77,7 @@ module.exports = (app, db) => {
     });
     
     //display user's cart
-    app.get("/api/orders", (req, res) => {
+    app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
                 username: req.body.username
@@ -90,5 +91,60 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
-    })
+    });
+
+    //make order active
+    app.post("/api/orders/active", (req, res) => {
+        const orderNbrGenerator = () => {
+            let randNbr = '';
+            for (let i = 0; i < 10; i++) {
+                randNbr += Math.floor(Math.random() * 10);
+            }
+            db.cart.findAll({
+                where: {
+                    status: 'ordered'
+                }
+            }).then(orders => {
+                for (let i = 0; i < orders.length; i++) {
+                    if (orders[i].orderNumber === randNbr) {
+                        orderNbrGenerator();
+                    }
+                }
+                db.cart.update({
+                    orderNumber: parseInt(randNbr),
+                    status: "ordered"
+                }, {
+                    where: {
+                        username: req.body.username
+                    }
+                }).then(cart => {
+                    res.json(cart);
+                }).catch(err => {
+                    console.log(err);
+                })
+                console.log(randNbr);
+                return randNbr;
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        orderNbrGenerator();
+    });
+
+    //display active orders
+    app.get("/api/orders/active", (req, res) => {
+        db.cart.findAll({
+            where: {
+                status: 'ordered'
+            }
+        }).then(orders => {
+            if (orders) {
+                res.status(300).json(orders);
+            } else {
+                res.status(404).send('No active orders');
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    });
 };
