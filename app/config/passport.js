@@ -30,6 +30,7 @@ passport.use(
                     });
                 }
                 // If none of the above, return the user
+                console.log(dbUser.dataValues.role);
                 return done(null, dbUser);
             });
         }
