@@ -45,8 +45,7 @@ module.exports = (app, db) => {
             price: req.body.price,
             quantity: req.body.quantity,
             //username input placeholder
-            username: app.locals.user,
-            shopper: req.body.shopper
+            username: app.locals.user
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
