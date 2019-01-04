@@ -5,7 +5,7 @@ module.exports = (app, db) => {
     app.post('/api/check', function(req, res) {
         console.log(req.body);
         db.User.findOne({
-            attributes: ['email'],
+            attributes: ['email', 'role', 'activeuser'],
             where: {
                 email: req.body.email
             }
