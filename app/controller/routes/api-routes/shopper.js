@@ -2,33 +2,21 @@ module.exports = (app, db) => {
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
-            // group: 'orderNumber',
             where: {
                 status: 'ordered'
             }
         }).then(order => {
             let orderGroups = {};
             let count = 0;
-            // class Order {
-            //     constructor(object) {
-            //         this.object = object;
-            //     }
-            // }
             for (let i = 0; i < order.length; i++) {
-                // let index = orderGroups.indexOf(order[i].orderNumber);
-                // if (index !== -1) {
-                //     orderGroups[index].push(order[i]);
-                // } else {
-                    if (order[i].orderNumber.toString() === orderGroups[order[i].orderNumber.toString()]) {
-                        
+                    if (orderGroups[order[i].orderNumber.toString()] === undefined) {
+                        orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
+                    } else {
+                        let previous = orderGroups[order[i].orderNumber.toString()];
+                        console.log(previous);
+                        console.log({...previous, ...order[i].dataValues});
+                        orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
                     }
-                    orderGroups[order[i].orderNumber.toString()] = [...order];
-                    // orderGroups[count] = new Order;
-                    count++;
-                // }
-                console.log('');
-                // console.log(index);
-                console.log(count);
             }
             res.status(200).json(orderGroups);
         }).catch(err => {

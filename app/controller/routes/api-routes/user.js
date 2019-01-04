@@ -44,8 +44,7 @@ module.exports = (app, db) => {
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
-            // username: app.locals.user
-            username: 'francis@gmail.com'
+            username: app.locals.user
 
         }).then(cart => {
             console.log(cart);
@@ -59,8 +58,7 @@ module.exports = (app, db) => {
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
-                // username: app.locals.user,
-                username: 'francis@gmail.com',
+                username: app.locals.user,
                 status: 'inCart'
             }
         }).then(cart => {
@@ -96,9 +94,7 @@ module.exports = (app, db) => {
                     status: "ordered"
                 }, {
                     where: {
-                        //change
-                        // username: app.locals.user,
-                        username: 'francis@gmail.com',
+                        username: app.locals.user,
                         status: 'inCart'
                     }
                 }).then(cart => {
