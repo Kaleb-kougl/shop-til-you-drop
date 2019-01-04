@@ -2,9 +2,9 @@ $('#login-btn').on('click', function(event) {
     event.preventDefault();
     var email = $('#email-input').val();
     var password = $('#password-input').val();
-    console.log('hi');
-    console.log(email);
-    console.log(password);
+    // console.log('hi');
+    // console.log(email);
+    // console.log(password);
 
     $.get('/api/login', {
         email: email,

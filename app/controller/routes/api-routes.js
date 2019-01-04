@@ -9,7 +9,6 @@ module.exports = (app, db) => {
                 email: req.body.email
             }
         }).then(function(project) {
-            // console.log(project.email);
             res.json(project);
         });
     });
@@ -28,7 +27,6 @@ module.exports = (app, db) => {
             .catch(function(err) {
                 console.log(err);
                 res.json(err);
-                // res.status(422).json(err.errors[0].message);
             });
     });
 
@@ -36,30 +34,6 @@ module.exports = (app, db) => {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
-    });
-
-    app.post(
-        '/api/login/',
-        passport.authenticate('local', {
-            successRedirect: '/loggedin',
-            failureRedirect: '/'
-        })
-    );
-
-    // Route for getting some data about our user to be used client side
-    app.get('/api/user_data', function(req, res) {
-        if (!req.user) {
-            // The user is not logged in, send back an empty object
-            res.json({});
-        } else {
-            // Otherwise send back the user's email and id
-            // Sending back a password, even a hashed password, isn't a good idea
-            res.json({
-                email: req.user.email,
-                role: req.user.role,
-                activeuser: req.user.activeuser
-            });
-        }
     });
 
     app.get('/api/login', function(req, res, next) {
@@ -77,7 +51,6 @@ module.exports = (app, db) => {
                     console.log(err);
                     return next(err);
                 }
-                // console.log(user);
                 return res.json(user);
             });
         })(req, res, next);
