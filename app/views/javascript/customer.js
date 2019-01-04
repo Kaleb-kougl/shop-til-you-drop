@@ -9,5 +9,30 @@
 // Or with jQuery
 
 $(document).ready(function () {
-    $('.tooltipped').tooltip();
+    // $("#search-text").val();
+    $("#search-btn").on("click", function () {
+        // console.log("hello");
+        var search = $("#textarea1").val()
+        console.log(search);
+
+        $.ajax({
+            type: "GET",
+            url: '/api/items/' + search,
+            success: function (res) {
+                console.log(res);
+                // var items = res.findCompletedItemsResponse[0].searchResult[0].item;
+                // var data = "";
+                // for (var i = 0; i < results.data.Recipes.length; i++) {
+                //     data += "<div>";
+                //     data += "<img src='" + imageURL + "  '/>";
+                //     data += "  " + cost + " - ";
+                // };
+                // $('.results').html(ins);
+            }
+        });
+
+    });
 });
+
+// $('.tooltipped').tooltip();
+// });
