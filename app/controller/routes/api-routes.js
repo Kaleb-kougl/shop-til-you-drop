@@ -1,7 +1,7 @@
 var passport = require('passport');
 
 module.exports = (app, db) => {
-    // don't know what this does and can't get route to work tbr
+    // used in signup -- checks for email existence before allowing you to enter a new email
     app.post('/api/check', function(req, res) {
         console.log(req.body);
         db.User.findOne({
@@ -38,7 +38,6 @@ module.exports = (app, db) => {
         req.logout();
         res.redirect('/');
     });
-
 
     app.get('/api/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
