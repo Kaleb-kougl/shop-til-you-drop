@@ -94,7 +94,8 @@ module.exports = (app, db) => {
                     status: "ordered"
                 }, {
                     where: {
-                        username: app.locals.user
+                        username: app.locals.user,
+                        status: 'inCart'
                     }
                 }).then(cart => {
                     res.json(cart);
