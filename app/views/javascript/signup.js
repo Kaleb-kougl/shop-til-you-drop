@@ -6,7 +6,7 @@ $('#signup').on('click', function(event) {
     // console.log(email);
     // console.log(password);
 
-    $.post('/api/signup', {
+    $.post('/api/signup/', {
         email: email,
         password: password,
         role: 'user',
