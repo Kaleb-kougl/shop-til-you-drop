@@ -45,7 +45,7 @@ module.exports = (app, db) => {
             price: req.body.price,
             quantity: req.body.quantity,
             //username input placeholder
-            username: req.body.username,
+            username: app.locals.user,
             shopper: req.body.shopper
         }).then(cart => {
             console.log(cart);
@@ -54,13 +54,12 @@ module.exports = (app, db) => {
             console.log(err);
         })
     });
-
         
     // display user's cart
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
-                username: req.body.username
+                username: app.locals.user
             }
         }).then(cart => {
             if (cart) {
@@ -95,7 +94,7 @@ module.exports = (app, db) => {
                     status: "ordered"
                 }, {
                     where: {
-                        username: req.body.username
+                        username: app.locals.user
                     }
                 }).then(cart => {
                     res.json(cart);

@@ -1,6 +1,7 @@
 var passport = require('passport');
 
 module.exports = (app, db) => {
+    // don't know what this does and can't get route to work tbr
     app.post('/api/check', function(req, res) {
         console.log(req.body);
         db.User.findOne({
@@ -14,6 +15,7 @@ module.exports = (app, db) => {
         });
     });
 
+    // Sign up functionality
     app.post('/api/signup/', function(req, res) {
         console.log(req.body);
         db.User.create({
@@ -23,6 +25,7 @@ module.exports = (app, db) => {
             activeuser: req.body.activeuser
         })
             .then(function() {
+                app.locals.user = req.body.email;
                 res.redirect(307, '/api/login');
             })
             .catch(function(err) {
@@ -38,6 +41,7 @@ module.exports = (app, db) => {
         res.redirect('/');
     });
 
+    // don't know what this does tbr
     app.post(
         '/api/login/',
         passport.authenticate('local', {
@@ -62,6 +66,7 @@ module.exports = (app, db) => {
         }
     });
 
+    // login functionality
     app.get('/api/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
             if (err) {
@@ -78,6 +83,8 @@ module.exports = (app, db) => {
                     return next(err);
                 }
                 // console.log(user);
+                app.locals.user = user.dataValues.email;
+                console.log(user);
                 return res.json(user);
             });
         })(req, res, next);
