@@ -2,15 +2,35 @@ module.exports = (app, db) => {
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
+            // group: 'orderNumber',
             where: {
                 status: 'ordered'
             }
-        }).then(orders => {
-            if (orders[0] === 0) {
-                res.status(404).send('No active orders');
-            } else {
-                res.status(200).json(orders);
+        }).then(order => {
+            let orderGroups = {};
+            let count = 0;
+            // class Order {
+            //     constructor(object) {
+            //         this.object = object;
+            //     }
+            // }
+            for (let i = 0; i < order.length; i++) {
+                // let index = orderGroups.indexOf(order[i].orderNumber);
+                // if (index !== -1) {
+                //     orderGroups[index].push(order[i]);
+                // } else {
+                    if (order[i].orderNumber.toString() === orderGroups[order[i].orderNumber.toString()]) {
+                        
+                    }
+                    orderGroups[order[i].orderNumber.toString()] = [...order];
+                    // orderGroups[count] = new Order;
+                    count++;
+                // }
+                console.log('');
+                // console.log(index);
+                console.log(count);
             }
+            res.status(200).json(orderGroups);
         }).catch(err => {
             console.log(err);
         })
