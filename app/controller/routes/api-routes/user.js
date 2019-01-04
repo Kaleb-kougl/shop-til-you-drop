@@ -47,7 +47,7 @@ module.exports = (app, db) => {
     });
 
         
-    //display user's cart
+    // display user's cart
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
@@ -99,5 +99,4 @@ module.exports = (app, db) => {
         }
         placeOrder();
     });
-
 }
