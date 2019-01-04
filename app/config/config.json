@@ -4,7 +4,7 @@
         "password": "root",
         "database": "shopping_app",
         "host": "127.0.0.1",
-        "port": 3307,
+        "port": 3308,
         "dialect": "mysql"
     },
     "production": {
