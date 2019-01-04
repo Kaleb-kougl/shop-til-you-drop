@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         shopper: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 'none'
         },
         status: {
             type: DataTypes.STRING,
