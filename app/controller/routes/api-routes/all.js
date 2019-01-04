@@ -4,7 +4,7 @@ module.exports = (app, db) => {
     // used in signup -- checks for email existence before allowing you to enter a new email
     app.post('/api/check', function(req, res) {
         db.User.findOne({
-            attributes: ['email'],
+            attributes: ['email', 'role', 'activeuser'],
             where: {
                 email: req.body.email
             }
