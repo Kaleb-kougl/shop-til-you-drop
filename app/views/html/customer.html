@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop Til You Drop Customer Page</title>
+    <!-- Compiled and minified CSS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../stylesheets/customer.css" media="screen" title="no title">
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col s2">
+            <a href="#!" class="brand-logo"><img id="logo-main" src="../images/logo1.png" alt="Logo"></a>
+        </div>
+        <div class="col s8">
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1" id="search-text">Item Search (i.e. Apple)</label>
+                </div>
+                <div class="col s6"><a href="sass.html"><i class="material-icons">search</i></a>
+                    <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover me!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s2">
+            <a href="#!" id="account-icon" class="secondary-content"><i class="medium material-icons">account_circle</i></a>
+        </div>
+    </div>
+    <!-- <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo"><img id="logo-main" src="../images/logo1.png" alt="Logo"></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html"></a>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <label for="textarea1" id="search-text">Item Search (i.e. Apple)</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+                <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+                <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+        </div>
+    </nav> -->
+    <div class="row">
+        <!-- <div class="col s12">This div is 12-columns wide on all screen sizes</div> -->
+        <div class="col s6">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h4>Shopping List</h4>
+                </li>
+                <li class="collection-item">
+                    <div>Item 1<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+                </li>
+                <li class="collection-item">
+                    <div>Item 2<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+                </li>
+                <li class="collection-item">
+                    <div>Item 3<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+                </li>
+                <li class="collection-item">
+                    <div>Item 4<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="col s6">Tooltip Pop-Up
+            <img id="placeholder" src="../images/dancing-vegetables-cucumber-broccoli.jpg" alt="Tooltip Placeholder">
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+    <script src="../javascript/customer.js"></script>
+</body>
+
+</html>
