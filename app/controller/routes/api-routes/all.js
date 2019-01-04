@@ -3,7 +3,6 @@ const passport = require('passport');
 module.exports = (app, db) => {
     // used in signup -- checks for email existence before allowing you to enter a new email
     app.post('/api/check', function(req, res) {
-        console.log(req.body);
         db.User.findOne({
             attributes: ['email'],
             where: {
@@ -54,6 +53,7 @@ module.exports = (app, db) => {
                     console.log(err);
                     return next(err);
                 }
+                app.locals.user = req.body.user;
                 return res.json(user);
             });
         })(req, res, next);

@@ -58,7 +58,8 @@ module.exports = (app, db) => {
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
-                username: app.locals.user
+                username: app.locals.user,
+                status: 'inCart'
             }
         }).then(cart => {
             if (cart) {
