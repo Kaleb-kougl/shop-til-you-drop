@@ -26,6 +26,10 @@ module.exports = app => {
         res.send(app.locals[req.params.search]);
     });
 
+    app.get('/pickOrder', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
+    });
+
     app.get('*', (req, res) => {
         res.status(404).send('File not found');
     });
