@@ -25,15 +25,16 @@ module.exports = (app, db) => {
             },
             headers: { "X-RapidAPI-Key": process.env.SPOONACULAR_API_KEY }
         }).then(results => {
-            let data = [];
-            for (let i = 0; i < results.data.Recipes.length; i++) {
-                data[i] = {
-                    name: results.data.Recipes[i].name,
-                    cost: results.data.Recipes[i].dataPoints[0].value,
-                    imageUrl: results.data.Recipes[i].image
-                }
-            }
-            app.locals[query] = data;
+            // let data = [];
+            // for (let i = 0; i < results.data.Recipes.length; i++) {
+            //     data[i] = {
+            //         name: results.data.Recipes[i].name,
+            //         cost: results.data.Recipes[i].dataPoints[0].value,
+            //         imageUrl: results.data.Recipes[i].image
+            //     }
+            // }
+            // app.locals[query] = data;
+            app.locals[query] = results.data.Recipes;
             res.redirect(`/searchResults/${req.params.item}`);
         });
     });
