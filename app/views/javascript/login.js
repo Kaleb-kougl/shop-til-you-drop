@@ -1,10 +1,11 @@
 $('#login-btn').on('click', function(event) {
     event.preventDefault();
-    var email = $('#email-input').val();
-    var password = $('#password-input').val();
-    // console.log('hi');
-    // console.log(email);
-    // console.log(password);
+    var email = $('#email-input')
+        .val()
+        .trim();
+    var password = $('#password-input')
+        .val()
+        .trim();
 
     $.get('/api/login', {
         email: email,
@@ -23,11 +24,5 @@ $('#login-btn').on('click', function(event) {
             window.location.replace('/loggedin');
             console.log(role);
         }
-        // if (data === '/login') {
-        //     alert('Please check your username and password!');
-        // }
     });
-    // .catch(function(err) {
-    //     console.log('error: ' + JSON.stringify(err));
-    // });
 });
