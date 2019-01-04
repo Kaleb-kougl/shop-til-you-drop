@@ -6,12 +6,24 @@ $('#signup').on('click', function(event) {
     // console.log(email);
     // console.log(password);
 
-    $.post('/api/signup/', {
-        email: email,
-        password: password,
-        role: 'user',
-        activeuser: true
+    // 1. check for duplication
+    $.post('/api/check', {
+        email: email
     }).then(function(data) {
-        console.log(data);
+        // 2. if user isn't in the db, add them
+        if (data == null) {
+            // alert('No email');
+            $.post('/api/signup', {
+                email: email,
+                password: password,
+                role: 'user',
+                activeuser: true
+            }).then(function(data) {
+                console.log(data);
+            });
+        } else {
+            // 3. if user is in db, alert saying email exists
+            alert('Email exists!');
+        }
     });
 });
