@@ -1,5 +1,5 @@
 module.exports = (app, db) => {
-    //
+    // admin disable abilities
     app.post("/api/admin/disable", (req, res) => {
         db.user.update({
             activeUser: false
@@ -10,9 +10,12 @@ module.exports = (app, db) => {
         })
     });
 
+    
     app.get("/api/admin/users", (req, res) => {
         db.user.findAll().then(users => {
             res.json(users);
         })
     });
+
+    
 }
