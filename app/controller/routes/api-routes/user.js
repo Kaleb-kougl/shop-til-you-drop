@@ -2,6 +2,18 @@ require('dotenv');
 const axios = require('axios');
 
 module.exports = (app, db) => {
+    // delivery and contact information storage
+    app.post('/api/contactInfo/', (req, res) => {
+        db.demo.create({
+            phone: parseInt(req.body.phone),
+            address: req.body.address
+        }).then(info => {
+            res.status(200).json(info);
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+
     // uses axios to get search results and puts results in app api
     app.get("/api/items/:item", (req, res) => {
         const query = req.params.item;
@@ -32,12 +44,9 @@ module.exports = (app, db) => {
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
-            cartname: req.body.cartname,
             //username input placeholder
             username: req.body.username,
-            UserEmail: req.body.userEmail,
-            shopper: req.body.shopper,
-            status: "inCart"
+            shopper: req.body.shopper
         }).then(cart => {
             console.log(cart);
             res.send('Hey');
@@ -47,7 +56,7 @@ module.exports = (app, db) => {
     });
 
         
-    //display user's cart
+    // display user's cart
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
             where: {
@@ -99,5 +108,4 @@ module.exports = (app, db) => {
         }
         placeOrder();
     });
-
 }
