@@ -19,7 +19,7 @@ app.use(passport.session());
 require('./app/controller/routes/api-routes.js')(app, db);
 require('./app/controller/routes/html-routes.js')(app);
 
-db.sequelize.sync( {force: true}).then(() => {
+db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
         console.log('App listening on PORT ' + PORT);
     });
