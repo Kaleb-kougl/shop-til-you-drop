@@ -19,7 +19,8 @@ module.exports = (app, db) => {
     // delete order from active api when claimed by shopper
     app.delete("/api/orders/active/", (req, res) => {
         db.cart.update({
-            status: 'transit'
+            status: 'transit',
+            shopper: app.locals.user
         }, {
             where: {
                 orderNumber: req.body.orderNumber
