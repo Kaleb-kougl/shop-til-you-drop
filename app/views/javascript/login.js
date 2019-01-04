@@ -20,9 +20,13 @@ $('#login-btn').on('click', function(event) {
             window.location.replace('/login');
         } else {
             role = data.role;
-
-            window.location.replace('/loggedin');
-            console.log(role);
+            activeUser = data.activeUser;
+            if (activeUser === 1) {
+                window.location.replace('/loggedin');
+                console.log(role);
+            } else {
+                window.location.replace('/banned');
+            }
         }
     });
 });

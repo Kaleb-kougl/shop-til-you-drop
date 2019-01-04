@@ -21,6 +21,9 @@ module.exports = app => {
         res.status(300).sendFile(path.join(__dirname, '/../../views/html/loggedin.html'));
     });
 
+    app.get('/banned', (req, res) => {
+        res.status(300).sendFile(path.join(__dirname, '/../../views/html/banned.html'));
+    });
 
     app.get('/searchResults/:search', (req, res) => {
         res.send(app.locals[req.params.search]);
