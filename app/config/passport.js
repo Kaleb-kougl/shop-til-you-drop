@@ -26,13 +26,13 @@ passport.use(
                 }
                 // If there is a user with the given email, but the password the user gives us is incorrect
                 else if (!dbUser.validPassword(password)) {
-                    console.log('no password');
                     return done(null, false, {
                         message: 'Incorrect password.'
                     });
                 }
                 // If none of the above, return the user
-                console.log(dbUser.dataValues.role);
+                // the user includes the email/pw/user/active
+                // console.log(dbUser.dataValues.role);
                 return done(null, dbUser);
             });
         }
