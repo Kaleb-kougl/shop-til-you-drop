@@ -41,10 +41,12 @@ module.exports = (app, db) => {
     
     // add item to cart
     app.post("/api/orders/", (req, res) => {
+        // remove for proper functionality
+        app.locals.user = 'test'
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
-            quantity: req.body.quantity,
+            quantity: parseInt(req.body.quantity),
             username: app.locals.user
         }).then(cartItem => {
             res.json(cartItem);
