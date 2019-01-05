@@ -1,4 +1,5 @@
 $.get('/api/orders/active/', function (data) {
+  // mock data for ui design
   data = [
     {
       1415013368: [
@@ -65,31 +66,50 @@ $.get('/api/orders/active/', function (data) {
 
 
 function renderCarousel(data) {
+  // loop over data
   data.map(index => {
     for (let key in index) {
       index = index[key];
     }
+    // create newDiv for each data Point
     let newDiv = $("<div>");
     newDiv.addClass("carousel-item red white-text");
     newDiv.attr("href", '#no');
-
+    // add orderNumber for lookup later
+    newDiv.attr("data-orderNumber", index[0].orderNumber);
+    // Give header
     let newHeader = $("<h2>")
     newHeader.html(index[0].orderNumber);
     newDiv.append(newHeader);
-
+    // create list of items to purchase
+    let newUl = $("<ul>");
     for (let key in index) {
-      let newP = $("<p>");
-      newP.html(index[key]["item"]);
-      newDiv.append(newP);
+      let newLi = $("<li>");
+      newLi.html(index[key]["item"]);
+      newUl.append(newLi);
     }
+    newDiv.append(newUl);
     // append to .carousel
     $(".carousel").append(newDiv);
   });
-
+  // initialize carousel so it moves
   var instance = M.Carousel.init({
     fullWidth: true,
     indicators: true
   });
   var slider = $('.carousel');
   slider.carousel();
+
+  // initialize modal
+  $('.modal').modal();
 }
+
+// grab the div with .active for the button then render a model
+$('#details-btn').on('click', function (e) {
+  let activeOrder = $('.active').attr('data-orderNumber');
+  console.log(activeOrder);
+  let modal = $(".modal");
+  // carousel doesn't play nice with modals, have to manual call open()
+  var instance = M.Modal.getInstance(modal);
+  instance.open();
+});
