@@ -4,11 +4,12 @@ navigator.geolocation.getCurrentPosition(pos => {
         url: '/api/orders/',
         data: {
             orderNumber: 32323,
-            lat: pos.coords.lat,
-            lng: pos.coords.lng
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
         }
     }).then(res => {
         alert(res);
+        console.log(res);
     }).catch(err => {
         console.log(err);
     })

@@ -57,11 +57,11 @@ module.exports = (app, db) => {
                     key: process.env.GOOGLE_API_KEY,
                 }
             }).then(directions => {
-                res.json(directions);
+                res.json(directions.data.routes[0]);
             }).catch(err => {
                 console.log(err);
             });
-            res.status(200).json(cartUpdate);
+            // res.status(200).json(cartUpdate);
         // }).catch(err => {
         //     console.log(err);
         // });
