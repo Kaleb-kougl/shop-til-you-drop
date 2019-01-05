@@ -1,4 +1,4 @@
-module.exports = (app, db) => {     
+module.exports = (app, db) => {
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
@@ -9,11 +9,11 @@ module.exports = (app, db) => {
             // sorts ordered items by order number
             let orderGroups = {};
             for (let i = 0; i < order.length; i++) {
-                    if (orderGroups[order[i].orderNumber.toString()] === undefined) {
-                        orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
-                    } else {
-                        orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
-                    }
+                if (orderGroups[order[i].orderNumber.toString()] === undefined) {
+                    orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
+                } else {
+                    orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
+                }
             }
             res.status(200).json(orderGroups);
         }).catch(err => {
@@ -27,14 +27,14 @@ module.exports = (app, db) => {
             status: 'transit',
             shopper: app.locals.user
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
-        }).then(order => {
-            res.status(200).json(order);
-        }).catch(err => {
-            console.log(err);
-        })
+                where: {
+                    orderNumber: req.body.orderNumber
+                }
+            }).then(order => {
+                res.status(200).json(order);
+            }).catch(err => {
+                console.log(err);
+            })
     });
 
     // mark as delivered
@@ -42,13 +42,13 @@ module.exports = (app, db) => {
         db.cart.update({
             status: "delivered",
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
-        }).then(cartUpdate => {
-            console.log(cartUpdate);
-        }).catch(err => {
-            console.log(err);
-        })
+                where: {
+                    orderNumber: req.body.orderNumber
+                }
+            }).then(cartUpdate => {
+                console.log(cartUpdate);
+            }).catch(err => {
+                console.log(err);
+            })
     });
 }
