@@ -16,7 +16,10 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./app/controller/routes/api-routes.js')(app, db);
+require('./app/controller/routes/api-routes/all.js')(app, db);
+require('./app/controller/routes/api-routes/user.js')(app, db);
+require('./app/controller/routes/api-routes/shopper.js')(app, db);
+require('./app/controller/routes/api-routes/admin.js')(app, db);
 require('./app/controller/routes/html-routes.js')(app);
 
 db.sequelize.sync().then(() => {
