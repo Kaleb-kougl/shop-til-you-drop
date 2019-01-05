@@ -2,3 +2,16 @@
 .carousel {
   height: 100vh;
 }
+
+.modal-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#close-order-details-modal-btn {
+  text-align: left;
+}
+/* puts at end of grid modal */
+#agree-order-details-modal-btn {
+  grid-area: 1 / 4 / 2 / 5;
+}
