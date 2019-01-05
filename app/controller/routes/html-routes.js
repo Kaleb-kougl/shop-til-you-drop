@@ -24,6 +24,7 @@ module.exports = app => {
     app.get('/banned', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/banned.html'));
     });
+    
     app.get('/searchResults/:search', (req, res) => {
         res.send(app.locals[req.params.search]);
     });
@@ -31,6 +32,10 @@ module.exports = app => {
     app.get('/pickOrder', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
     });
+
+    app.get('/directions/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/shopper.html'));
+    })
 
     app.get('/customer', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
