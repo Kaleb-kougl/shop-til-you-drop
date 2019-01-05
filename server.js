@@ -17,7 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./app/controller/routes/api-routes/all.js')(app, db);
-require('./app/controller/routes/api-routes/customer.js')(app, db);
+require('./app/controller/routes/api-routes/user.js')(app, db);
 require('./app/controller/routes/api-routes/shopper.js')(app, db);
 require('./app/controller/routes/api-routes/admin.js')(app, db);
 require('./app/controller/routes/html-routes.js')(app);
