@@ -5,12 +5,20 @@ module.exports = (app, db) => {
             where: {
                 status: 'ordered'
             }
-        }).then(orders => {
-            if (orders[0] === 0) {
-                res.status(404).send('No active orders');
-            } else {
-                res.status(200).json(orders);
+        }).then(order => {
+            let orderGroups = {};
+            let count = 0;
+            for (let i = 0; i < order.length; i++) {
+                    if (orderGroups[order[i].orderNumber.toString()] === undefined) {
+                        orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
+                    } else {
+                        let previous = orderGroups[order[i].orderNumber.toString()];
+                        console.log(previous);
+                        console.log({...previous, ...order[i].dataValues});
+                        orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
+                    }
             }
+            res.status(200).json(orderGroups);
         }).catch(err => {
             console.log(err);
         })
