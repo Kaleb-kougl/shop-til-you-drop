@@ -6,9 +6,6 @@ $('#signup').on('click', function(event) {
     var password = $('#password-input')
         .val()
         .trim();
-    // console.log('hi');
-    // console.log(email);
-    // console.log(password);
 
     // 0. check for text
     if (!email || !password) {

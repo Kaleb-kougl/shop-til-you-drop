@@ -6,15 +6,12 @@ module.exports = (app, db) => {
                 status: 'ordered'
             }
         }).then(order => {
+            // sorts ordered items by order number
             let orderGroups = {};
-            let count = 0;
             for (let i = 0; i < order.length; i++) {
                     if (orderGroups[order[i].orderNumber.toString()] === undefined) {
                         orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
                     } else {
-                        let previous = orderGroups[order[i].orderNumber.toString()];
-                        console.log(previous);
-                        console.log({...previous, ...order[i].dataValues});
                         orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
                     }
             }

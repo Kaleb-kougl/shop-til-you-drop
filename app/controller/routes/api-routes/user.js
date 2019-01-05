@@ -46,10 +46,8 @@ module.exports = (app, db) => {
             price: req.body.price,
             quantity: req.body.quantity,
             username: app.locals.user
-
-        }).then(cart => {
-            console.log(cart);
-            res.send('Hey');
+        }).then(cartItem => {
+            res.json(cartItem);
         }).catch(err => {
             console.log(err);
         })
@@ -63,8 +61,8 @@ module.exports = (app, db) => {
                 status: 'inCart'
             }
         }).then(cart => {
-            if (cart) {
-                res.status(200).json(cart);
+            if (myCart) {
+                res.status(200).json(myCart);
             } else {
                 res.status(404).send('Nothing is in your cart');
             }

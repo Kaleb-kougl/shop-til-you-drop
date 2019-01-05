@@ -23,7 +23,7 @@ module.exports = (app, db) => {
         })
     });
 
-    // unban users
+    // enable users access
     app.delete('/api/admin/banned/', (req, res) => {
         db.user.update({
             activeUser: true
