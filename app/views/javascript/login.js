@@ -21,7 +21,7 @@ $('#login-btn').on('click', function(event) {
         } else {
             role = data.role;
             activeUser = data.activeUser;
-            if (activeUser === 1) {
+            if (activeUser === true) {
                 window.location.replace('/loggedin');
                 console.log(role);
             } else {
