@@ -66,5 +66,27 @@ module.exports = (app, db) => {
             res.json(data);
         })
     });
+       // note from ry - i think we should honestly not worry about reinstating carts when a player has been unbanned.
+    // the demographics/user information yes, cart -- by the point someone is unbanned realistically they won't want
+    // the exact same cart again
+    app.post('/api/admin/bannedcart', (req, res) => {
+        db.cart
+            .update(
+                {
+                    status: 'bannedUser'
+                },
+                {
+                    where: {
+                        email: req.body.user
+                    }
+                }
+            )
+            .then(banned => {
+                res.json(banned);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    });
 }
 
