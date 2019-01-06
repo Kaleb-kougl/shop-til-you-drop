@@ -61,7 +61,11 @@ $(document).ready(function () {
                 // intentionally empty
             }
         });
-    })
+    });
+
+    $(document).on('click', '#cart', function() {
+        location.replace('/viewCart/')
+    });
 });
 
 // $('.tooltipped').tooltip();
