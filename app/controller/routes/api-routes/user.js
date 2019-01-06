@@ -38,13 +38,15 @@ module.exports = (app, db) => {
             res.redirect(`/searchResults/${req.params.item}`);
         });
     });
-    
+
     // add item to cart
     app.post("/api/orders/", (req, res) => {
+        // remove for proper functionality
+        app.locals.user = 'test'
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
-            quantity: req.body.quantity,
+            quantity: parseInt(req.body.quantity),
             username: app.locals.user,
             UserEmail: app.locals.user
         }).then(cartItem => {
@@ -53,7 +55,7 @@ module.exports = (app, db) => {
             console.log(err);
         })
     });
-        
+
     // display user's cart
     app.get("/api/orders/", (req, res) => {
         db.cart.findAll({
@@ -93,17 +95,19 @@ module.exports = (app, db) => {
                     orderNumber: parseInt(randNbr),
                     status: "ordered"
                 }, {
-                    where: {
-                        username: app.locals.user,
-                        status: 'inCart'
-                    }
-                }).then(cart => {
-                    res.json(cart);
-                }).catch(err => {
-                    console.log(err);
-                })
+                        where: {
+                            username: app.locals.user,
+                            status: 'inCart'
+                        }
+                    }).then(cart => {
+                        res.json(cart);
+                    }).catch(err => {
+                        console.log(err);
+                        res.json({ 'error': 'something went wrong' });
+                    })
             }).catch(err => {
                 console.log(err);
+                res.json({ 'error': 'something went wrong' });
             })
         }
         placeOrder();

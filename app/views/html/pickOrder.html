@@ -10,8 +10,10 @@
   <!-- reset -->
   <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title">
   <!-- materialize cdn -->
+  <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://code.jquery.com/jquery.js"></script>
 
@@ -19,8 +21,23 @@
 </head>
 
 <body>
-  Pick order!
+  <div class="carousel carousel-slider center">
+    <div class="carousel-fixed-item center">
+      <button data-target="modal1" class="waves-effect white grey-text darken-text-2 btn modal-trigger" id="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Modal Order details -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat" id="close-order-details-modal-btn">Disagree</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agree-order-details-modal-btn">Agree</a>
+    </div>
+  </div>
   <!-- Leave this at the bottom of the body -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="/javascript/pickOrder.js"></script>
 </body>
 
