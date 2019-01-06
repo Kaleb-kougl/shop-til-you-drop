@@ -14,9 +14,9 @@ $('#signup').on('click', function(event) {
     }
 
     // 1. check for duplication
-    // $.post('/api/check', {
-    //     email: email
-    // }).then(function(data) {
+    $.post('/api/check', {
+        email: email
+    }).then(function(data) {
         // 2. if user isn't in the db, add them
         if (data == null) {
             $.post('/api/signup', {
@@ -38,4 +38,4 @@ $('#signup').on('click', function(event) {
             alert('Email exists!');
         }
     });
-// });
+});

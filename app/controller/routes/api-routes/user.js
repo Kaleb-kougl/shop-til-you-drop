@@ -45,7 +45,8 @@ module.exports = (app, db) => {
             item: req.body.item,
             price: req.body.price,
             quantity: req.body.quantity,
-            username: app.locals.user
+            username: app.locals.user,
+            UserEmail: app.locals.user
         }).then(cartItem => {
             res.json(cartItem);
         }).catch(err => {

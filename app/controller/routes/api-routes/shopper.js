@@ -6,7 +6,11 @@ module.exports = (app, db) => {
         db.cart.findAll({
             where: {
                 status: 'ordered'
-            }
+            }, include: [
+                {
+                    model: db.demo
+                }
+            ]
         }).then(order => {
             // sorts ordered items by order number
             let orderGroups = {};
@@ -41,13 +45,13 @@ module.exports = (app, db) => {
 
     // mark order as in transit
     app.put('/api/orders/', (req, res) => {
-        // db.cart.update({
-        //     status: "inTransit",
-        // }, {
-        //     where: {
-        //         orderNumber: req.body.orderNumber
-        //     }
-        // }).then(cartUpdate => {
+        db.cart.update({
+            status: "inTransit",
+        }, {
+            where: {
+                orderNumber: req.body.orderNumber
+            }
+        }).then(cartUpdate => {
             axios({
                 method: 'GET',
                 url: 'https://maps.googleapis.com/maps/api/directions/json?',
@@ -61,10 +65,10 @@ module.exports = (app, db) => {
             }).catch(err => {
                 console.log(err);
             });
-            // res.status(200).json(cartUpdate);
-        // }).catch(err => {
-        //     console.log(err);
-        // });
+            res.status(200).json(cartUpdate);
+        }).catch(err => {
+            console.log(err);
+        });
     });
 
     // mark as delivered
