@@ -140,16 +140,24 @@ $.get('/api/orders/active/', function (data) {
 });
 
 var globalData;
+var carouselColors =
+  ['green lighten-5', 'green lighten-4',
+    'green lighten-3', 'green lighten-2',
+    'green lighten-1', 'green', 'green darken-1',
+    'green darken-2', 'green darken-3',
+    'green darken-4'];
 
 function renderCarousel(data) {
   console.log(data);
   // store data in a global var for later
   globalData = data;
   // Make a new card for carousel for each order
+  let colorIndex = 0;
   for (let order in data) {
+    colorIndex++;
     // create newDiv for each data Point
     let newDiv = $("<div>");
-    newDiv.addClass("carousel-item red white-text");
+    newDiv.addClass(`carousel-item ${carouselColors[(colorIndex % carouselColors.length)]} white-text`);
     newDiv.attr("href", '#no');
     // add orderNumber for lookup later
     newDiv.attr("data-orderNumber", order);
