@@ -42,7 +42,7 @@ module.exports = (app, db) => {
     // add item to cart
     app.post("/api/orders/", (req, res) => {
         // remove for proper functionality
-        app.locals.user = 'test'
+        // app.locals.user = 'test';
         db.cart.create({
             item: req.body.item,
             price: req.body.price,
@@ -63,7 +63,7 @@ module.exports = (app, db) => {
                 username: app.locals.user,
                 status: 'inCart'
             }
-        }).then(cart => {
+        }).then(myCart => {
             if (myCart) {
                 res.status(200).json(myCart);
             } else {
