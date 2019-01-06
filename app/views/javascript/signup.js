@@ -1,5 +1,6 @@
 $('#signupform').on('submit', function(event) {
     event.preventDefault();
+    console.log('Start to add');
     var first_name = $('#first_name')
         .val()
         .trim();
