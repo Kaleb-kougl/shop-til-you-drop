@@ -1,4 +1,7 @@
-module.exports = (app, db) => {
+const axios = require('axios');
+
+module.exports = (app, db) => {     
+
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
@@ -24,7 +27,7 @@ module.exports = (app, db) => {
     // delete order from active api when claimed by shopper
     app.delete("/api/orders/active/", (req, res) => {
         db.cart.update({
-            status: 'transit',
+            status: 'purchasing',
             shopper: app.locals.user
         }, {
                 where: {
@@ -37,18 +40,47 @@ module.exports = (app, db) => {
             })
     });
 
+    // mark order as in transit
+    app.put('/api/orders/', (req, res) => {
+        // db.cart.update({
+        //     status: "inTransit",
+        // }, {
+        //     where: {
+        //         orderNumber: req.body.orderNumber
+        //     }
+        // }).then(cartUpdate => {
+            axios({
+                method: 'GET',
+                url: 'https://maps.googleapis.com/maps/api/directions/json?',
+                params: {
+                    origin: req.body.lat + ',' + req.body.lng,
+                    destination: 'Chicago Premium Outlets',
+                    key: process.env.GOOGLE_API_KEY,
+                }
+            }).then(directions => {
+                res.json(directions.data.routes[0]);
+            }).catch(err => {
+                console.log(err);
+            });
+            // res.status(200).json(cartUpdate);
+        // }).catch(err => {
+        //     console.log(err);
+        // });
+    });
+
     // mark as delivered
-    app.put("/api/orders/", (req, res) => {
+    app.delete("/api/orders/", (req, res) => {
         db.cart.update({
             status: "delivered",
         }, {
-                where: {
-                    orderNumber: req.body.orderNumber
-                }
-            }).then(cartUpdate => {
-                console.log(cartUpdate);
-            }).catch(err => {
-                console.log(err);
-            })
+            where: {
+                orderNumber: req.body.orderNumber
+            }
+        }).then(cartUpdate => {
+            res.status(200).json(cartUpdate);
+        }).catch(err => {
+            console.log(err);
+        })
+
     });
 }
