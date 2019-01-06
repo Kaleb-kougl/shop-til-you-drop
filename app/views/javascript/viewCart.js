@@ -2,7 +2,6 @@ $.ajax({
     type: "GET",
     url: '/api/orders/',
     success: cart => {
-        console.log(cart);
         $('.collection').empty();
         for (let i = 0; i < cart.length; i++) {
             let list = $('<li>').attr('class', 'collection-item searchable').attr('data-name', cart[i].item).html(`<h5>${cart[i].item}</h5>`);
@@ -15,3 +14,15 @@ $.ajax({
         }
     }
 });
+
+$('#order').on('click', () => {
+    $.ajax({
+        type: "POST",
+        url: '/api/orders/active',
+        success: cart => {
+            $('#orderConfirmation').empty();
+            let list = $('<h5>').html('Your items have been ordered!');
+            $('#orderConfirmation').append(list);
+        }
+    });
+})
