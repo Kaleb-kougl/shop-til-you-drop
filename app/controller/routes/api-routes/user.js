@@ -81,6 +81,7 @@ module.exports = (app, db) => {
             for (let i = 0; i < 10; i++) {
                 randNbr += Math.floor(Math.random() * 10);
             }
+            console.log(randNbr);
             db.cart.findAll({
                 where: {
                     status: 'ordered'
@@ -88,7 +89,7 @@ module.exports = (app, db) => {
             }).then(orders => {
                 for (let i = 0; i < orders.length; i++) {
                     if (orders[i].orderNumber === randNbr) {
-                        orderNbrGenerator();
+                        placeOrder();
                     }
                 }
                 db.cart.update({

@@ -14,7 +14,6 @@ $(document).ready(function () {
         // console.log("hello");
         var search = $("#textarea1").val()
         console.log(search);
-
         $.ajax({
             type: "GET",
             url: '/api/items/' + search,

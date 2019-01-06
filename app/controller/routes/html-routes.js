@@ -29,6 +29,10 @@ module.exports = app => {
         res.send(app.locals[req.params.search]);
     });
 
+    app.get('/viewcart/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/viewCart.html'));
+    })
+
     app.get('/pickOrder', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
     });
