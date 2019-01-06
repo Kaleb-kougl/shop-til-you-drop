@@ -38,12 +38,16 @@ db.user = require('./user.js')(sequelize, Sequelize);
 db.cart = require('./cart.js')(sequelize, Sequelize);
 db.demo = require('./demo.js')(sequelize, Sequelize);
 
-// user to cart:
-db.user.hasMany(db.cart);
-db.cart.belongsTo(db.user);
+// // user to cart:
+// db.user.hasMany(db.cart);
+// db.cart.belongsTo(db.user, {as: 'username'});
 
 // user to demo:
 db.user.hasOne(db.demo);
-db.demo.belongsTo(db.user);
+db.demo.belongsTo(db.user, {foreignKey: 'username', targetKey: 'email'});
+
+// demo to cart
+db.demo.hasMany(db.cart);
+db.cart.belongsTo(db.demo, {foreignKey: 'username', targetKey: 'username'});
 
 module.exports = db;
