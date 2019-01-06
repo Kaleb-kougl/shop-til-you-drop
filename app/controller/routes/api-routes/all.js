@@ -46,7 +46,17 @@ module.exports = (app, db) => {
                 username: req.body.email
             }).then(() => {
                 app.locals.user = req.body.email;
-                res.redirect(307, '/api/login');
+                app.locals.role = req.body.role;
+                // this doesn't do anything yet
+                if (req.body.role === 'Customer') {
+                    res.redirect(200, '/customer/');
+                } else if (req.body.role === 'Shopper') {
+                    res.redirect(200, '/pickOrder/')
+                } else if (req.body.role === 'Admin') {
+                    res.redirect(200, '/admin/')
+                } else {
+                    res.redirect('404', '*')
+                }
             }).catch(err => {
                 console.log(err);
                 res.status(500).json(err)
