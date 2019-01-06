@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         UserEmail: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
     return Demo;

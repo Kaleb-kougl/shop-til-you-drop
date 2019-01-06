@@ -6,11 +6,14 @@ module.exports = (app, db) => {
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
             where: {
-                status: 'ordered'
+                status: 'ordered',
+                // $or: [
+                //     {'$db.demo.username$': app.locals.user}
+                // ]
             }, include: [
                 {
                     model: db.demo
-                }
+                } 
             ]
         }).then(order => {
             // sorts ordered items by order number

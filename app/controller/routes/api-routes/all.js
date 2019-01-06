@@ -21,23 +21,40 @@ module.exports = (app, db) => {
             password: req.body.password,
             role: req.body.role,
             activeuser: req.body.activeuser
-        })
-            .then(function () {
-                db.Demo.create({
-                    firstName: req.body.first_name,
-                    lastName: req.body.last_name,
-                    imageUrl: req.body.picture,
-                    phone: req.body.phone,
-                    address: req.body.address,
-                    UserEmail: req.body.email
-                })
+            // demo: {
+            //     firstName: req.body.first_name,
+            //     lastName: req.body.last_name,
+            //     imageUrl: req.body.picture,
+            //     phone: req.body.phone,
+            //     address: req.body.address,
+            //     UserEmail: req.body.email,
+            //     username: req.body.email
+            // }
+        // }, {
+        //     include: [{
+        //         // association: db.user.db.Demo,
+        //         include: [db.demo]
+        //     }]
+        }).then(() => {
+            db.Demo.create({
+                firstName: req.body.first_name,
+                lastName: req.body.last_name,
+                imageUrl: req.body.picture,
+                phone: req.body.phone,
+                address: req.body.address,
+                UserEmail: req.body.email,
+                username: req.body.email
+            }).then(() => {
                 app.locals.user = req.body.email;
                 res.redirect(307, '/api/login');
-            })
-            .catch(function (err) {
+            }).catch(err => {
                 console.log(err);
-                res.json(err);
+                res.status(500).json(err)
             });
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     });
 
     // Route for logging user out
