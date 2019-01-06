@@ -1,4 +1,4 @@
-$('#signup').on('click', function (event) {
+$('#signup').on('submit', function (event) {
     event.preventDefault();
     var first_name = $('#first_name').val().trim();
     var last_name = $('#last_name').val().trim();
