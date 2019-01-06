@@ -49,13 +49,13 @@ module.exports = (app, db) => {
                 app.locals.role = req.body.role;
                 // this doesn't do anything yet
                 if (req.body.role === 'Customer') {
-                    res.redirect(200, '/customer/');
+                    res.send('../customer/');
                 } else if (req.body.role === 'Shopper') {
-                    res.redirect(200, '/pickOrder/')
+                    res.send('../pickOrder/')
                 } else if (req.body.role === 'Admin') {
-                    res.redirect(200, '/admin/')
+                    res.send('../admin/')
                 } else {
-                    res.redirect('404', '*')
+                    res.redirect('*')
                 }
             }).catch(err => {
                 console.log(err);

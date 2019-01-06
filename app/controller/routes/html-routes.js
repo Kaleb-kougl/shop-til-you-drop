@@ -41,7 +41,7 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/shopper.html'));
     })
 
-    app.get('/customer', (req, res) => {
+    app.get('/customer/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
     });
 
