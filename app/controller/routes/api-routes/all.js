@@ -2,19 +2,19 @@ const passport = require('passport');
 
 module.exports = (app, db) => {
     // used in signup -- checks for email existence before allowing you to enter a new email
-    app.post('/api/check', function(req, res) {
+    app.post('/api/check', function (req, res) {
         db.User.findOne({
             attributes: ['email', 'role', 'activeuser'],
             where: {
                 email: req.body.email
             }
-        }).then(function(project) {
+        }).then(function (project) {
             res.json(project);
         });
     });
 
     // Sign up functionality
-    app.post('/api/signup/', function(req, res) {
+    app.post('/api/signup/', function (req, res) {
         console.log(req.body);
         db.User.create({
             email: req.body.email,
@@ -22,24 +22,32 @@ module.exports = (app, db) => {
             role: req.body.role,
             activeuser: req.body.activeuser
         })
-            .then(function() {
+            .then(function () {
+                db.Demo.create({
+                    firstName: req.body.first_name,
+                    lastName: req.body.last_name,
+                    imageUrl: req.body.picture,
+                    phone: req.body.phone,
+                    address: req.body.address,
+                    UserEmail: req.body.email
+                })
                 app.locals.user = req.body.email;
                 res.redirect(307, '/api/login');
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.log(err);
                 res.json(err);
             });
     });
 
     // Route for logging user out
-    app.get('/logout', function(req, res) {
+    app.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
 
-    app.get('/api/login', function(req, res, next) {
-        passport.authenticate('local', function(err, user, info) {
+    app.get('/api/login', function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
             if (err) {
                 return next(err);
             }
@@ -48,7 +56,7 @@ module.exports = (app, db) => {
                 console.log(info);
                 return res.json(info);
             }
-            req.logIn(user, function(err) {
+            req.logIn(user, function (err) {
                 if (err) {
                     console.log(err);
                     return next(err);
