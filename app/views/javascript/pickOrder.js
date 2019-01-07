@@ -1,6 +1,6 @@
 $.get('/api/orders/active/', function (data) {
   if (data === 'Access denied') {
-    alert('Pleas log in for access!');
+    alert('Please log in for access!');
     window.location.replace('/login/');
   } else {
     // mock data for ui design
