@@ -8,6 +8,14 @@
 
 // Or with jQuery
 
+$(document).on('click', '#customer-home', function () {
+    location.replace('/customer/')
+});
+
+$(document).on('click', '#profile', function () {
+    location.replace('/userprofile/')
+});
+
 $(document).ready(function () {
     // $("#search-text").val();
 
