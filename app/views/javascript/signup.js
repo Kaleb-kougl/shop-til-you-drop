@@ -14,11 +14,9 @@ $('#signupform').on('submit', function(event) {
     var email = $('#email-input')
         .val()
         .trim();
-    var phone = parseInt(
-        $('#phone-input')
-            .val()
-            .trim()
-    );
+    var phoneRaw = $('#phone-input')
+        .val()
+        .trim();
     var address = $('#address-input')
         .val()
         .trim();
@@ -34,6 +32,20 @@ $('#signupform').on('submit', function(event) {
         alert('Please enter your information!');
         return;
     }
+
+    // 0.5 phone number validation
+    // remove all dashes and spaces
+    var phonehalf = phoneRaw.replace(/-/g, '');
+    var phoneNum = phonehalf.replace(/\s/g, '');
+
+    // check for length
+    if (phoneNum.length != 11) {
+        alert('Please insert a valid phone number');
+        return;
+    }
+
+    var phone = '+' + phoneNum;
+    alert(phone);
 
     // 1. check for duplication
     $.post('/api/check', {
