@@ -132,9 +132,9 @@ function success(data) {
   $.ajax({
     type: "DELETE",
     url: '/api/orders/active/',
-    data: { 'orderNumber': orderNumber }
+    data: { 'orderNumber': orderNumber },
   }).done(res => {
-    console.log(res);
+    window.location.replace('/yourPickups');
   });
 }
 
