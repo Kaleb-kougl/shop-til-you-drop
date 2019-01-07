@@ -5,24 +5,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Sign Up</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title">
+        <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         />
-        <link rel="stylesheet" href="../stylesheets/signup.css" media="screen" title="no title">
+        <link rel="stylesheet" href="../stylesheets/signup.css" media="screen" title="no title" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"
         ></script>
+        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
     </head>
 
     <body>
         <!-- note from ry - need to include id signupform because form submissions are what we're flagging -->
         <div class="container white">
-            <h1 class='teal-text text-lighten-1'>Sign Up!</h1>
+            <h1 class="teal-text text-lighten-1">Sign Up!</h1>
             <form class="signup" id="signupform">
                 <div class="row">
                     <form class="col s12">
@@ -38,7 +39,12 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="password-input" type="password" class="validate" required />
+                                <input
+                                    id="password-input"
+                                    type="password"
+                                    class="validate"
+                                    required
+                                />
                                 <label for="password-input">Password</label>
                             </div>
                         </div>
@@ -80,7 +86,9 @@
                             </div>
                         </div>
                         <div class="center-align">
-                            <button class="waves-effect waves-light btn" type="submit" id="signup">Sign Up</button>
+                            <button class="waves-effect waves-light btn" type="submit" id="signup">
+                                Sign Up
+                            </button>
                         </div>
                     </form>
                 </div>

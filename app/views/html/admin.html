@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Shop</title>
+        <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title" />
+        <!-- Compiled and minified CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <!-- Compiled and minified JavaScript -->
+        <link rel="stylesheet" href="/stylesheets/admin.css" media="screen" title="no title" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shop</title>
-    <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <link rel="stylesheet" href="/stylesheets/admin.css" media="screen" title="no title">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    </head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery.js"></script>
-</head>
+    <body>
+        <h1>Administrator panel</h1>
+        <table id="userData">
+            <thead id="table-head">
+                <tr>
+                    <th>User e-mail</th>
+                    <th>Role</th>
+                    <th>Account status</th>
+                    <th>Change Status</th>
+                </tr>
+            </thead>
 
-<body>
-    <h1>Administrator panel</h1>
-    <table id='userData'>
-        <thead id="table-head">
-            <tr>
-                <th>User e-mail</th>
-                <th>Role</th>
-                <th>Account status</th>
-                <th>Change Status</th>
-            </tr>
-        </thead>
-
-        <tbody id="table-body">
-
-        </tbody>
-    </table>
-    <script src="/javascript/admin.js"></script>
-</body>
-
+            <tbody id="table-body"></tbody>
+        </table>
+        <script src="/javascript/admin.js"></script>
+    </body>
 </html>
