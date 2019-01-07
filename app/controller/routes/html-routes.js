@@ -29,6 +29,10 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
     });
 
+    app.get('/yourPickups', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/yourPickups.html'));
+    });
+
     app.get('/directions/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/shopper.html'));
     });
