@@ -1,5 +1,5 @@
 const axios = require('axios');
-var twilio = require('twilio');
+const twilio = require('twilio');
 
 require('dotenv').config();
 
@@ -17,8 +17,6 @@ module.exports = (app, db) => {
             })
             // when sent
             .then(message => {
-                console.log('text sent successfully');
-                console.log(message.sid)
                 res.json({ 'textSent': true, 'messageId': message.sid });
             })
             // resolve promise
@@ -57,14 +55,14 @@ module.exports = (app, db) => {
             status: 'purchasing',
             shopper: app.locals.user
         }, {
-                where: {
-                    orderNumber: req.body.orderNumber
-                }
-            }).then(order => {
-                res.status(200).json(order);
-            }).catch(err => {
-                console.log(err);
-            })
+            where: {
+                orderNumber: req.body.orderNumber
+            }
+        }).then(order => {
+            res.status(200).json(order);
+        }).catch(err => {
+            console.log(err);
+        })
     });
 
     // mark order as in transit
@@ -72,9 +70,9 @@ module.exports = (app, db) => {
         db.cart.update({
             status: "inTransit",
         }, {
-                where: {
-                    orderNumber: req.body.orderNumber
-                }
+            where: {
+                orderNumber: req.body.orderNumber
+            }
             }).then(cartUpdate => {
                 axios({
                     method: 'GET',
