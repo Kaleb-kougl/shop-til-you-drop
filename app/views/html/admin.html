@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Shop</title>
-        <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title" />
-        <!-- Compiled and minified CSS -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
-        <!-- Compiled and minified JavaScript -->
-        <link rel="stylesheet" href="/stylesheets/admin.css" media="screen" title="no title" />
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop</title>
+    <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
 
-    <body>
-        <h1>Administrator panel</h1>
-        <table id="userData">
-            <thead id="table-head">
-                <tr>
-                    <th>User e-mail</th>
-                    <th>Role</th>
-                    <th>Account status</th>
-                    <th>Change Status</th>
-                </tr>
-            </thead>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
 
-            <tbody id="table-body"></tbody>
-        </table>
-        <script src="/javascript/admin.js"></script>
-    </body>
+<body>
+    <h1>Administrator panel</h1>
+    <table id='userData'>
+        <thead id="table-head">
+            <tr>
+                <th>User e-mail</th>
+                <th>Role</th>
+                <th>Account status</th>
+            </tr>
+        </thead>
+
+        <tbody id="table-body">
+
+        </tbody>
+    </table>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <img style='float:left;margin:25px;' width='200px' height='200px' id='userImage'><img>
+            First Name :<h6 id='userFirstName'></h6>
+            Last Name :<h6 id='userLastName'></h6>
+            Address : <h6 id='userAddress'></h6>
+            Phone Number : <h6 id='userPhone'></h6>
+            Member since : <h6 id='createdAt'></h6>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            <a style='float:left;' id='action' class="waves-effect waves-light btn"></a>
+        </div>
+    </div>
+    <script src="/javascript/admin.js"></script>
+</body>
+
 </html>
