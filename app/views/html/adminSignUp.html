@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Sign Up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"
+        ></script>
+    </head>
+
+    <body>
+        <div class="container white">
+            <h1 class='teal-text text-lighten-1'>Sign Up for Admin Access!</h1>
+            <form class="signup" id="signupform">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="first_name" type="text" class="validate" required />
+                                <label for="first_name">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" type="text" class="validate" required />
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password-input" type="password" class="validate" required />
+                                <label for="password-input">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email-input" type="email" class="validate" required />
+                                <label for="email-input">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="phone-input" type="tel" class="validate" required />
+                                <label for="phone-input"
+                                    >Telephone (please enter as the country code ("1" for the United
+                                    States) followed by your 10-digit phone number)</label
+                                >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="address-input" type="text" class="validate" required />
+                                <label for="address-input">Address</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="picture-link" type="text" class="validate" required />
+                                <label for="picture-link">Link to your profile picture</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="access-code-input" type="text" class="validate" required />
+                                <label>Please Enter Your Access Code</label> <br /><br />
+                            </div>
+                        </div>
+                        <div class="center-align">
+                            <button type="submit" class="waves-effect waves-light btn" id="signup">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"
+    ></script>
+    <script src="/javascript/adminSignUp.js"></script>
+</html>

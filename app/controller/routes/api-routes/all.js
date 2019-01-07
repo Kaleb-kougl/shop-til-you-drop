@@ -15,41 +15,71 @@ module.exports = (app, db) => {
 
     // Sign up functionality
     app.post('/api/signup/', function (req, res) {
-        console.log(req.body);
-        db.User.create({
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role,
-            activeuser: req.body.activeuser
-        }).then(() => {
-            db.Demo.create({
-                firstName: req.body.first_name,
-                lastName: req.body.last_name,
-                imageUrl: req.body.picture,
-                phone: req.body.phone,
-                address: req.body.address,
-                UserEmail: req.body.email,
-                username: req.body.email
+        if (req.body.role === 'Admin') {
+            if (parseInt(req.body.accessCode) === 5672130845) {
+                db.User.create({
+                    email: req.body.email,
+                    password: req.body.password,
+                    role: 'Admin',
+                    activeuser: req.body.activeuser
+                }).then(() => {
+                    db.Demo.create({
+                        firstName: req.body.first_name,
+                        lastName: req.body.last_name,
+                        imageUrl: req.body.picture,
+                        phone: req.body.phone,
+                        address: req.body.address,
+                        UserEmail: req.body.email,
+                        username: req.body.email
+                    }).then(() => {
+                        app.locals.user = req.body.email;
+                        app.locals.role = req.body.role;
+                        res.send('../admin/');
+                    }).catch(err => {
+                        console.log(err);
+                        res.status(500).json(err)
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).json(err);
+                });
+            } else {
+                res.status(404).send('Access denied.')
+            }
+        } else {
+            db.User.create({
+                email: req.body.email,
+                password: req.body.password,
+                role: req.body.role,
+                activeuser: req.body.activeuser
             }).then(() => {
-                app.locals.user = req.body.email;
-                app.locals.role = req.body.role;
-                if (req.body.role === 'Customer') {
-                    res.send('../customer/');
-                } else if (req.body.role === 'Shopper') {
-                    res.send('../pickOrder/')
-                } else if (req.body.role === 'Admin') {
-                    res.send('../admin/')
-                } else {
-                    res.redirect('*')
-                }
+                db.Demo.create({
+                    firstName: req.body.first_name,
+                    lastName: req.body.last_name,
+                    imageUrl: req.body.picture,
+                    phone: req.body.phone,
+                    address: req.body.address,
+                    UserEmail: req.body.email,
+                    username: req.body.email
+                }).then(() => {
+                    app.locals.user = req.body.email;
+                    app.locals.role = req.body.role;
+                    if (req.body.role === 'Customer') {
+                        res.send('../customer/');
+                    } else if (req.body.role === 'Shopper') {
+                        res.send('../pickOrder/')
+                    } else {
+                        res.redirect('*')
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).json(err)
+                });
             }).catch(err => {
                 console.log(err);
-                res.status(500).json(err)
+                res.status(500).json(err);
             });
-        }).catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+        }
     });
 
     // Route for logging user out
