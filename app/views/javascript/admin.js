@@ -34,7 +34,6 @@ $(document).ready(function () {
                 // getTableData(),
                 // openUserProfile()
             )
-
         }
         console.log(status)
     })
@@ -69,16 +68,20 @@ function getTableData() {
     $.get('/api/admin/users').then(res => {
         console.log(res)
         $("#table-body").text('')
-        for (var i = 0; i < res.length; i++) {
-            var userRow = $('<tr>');
-            userRow.attr('data-email', res[i].email);
-            var userEmail = $('<td>').text(res[i].email);
-            var userRole = $('<td>').text(res[i].role);
-            var accountStatus = $('<td>').text(res[i].activeUser);
-            userRow.append(userEmail);
-            userRow.append(userRole);
-            userRow.append(accountStatus);
-            $("#table-body").append(userRow)
+        if (res === 'Access denied') {
+            window.location.replace('/login/')
+        } else {
+            for (var i = 0; i < res.length; i++) {
+                var userRow = $('<tr>');
+                userRow.attr('data-email', res[i].email);
+                var userEmail = $('<td>').text(res[i].email);
+                var userRole = $('<td>').text(res[i].role);
+                var accountStatus = $('<td>').text(res[i].activeUser);
+                userRow.append(userEmail);
+                userRow.append(userRole);
+                userRow.append(accountStatus);
+                $("#table-body").append(userRow)
+            }
         }
     })
 }
