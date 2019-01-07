@@ -18,7 +18,6 @@ var carouselColors =
     'green darken-4'];
 
 function renderCarousel(data) {
-  // console.log(data);
   // store data in a global var for later
   globalData = data;
   // Make a new card for carousel for each order
@@ -112,11 +111,9 @@ $('#details-btn').on('click', function (e) {
 
 // agree to order, send text to user
 $('#agree-order-details-modal-btn').on('click', function (e) {
-  // console.log('click');
   let name = document.querySelector('#name').innerHTML;
   $.get("/api/getUser")
     .done(data => {
-      console.log(data);
       let shopper = data.firstName + ' ' + data.lastName;
       let email = data.user;
       let message = `${name}, your food is currently being picked up by ${shopper}. They can be contacted at ${email} if needed.`;
@@ -137,7 +134,7 @@ function success(data) {
     url: '/api/orders/active/',
     data: { 'orderNumber': orderNumber }
   }).done(res => {
-    console.log('this thing', res);
+    console.log(res);
   });
 }
 
