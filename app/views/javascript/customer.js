@@ -10,15 +10,18 @@
 
 $(document).ready(function () {
     // $("#search-text").val();
+
     $("#textarea1").keypress(function (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
             searchfn();
         }
     });
+
     $("#search-btn").on("click", searchfn);
 
     function searchfn() {
         // console.log("hello");
+        $('.first-image-placeholder').hide();
         var search = $("#textarea1").val()
         console.log(search);
         $.ajax({
@@ -38,9 +41,58 @@ $(document).ready(function () {
                     list.append(fat);
                     let carbs = $('<h6>').html(res[i].dataPoints[3].value);
                     list.append(carbs);
-                    list.append('<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>');
+                    // list.append('<a href="#!" class="secondary-content" id="addItem"><i class="material-icons">send</i></a>');
+                    let button = $('<button>').attr('id', 'button' + i);
+
+                    button.attr('data-title', res[i].name)
+                    button.attr('data-price', res[i].dataPoints[0].value)
+
+                    button.text("Add To Cart");
+                    // button.html = "click me";
+                    button.addClass('save-button')
+                    list.append(button);
                     $('.collection').append(list);
                 }
+              
+                $(document).ready(function () {
+                    var addItem = $('.save-button');
+                    var removeItem = $('#remove');
+                    addItem.click(function () {
+
+                        var removeBtn = $("<button>remove</button>");
+                        // button.attr('id', 'remove')
+
+                        // console.log('THIS IS THE BUTTPN I CLICKED!!!', $(this).data('title'));
+                        var h1 = $('<h1>')
+                        h1.text($(this).data('title'))
+                        var priceH1 = $('<h3>')
+                        priceH1.text($(this).data('price'))
+
+                        var div = $('<div>').append(h1)
+                        div.append(priceH1)
+                        div.append(removeBtn)
+
+                        $('#shoppingList').append(div);
+
+
+
+
+                    });
+                    removeItem.click(function () {
+                        // var toRemove = $('#remove').val();
+                        $('#remove').remove();
+
+                        // $('li:contains(' + toRemove + ')').remove();
+                    });
+                });
+                // var items = res.findCompletedItemsResponse[0].searchResult[0].item;
+                // var data = "";
+                // for (var i = 0; i < results.data.Recipes.length; i++) {
+                //     data += "<div>";
+                //     data += "<img src='" + imageURL + "  '/>";
+                //     data += "  " + cost + " - ";
+                // };
+                // $('.results').html(ins)
             }
         });
 
