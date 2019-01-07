@@ -19,11 +19,16 @@ $('#login-btn').on('click', function(event) {
             alert('Password is incorrect!');
             window.location.replace('/login');
         } else {
-            role = data.role;
-            activeUser = data.activeUser;
-            if (activeUser === true) {
-                window.location.replace('/loggedin');
-                console.log(role);
+            if (data.activeUser === true) {
+                if (data.role === 'Customer') {
+                    window.location.replace('../customer/');
+                } else if (data.role === 'Shopper') {
+                    window.location.replace('../pickOrder/')
+                } else if (data.role === 'Admin') {
+                    window.location.replace('../admin/')
+                } else {
+                    window.location.replace('*')
+                }
             } else {
                 window.location.replace('/banned');
             }
