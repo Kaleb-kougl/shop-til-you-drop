@@ -30,9 +30,6 @@ module.exports = (app, db) => {
         db.cart.findAll({
             where: {
                 status: 'ordered',
-                // $or: [
-                //     {'$db.demo.username$': app.locals.user}
-                // ]
             }, include: [
                 {
                     model: db.demo
@@ -111,6 +108,5 @@ module.exports = (app, db) => {
             }).catch(err => {
                 console.log(err);
             })
-
     });
 }

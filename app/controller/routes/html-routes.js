@@ -45,6 +45,14 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
     });
 
+    app.get('/admin/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/admin.html'));
+    })
+
+    app.get('/adminSignUp/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/adminSignUp.html'));
+    })
+
     app.get('*', (req, res) => {
         res.status(404).send('File not found');
     });
