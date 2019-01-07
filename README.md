@@ -25,3 +25,7 @@ Front End: Kaleb
 Front End: Alex
 Back End: John
 Back End: Ry
+
+
+# credits
+https://www.favicon-generator.org/ - for hamburger favicon
