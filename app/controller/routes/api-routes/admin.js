@@ -1,13 +1,21 @@
 module.exports = (app, db) => {
     // display all users 
     app.get('/api/admin/users/', (req, res) => {
-        db.user.findAll().then(users => {
-            res.json(users);
-        }).catch(err => {
-            console.log(err);
-        })
+      console.log(app.locals.role);
+        if (app.locals.role !== 'Admin'){
+            res.send('Access denied')
+        } else {
+            if (app.locals.role !== 'Admin'){
+                res.send('Access denied')
+            } else {
+                db.user.findAll().then(users => {
+                    res.json(users);
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }
     });
-
     app.put('/api/admin/banUser', function (req, res) {
         console.log(req.body)
         db.demo.update({ activeuser: false }, {
