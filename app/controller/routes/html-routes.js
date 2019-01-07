@@ -5,20 +5,12 @@ module.exports = app => {
         res.status(300).sendFile(path.join(__dirname, '/../../views/html/index.html'));
     });
 
-    app.get('/login', (req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '/../../views/html/login.html'));
-    });
-
     app.get('/signup', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/signup.html'));
     });
 
     app.get('/login', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/login.html'));
-    });
-
-    app.get('/loggedin', (req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '/../../views/html/loggedin.html'));
     });
 
     app.get('/banned', (req, res) => {
@@ -31,7 +23,7 @@ module.exports = app => {
 
     app.get('/viewcart/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/viewCart.html'));
-    })
+    });
 
     app.get('/pickOrder', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
@@ -39,7 +31,7 @@ module.exports = app => {
 
     app.get('/directions/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/shopper.html'));
-    })
+    });
 
     app.get('/customer/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
@@ -51,11 +43,11 @@ module.exports = app => {
 
     app.get('/admin/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/admin.html'));
-    })
+    });
 
     app.get('/adminSignUp/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/adminSignUp.html'));
-    })
+    });
 
     app.get('*', (req, res) => {
         res.status(404).send('File not found');
