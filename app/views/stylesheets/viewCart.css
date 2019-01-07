@@ -1,3 +1,5 @@
+
+
 #logo-main {
     width: 80px;
     height: 65px;
@@ -5,4 +7,11 @@
 
 #title {
     text-align: center;
+}
+
+.btn {
+    background-color: #e75a2c;
+}
+.btn:hover {
+    background-color: #0092ff;
 }
