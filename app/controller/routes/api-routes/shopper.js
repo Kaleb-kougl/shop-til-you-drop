@@ -109,4 +109,8 @@ module.exports = (app, db) => {
                 console.log(err);
             })
     });
+
+    app.get("/api/getUser", (req, res) => {
+        res.json(app.locals)
+    });
 }
