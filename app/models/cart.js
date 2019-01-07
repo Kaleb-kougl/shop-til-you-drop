@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        // username: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false
-        // },
         orderNumber: {
             type: DataTypes.INTEGER,
             defaultValue: 777,

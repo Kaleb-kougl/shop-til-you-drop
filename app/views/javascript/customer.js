@@ -10,14 +10,11 @@
 
 $(document).ready(function () {
     // $("#search-text").val();
-
     $("#textarea1").keypress(function (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
             searchfn();
         }
     });
-
-
     $("#search-btn").on("click", searchfn);
 
     function searchfn() {
@@ -72,6 +69,13 @@ $(document).ready(function () {
             }
         });
     });
+
+    // $("#search-btn").on('click', function () {
+    //     console.log('click');
+    //     // $("#first-image-placeholder").replaceWith(".collection");
+    // });
+
+    // $('#first-image-placeholder').replaceWith('#search-item-list');
 
     $(document).on('click', '#cart', function () {
         location.replace('/viewCart/')

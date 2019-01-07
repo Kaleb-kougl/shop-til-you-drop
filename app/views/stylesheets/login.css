@@ -4,7 +4,7 @@ body, html {
 
 body {
   position: fixed;
-  top: 15vh;
+  top: 5vh;
 }
 
 #login-btn-container {
@@ -18,4 +18,8 @@ body {
 
 .txt {
   margin: 0;
+}
+
+h2 {
+  font-size: 24px;
 }

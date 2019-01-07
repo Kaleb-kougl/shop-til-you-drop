@@ -36,5 +36,5 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
-    })
+    });
 }
