@@ -1,25 +1,64 @@
-body, html {
-  height: 100vh;
+body,
+html {
+    height: 100vh;
 }
 
 body {
-  position: fixed;
-  top: 5vh;
+    position: fixed;
+    top: 5vh;
 }
 
 #login-btn-container {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #signup-container {
-  margin-top: 18vh;
+    margin-top: 18vh;
 }
 
 .txt {
-  margin: 0;
+    margin: 0;
 }
 
 h2 {
-  font-size: 24px;
+    font-size: 24px;
+}
+
+.btn {
+    background-color: #e75a2c;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type='text']:not(.browser-default):focus:not([readonly]),
+input[type='password']:not(.browser-default):focus:not([readonly]),
+input[type='email']:not(.browser-default):focus:not([readonly]),
+input[type='url']:not(.browser-default):focus:not([readonly]),
+input[type='time']:not(.browser-default):focus:not([readonly]),
+input[type='date']:not(.browser-default):focus:not([readonly]),
+input[type='datetime']:not(.browser-default):focus:not([readonly]),
+input[type='datetime-local']:not(.browser-default):focus:not([readonly]),
+input[type='tel']:not(.browser-default):focus:not([readonly]),
+input[type='number']:not(.browser-default):focus:not([readonly]),
+input[type='search']:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #5a9734;
+    -webkit-box-shadow: 0 1px 0 0 #5a9734;
+    box-shadow: 0 1px 0 0 #5a9734;
+}
+
+label.focus {
+    color: #5a9734;
+}
+
+label.active {
+    color: #5a9734;
+}
+
+.active {
+    color: #5a9734 !important;
+}
+
+h1 {
+    color: #5a9734;
 }
