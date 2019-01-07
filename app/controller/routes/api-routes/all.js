@@ -16,7 +16,7 @@ module.exports = (app, db) => {
     // Sign up functionality
     app.post('/api/signup/', function (req, res) {
         if (req.body.role === 'Admin') {
-            if (parseInt(req.body.accessCode) === 5672130845) {
+            if (req.body.accessCode === process.env.ACCESS_CODE) {
                 db.User.create({
                     email: req.body.email,
                     password: req.body.password,
@@ -103,7 +103,9 @@ module.exports = (app, db) => {
                     console.log(err);
                     return next(err);
                 }
-                app.locals.user = req.body.user;
+                console.log(user.dataValues);
+                app.locals.user = user.dataValues.email;
+                app.locals.role = user.dataValues.role;
                 return res.json(user);
             });
         })(req, res, next);
