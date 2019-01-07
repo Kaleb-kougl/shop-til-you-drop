@@ -239,3 +239,20 @@ $('#details-btn').on('click', function (e) {
   var instance = M.Modal.getInstance(modal);
   instance.open();
 });
+
+// agree to order, send text to user
+$('#agree-order-details-modal-btn').on('click', function (e) {
+  let name = document.querySelector('#name').innerHTML;
+  let shopper = 'TempValue';
+  let message = `${name}, your food is currently being picked up by ${shopper}`
+  $.ajax({
+    type: "POST",
+    url: '/api/message',
+    data: { "Message": message },
+    success: success,
+  });
+});
+
+function success(data) {
+  console.log(data);
+}

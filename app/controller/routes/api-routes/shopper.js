@@ -1,6 +1,30 @@
 const axios = require('axios');
+var twilio = require('twilio');
+
+require('dotenv').config();
+
+const client = new twilio(process.env.Twilio_accountSid, process.env.Twilio_authToken);
 
 module.exports = (app, db) => {
+    // send text
+    app.post("/api/message", (req, res) => {
+        // create message
+        client.messages
+            .create({
+                body: req.body.Message,
+                from: '+14797899092',
+                to: '+14792834454'
+            })
+            // when sent
+            .then(message => {
+                console.log('text sent successfully');
+                console.log(message.sid)
+                res.json({ 'textSent': true, 'messageId': message.sid });
+            })
+            // resolve promise
+            .done();
+    });
+
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
@@ -9,7 +33,7 @@ module.exports = (app, db) => {
             }, include: [
                 {
                     model: db.demo
-                } 
+                }
             ]
         }).then(order => {
             // sorts ordered items by order number
@@ -48,27 +72,27 @@ module.exports = (app, db) => {
         db.cart.update({
             status: "inTransit",
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
-        }).then(cartUpdate => {
-            axios({
-                method: 'GET',
-                url: 'https://maps.googleapis.com/maps/api/directions/json?',
-                params: {
-                    origin: req.body.lat + ',' + req.body.lng,
-                    destination: 'Chicago Premium Outlets',
-                    key: process.env.GOOGLE_API_KEY,
+                where: {
+                    orderNumber: req.body.orderNumber
                 }
-            }).then(directions => {
-                res.json(directions.data.routes[0]);
+            }).then(cartUpdate => {
+                axios({
+                    method: 'GET',
+                    url: 'https://maps.googleapis.com/maps/api/directions/json?',
+                    params: {
+                        origin: req.body.lat + ',' + req.body.lng,
+                        destination: 'Chicago Premium Outlets',
+                        key: process.env.GOOGLE_API_KEY,
+                    }
+                }).then(directions => {
+                    res.json(directions.data.routes[0]);
+                }).catch(err => {
+                    console.log(err);
+                });
+                res.status(200).json(cartUpdate);
             }).catch(err => {
                 console.log(err);
             });
-            res.status(200).json(cartUpdate);
-        }).catch(err => {
-            console.log(err);
-        });
     });
 
     // mark as delivered
@@ -76,13 +100,13 @@ module.exports = (app, db) => {
         db.cart.update({
             status: "delivered",
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
-        }).then(cartUpdate => {
-            res.status(200).json(cartUpdate);
-        }).catch(err => {
-            console.log(err);
-        })
+                where: {
+                    orderNumber: req.body.orderNumber
+                }
+            }).then(cartUpdate => {
+                res.status(200).json(cartUpdate);
+            }).catch(err => {
+                console.log(err);
+            })
     });
 }
