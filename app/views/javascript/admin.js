@@ -1,71 +1,86 @@
-$.ajax({
-    method: 'GET',
-    url: '/api/admin/users/'
-}).then(res => {
-    if (res = 'Access denied') {
-        alert('Please Log-In for access to Admin Page');
-        window.location.replace('/login/');
-    } else {
-        for (let i = 0; i < res.length; i++) {
-            let status = '';
-            let toggleBan;
-            if (res[i].activeUser) {
-                status = 'active';
-                toggleBan = $('<td class="ban">').attr('data-email', res[i].email).text('Ban');
-            } else {
-                status = 'banned';
-                toggleBan = $('<td class="unban">').attr('data-email', res[i].email).text('Unban');
-            }
-            let userRow = $('<tr>');
+
+var chosenUserEmail;
+var status;
+
+$(document).ready(function () {
+    getTableData()
+
+    $('body').on('click', 'tr', function () {
+        chosenUserEmail = $(this).attr('data-email');
+        openUserProfile();
+    });
+
+    $('body').on('click', '#action', function () {
+        console.log(status)
+        if (status == 1) {
+            $.ajax({
+                url: '/api/admin/banUser',
+                type: 'PUT',
+                data: { chosenUserEmail }
+            }).then(
+                console.log('hello'),
+                window.location.reload(),
+                // getTableData(),
+                // openUserProfile()
+            )
+        } else {
+            $.ajax({
+                url: '/api/admin/unbanUser',
+                type: 'PUT',
+                data: { chosenUserEmail }
+            }).then(
+                console.log('hello'),
+                window.location.reload(),
+                // getTableData(),
+                // openUserProfile()
+            )
+
+        }
+        console.log(status)
+    })
+
+})
+function openUserProfile() {
+    $.ajax({
+        url: '/api/admin/userData/' + chosenUserEmail,
+        type: 'GET',
+        // data: { chosenUserEmail },
+    }).then(function (data) {
+        console.log(data);
+        $('#userImage').attr('src', data[0].imageUrl);
+        $('#userFirstName').text(data[0].firstName);
+        $('#userLastName').text(data[0].lastName);
+        $('#userAddress').text(data[0].address);
+        $('#userPhone').text(data[0].phone);
+        $('#createdAt').text(data[0].createdAt);
+        if (data[0].activeuser == true) {
+            $('#action').text('Deactivate account')
+            status = 1;
+        } else {
+            $('#action').text('Activate account');
+            status = 0;
+        }
+        var modal = M.Modal.init($('#modal')[0]);
+        modal.open();
+        console.log(status)
+    })
+}
+function getTableData() {
+    $.get('/api/admin/users').then(res => {
+        console.log(res)
+        $("#table-body").text('')
+        for (var i = 0; i < res.length; i++) {
+            var userRow = $('<tr>');
             userRow.attr('data-email', res[i].email);
-            let userEmail = $('<td>').text(res[i].email);
-            let userRole = $('<td>').text(res[i].role);
-            let accountStatus = $('<td>').text(status);
+            var userEmail = $('<td>').text(res[i].email);
+            var userRole = $('<td>').text(res[i].role);
+            var accountStatus = $('<td>').text(res[i].activeUser);
             userRow.append(userEmail);
             userRow.append(userRole);
             userRow.append(accountStatus);
-            userRow.append(toggleBan);
-            $("#table-body").append(userRow);
+            $("#table-body").append(userRow)
         }
-    }
-});
+    })
+}
 
-$(document).on('click', '.ban', function() {
-    if (res = 'Access denied') {
-        alert('Please Log-In for access to Admin Page')
-        window.location.replace('/login/')
-    } else {
-        $.ajax({
-            method: 'POST',
-            url: '/api/admin/banned',
-            data: {
-                user: $(this).attr('data-email')
-            }
-        }).then(res => {
-            window.location.reload();
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-});
 
-$(document).on('click', '.unban', function() {
-    if (res = 'Access denied') {
-        alert('Please Log-In for access to Admin Page')
-        window.location.replace('/login/')
-    } else {
-        $.ajax({
-            method: 'DELETE',
-            url: '/api/admin/banned',
-            data: {
-                user: $(this).attr('data-email')
-            }
-        }).then(res => {
-            window.location.reload();
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-});
