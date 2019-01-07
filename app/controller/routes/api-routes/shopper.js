@@ -25,28 +25,32 @@ module.exports = (app, db) => {
 
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
-        db.cart.findAll({
-            where: {
-                status: 'ordered',
-            }, include: [
-                {
-                    model: db.demo
+        if (app.locals.role !== 'Shopper') {
+            res.send('Access denied');
+        } else {
+            db.cart.findAll({
+                where: {
+                    status: 'ordered',
+                }, include: [
+                    {
+                        model: db.demo
+                    }
+                ]
+            }).then(order => {
+                // sorts ordered items by order number
+                let orderGroups = {};
+                for (let i = 0; i < order.length; i++) {
+                    if (orderGroups[order[i].orderNumber.toString()] === undefined) {
+                        orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
+                    } else {
+                        orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
+                    }
                 }
-            ]
-        }).then(order => {
-            // sorts ordered items by order number
-            let orderGroups = {};
-            for (let i = 0; i < order.length; i++) {
-                if (orderGroups[order[i].orderNumber.toString()] === undefined) {
-                    orderGroups[order[i].orderNumber.toString()] = [order[i].dataValues];
-                } else {
-                    orderGroups[order[i].orderNumber.toString()][orderGroups[order[i].orderNumber.toString()].length] = order[i].dataValues;
-                }
-            }
-            res.status(200).json(orderGroups);
-        }).catch(err => {
-            console.log(err);
-        })
+                res.status(200).json(orderGroups);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     });
 
     // delete order from active api when claimed by shopper

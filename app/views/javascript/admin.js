@@ -69,7 +69,8 @@ function getTableData() {
         console.log(res)
         $("#table-body").text('')
         if (res === 'Access denied') {
-            window.location.replace('/login/')
+            alert('Pleas log in for access!');
+            window.location.replace('/login/');
         } else {
             for (var i = 0; i < res.length; i++) {
                 var userRow = $('<tr>');
