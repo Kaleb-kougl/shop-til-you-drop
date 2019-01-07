@@ -53,14 +53,14 @@ $(document).ready(function () {
                     list.append(button);
                     $('.collection').append(list);
                 }
-              
+
                 $(document).ready(function () {
                     var addItem = $('.save-button');
                     var removeItem = $('#remove');
                     addItem.click(function () {
 
                         var removeBtn = $("<button>remove</button>");
-                        // button.attr('id', 'remove')
+                        removeBtn.attr('id', 'remove')
 
                         // console.log('THIS IS THE BUTTPN I CLICKED!!!', $(this).data('title'));
                         var h1 = $('<h1>')
@@ -79,10 +79,13 @@ $(document).ready(function () {
 
                     });
                     removeItem.click(function () {
+                        console.log(this);
+
                         // var toRemove = $('#remove').val();
+
                         $('#remove').remove();
 
-                        // $('li:contains(' + toRemove + ')').remove();
+                        // $('div:contains(' + toRemove + ')').remove();
                     });
                 });
                 // var items = res.findCompletedItemsResponse[0].searchResult[0].item;
