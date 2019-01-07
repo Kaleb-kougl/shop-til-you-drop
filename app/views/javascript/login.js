@@ -11,7 +11,6 @@ $('#login-btn').on('click', function(event) {
         email: email,
         password: password
     }).then(function(data) {
-        // alert(data);
         if (data.message === 'Incorrect email.') {
             alert('User does not exist!');
             window.location.replace('/signup');
@@ -19,11 +18,17 @@ $('#login-btn').on('click', function(event) {
             alert('Password is incorrect!');
             window.location.replace('/login');
         } else {
-            role = data.role;
-            activeUser = data.activeUser;
-            if (activeUser === true) {
-                window.location.replace('/loggedin');
-                console.log(role);
+            if (data.activeUser === true) {
+                alert('Log-in Successful!');
+                if (data.role === 'Customer') {
+                    window.location.replace('../customer/');
+                } else if (data.role === 'Shopper') {
+                    window.location.replace('../pickOrder/')
+                } else if (data.role === 'Admin') {
+                    window.location.replace('../admin/')
+                } else {
+                    window.location.replace('*')
+                }
             } else {
                 window.location.replace('/banned');
             }

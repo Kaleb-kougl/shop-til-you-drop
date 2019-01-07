@@ -21,20 +21,6 @@ module.exports = (app, db) => {
             password: req.body.password,
             role: req.body.role,
             activeuser: req.body.activeuser
-            // demo: {
-            //     firstName: req.body.first_name,
-            //     lastName: req.body.last_name,
-            //     imageUrl: req.body.picture,
-            //     phone: req.body.phone,
-            //     address: req.body.address,
-            //     UserEmail: req.body.email,
-            //     username: req.body.email
-            // }
-        // }, {
-        //     include: [{
-        //         // association: db.user.db.Demo,
-        //         include: [db.demo]
-        //     }]
         }).then(() => {
             db.Demo.create({
                 firstName: req.body.first_name,
@@ -47,7 +33,6 @@ module.exports = (app, db) => {
             }).then(() => {
                 app.locals.user = req.body.email;
                 app.locals.role = req.body.role;
-                // this doesn't do anything yet
                 if (req.body.role === 'Customer') {
                     res.send('../customer/');
                 } else if (req.body.role === 'Shopper') {
