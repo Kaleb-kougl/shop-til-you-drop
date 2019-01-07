@@ -16,18 +16,22 @@ module.exports = (app, db) => {
 
     // uses axios to get search results and puts results in app api
     app.get("/api/items/:item", (req, res) => {
-        const query = req.params.item;
-        axios({
-            method: 'GET',
-            url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/site/search?',
-            params: {
-                query: query
-            },
-            headers: { "X-RapidAPI-Key": process.env.SPOONACULAR_API_KEY }
-        }).then(results => {
-            app.locals[query] = results.data.Recipes;
-            res.redirect(`/searchResults/${req.params.item}`);
-        });
+        if (app.locals.role !== 'Customer') {
+            res.send('Access denied')
+        } else {
+            const query = req.params.item;
+            axios({
+                method: 'GET',
+                url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/site/search?',
+                params: {
+                    query: query
+                },
+                headers: { "X-RapidAPI-Key": process.env.SPOONACULAR_API_KEY }
+            }).then(results => {
+                app.locals[query] = results.data.Recipes;
+                res.redirect(`/searchResults/${req.params.item}`);
+            });
+        }
     });
 
     // add item to cart
