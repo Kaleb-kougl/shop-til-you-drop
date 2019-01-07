@@ -49,6 +49,10 @@ module.exports = app => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
     });
 
+    app.get('/userprofile/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/userprofile.html'));
+    });
+
     app.get('/admin/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/admin.html'));
     })

@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Account Profile</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <script src="userprofile.js"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
-    </head>
 
-    <body></body>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Account Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+    <!-- Compiled and minified JavaScript -->
+    <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="../stylesheets/userprofile.css" media="screen" title="no title" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col s2">
+            <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
+        </div>
+        <div class="col s8">
+            <div class="row">
+                <div class="input-field col s6">
+                    <h1 id="title">Welcome to Your Account Page</h1>
+                </div>
+                <!-- <a><i class="material-icons">search</i></a> -->
+            </div>
+        </div>
+        <div class="col s2">
+            <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
+        </div>
+    </div>
+    <div class="card" id="profile-view">
+        <div class="card-image waves-effect waves-block waves-light" id="dummy-pic">
+            <img class="activator" src="../images/user-dummy-pic.png">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Your Name<i class="material-icons right">more_vert</i></span>
+            <p><a href="#">Your Username</a></p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Your Info<i class="material-icons right">close</i></span>
+            <p>Here is some more information about you</p>
+        </div>
+    </div>
+
+    <script src="userprofile.js"></script>
+</body>
+
 </html>

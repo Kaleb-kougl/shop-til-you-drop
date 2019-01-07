@@ -16,6 +16,10 @@
     background-color: #e75a2c;
 }
 
+.btn:hover {
+    background-color: #0092ff;
+}
+
 input:not([type]):focus:not([readonly]),
 input[type='text']:not(.browser-default):focus:not([readonly]),
 input[type='password']:not(.browser-default):focus:not([readonly]),
