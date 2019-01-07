@@ -78,7 +78,7 @@ module.exports = (app, db) => {
     app.post("/api/orders/active/", (req, res) => {
         const placeOrder = () => {
             let randNbr = '';
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 7; i++) {
                 randNbr += Math.floor(Math.random() * 10);
             }
             console.log(randNbr);
