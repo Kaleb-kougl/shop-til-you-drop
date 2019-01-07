@@ -3,6 +3,8 @@ $.get('/api/orders/active/', function (data) {
     alert('Please log in for access!');
     window.location.replace('/login/');
   } else {
+    // mock data for ui design
+    // console.log(data);
     renderCarousel(data);
   }
 });
@@ -16,7 +18,7 @@ var carouselColors =
     'green darken-4'];
 
 function renderCarousel(data) {
-  console.log(data);
+  // console.log(data);
   // store data in a global var for later
   globalData = data;
   // Make a new card for carousel for each order
@@ -110,7 +112,7 @@ $('#details-btn').on('click', function (e) {
 
 // agree to order, send text to user
 $('#agree-order-details-modal-btn').on('click', function (e) {
-  console.log('click');
+  // console.log('click');
   let name = document.querySelector('#name').innerHTML;
   $.get("/api/getUser")
     .done(data => {
@@ -129,5 +131,16 @@ $('#agree-order-details-modal-btn').on('click', function (e) {
 });
 
 function success(data) {
+  let orderNumber = document.querySelector("#order-details-modal-header").innerHTML;
+  $.ajax({
+    type: "DELETE",
+    url: '/api/orders/active/',
+    data: { 'orderNumber': orderNumber }
+  }).done(res => {
+    console.log('this thing', res);
+  });
+}
+
+function showOrder(data) {
   console.log(data);
 }

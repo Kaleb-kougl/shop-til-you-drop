@@ -55,18 +55,20 @@ module.exports = (app, db) => {
 
     // delete order from active api when claimed by shopper
     app.delete("/api/orders/active/", (req, res) => {
+        let customerRegex = /Order Number: /;
+        let orderNumber = req.body.orderNumber.replace(customerRegex, '');
         db.cart.update({
             status: 'purchasing',
             shopper: app.locals.user
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
-        }).then(order => {
-            res.status(200).json(order);
-        }).catch(err => {
-            console.log(err);
-        })
+                where: {
+                    orderNumber: orderNumber
+                }
+            }).then(order => {
+                res.status(200).json(order);
+            }).catch(err => {
+                console.log(err);
+            })
     });
 
     // mark order as in transit
@@ -74,9 +76,9 @@ module.exports = (app, db) => {
         db.cart.update({
             status: "inTransit",
         }, {
-            where: {
-                orderNumber: req.body.orderNumber
-            }
+                where: {
+                    orderNumber: req.body.orderNumber
+                }
             }).then(cartUpdate => {
                 axios({
                     method: 'GET',
