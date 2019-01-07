@@ -11,7 +11,7 @@ module.exports = (app, db) => {
         db.cart.findAll({
             where: {
                 status: 'purchasing',
-                shopper: app.locals.user
+                shopper: app.locals.user || req.body.user
             }
         }).then(order => {
             res.json(order);
@@ -125,6 +125,7 @@ module.exports = (app, db) => {
                 res.status(200).json(cartUpdate);
             }).catch(err => {
                 console.log(err);
+                res.status(500).json({ 'error': err })
             })
     });
 
