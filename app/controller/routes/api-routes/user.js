@@ -32,9 +32,10 @@ module.exports = (app, db) => {
 
     // add item to cart
     app.post("/api/orders/", (req, res) => {
+        let price = req.body.price.replace('$', '').split(' ')[0];
         db.cart.create({
             item: req.body.item,
-            price: req.body.price,
+            price: price,
             quantity: parseInt(req.body.quantity),
             username: app.locals.user,
             UserEmail: app.locals.user
