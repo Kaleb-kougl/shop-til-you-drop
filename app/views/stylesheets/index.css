@@ -45,3 +45,6 @@ h1 {
 .btn {
     background-color: #e75a2c;
 }
+.btn:hover {
+    background-color: #0092ff;
+}
