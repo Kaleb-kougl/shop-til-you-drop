@@ -39,7 +39,11 @@ $('#signupform').on('submit', function(event) {
         email: email
     }).then(function(data) {
         // 2. if user isn't in the db, add them
-        if (data == null) {
+        if (data !== null) {
+            // 3. if user is in db, alert saying email exists
+            alert('Email exists!');
+        }
+        if (data === null) {
             $.post('/api/signup', {
                 email: email,
                 password: password,
@@ -50,18 +54,21 @@ $('#signupform').on('submit', function(event) {
                 address: address,
                 picture: picture,
                 activeuser: true
-            }).then(function(data) {
+            }).then(role => {
                 // sequelize does the email validation - if this error comes in, show it
-                if (data.errors[0].message === 'Validation isEmail on email failed') {
-                    alert('Please enter a valid email!');
-                } else {
-                    console.log(data.errors);
-                    alert('Something went wrong - please try again!');
-                }
+                // if (data === null) {
+                location.replace(role);
+                // } else if (data.errors[0].message === 'Validation isEmail on email failed') {
+                //     alert('Please enter a valid email!');
+                // } else {
+                //     console.log(data.errors);
+                //     alert('Something went wrong - please try again!');
+                // }
+            }).catch(err => {
+                console.log(err);
             });
         } else {
-            // 3. if user is in db, alert saying email exists
-            alert('Email exists!');
+            console.log('How did you get here?');
         }
     });
 });
