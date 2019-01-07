@@ -1,7 +1,6 @@
 module.exports = (app, db) => {
     // display all users 
     app.get('/api/admin/users/', (req, res) => {
-      console.log(app.locals.role);
         if (app.locals.role !== 'Admin'){
             res.send('Access denied')
         } else {
@@ -16,8 +15,9 @@ module.exports = (app, db) => {
             }
         }
     });
+
+    // ban user
     app.put('/api/admin/banUser', function (req, res) {
-        console.log(req.body)
         db.demo.update({ activeuser: false }, {
             where: {
                 UserEmail: req.body.chosenUserEmail
@@ -36,9 +36,8 @@ module.exports = (app, db) => {
             })
     });
 
+    // unban user
     app.put('/api/admin/unbanUser', function (req, res) {
-        console.log('email')
-        console.log(req.body)
         db.demo.update({ activeuser: true }, {
             where: {
                 UserEmail: req.body.chosenUserEmail
@@ -59,9 +58,6 @@ module.exports = (app, db) => {
     });
 
     app.get('/api/admin/userData/:email', function (req, res) {
-        console.log('hello')
-        console.log(req.params.email)
-
         db.demo.findAll({
             where: {
                 UserEmail: req.params.email

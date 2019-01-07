@@ -41,14 +41,6 @@ $(document).ready(function () {
                     list.append('<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>');
                     $('.collection').append(list);
                 }
-                // var items = res.findCompletedItemsResponse[0].searchResult[0].item;
-                // var data = "";
-                // for (var i = 0; i < results.data.Recipes.length; i++) {
-                //     data += "<div>";
-                //     data += "<img src='" + imageURL + "  '/>";
-                //     data += "  " + cost + " - ";
-                // };
-                // $('.results').html(ins);
             }
         });
 
