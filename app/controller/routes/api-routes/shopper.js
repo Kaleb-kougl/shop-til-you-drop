@@ -1,15 +1,11 @@
 const axios = require('axios');
 
-module.exports = (app, db) => {     
-
+module.exports = (app, db) => {
     // display active orders
     app.get("/api/orders/active/", (req, res) => {
         db.cart.findAll({
             where: {
                 status: 'ordered',
-                // $or: [
-                //     {'$db.demo.username$': app.locals.user}
-                // ]
             }, include: [
                 {
                     model: db.demo
@@ -88,6 +84,5 @@ module.exports = (app, db) => {
         }).catch(err => {
             console.log(err);
         })
-
     });
 }

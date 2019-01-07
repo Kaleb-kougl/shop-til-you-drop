@@ -11,7 +11,6 @@ $('#login-btn').on('click', function(event) {
         email: email,
         password: password
     }).then(function(data) {
-        // alert(data);
         if (data.message === 'Incorrect email.') {
             alert('User does not exist!');
             window.location.replace('/signup');
@@ -20,6 +19,7 @@ $('#login-btn').on('click', function(event) {
             window.location.replace('/login');
         } else {
             if (data.activeUser === true) {
+                alert('Log-in Successful!');
                 if (data.role === 'Customer') {
                     window.location.replace('../customer/');
                 } else if (data.role === 'Shopper') {
