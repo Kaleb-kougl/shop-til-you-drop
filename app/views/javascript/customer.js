@@ -8,41 +8,45 @@
 
 // Or with jQuery
 
-$(document).on('click', '#customer-home', function () {
-    location.replace('/customer/')
+$(document).on('click', '#customer-home', function() {
+    location.replace('/customer/');
 });
 
-$(document).on('click', '#profile', function () {
-    location.replace('/userprofile/')
+$(document).on('click', '#profile', function() {
+    location.replace('/userprofile/');
 });
 
-$(document).ready(function () {
+$(document).ready(function() {
     // $("#search-text").val();
 
-    $("#textarea1").keypress(function (e) {
+    $('#textarea1').keypress(function(e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
             searchfn();
         }
     });
 
-    $("#search-btn").on("click", searchfn);
+    $('#search-btn').on('click', searchfn);
 
     function searchfn() {
         // console.log("hello");
         $('.first-image-placeholder').hide();
-        var search = $("#textarea1").val()
+        var search = $('#textarea1').val();
         console.log(search);
         $.ajax({
-            type: "GET",
+            type: 'GET',
             url: '/api/items/' + search,
-            success: function (res) {
+            success: function(res) {
                 if (res === 'Access denied') {
                     alert('Please log in for access!');
                     window.location.replace('/login/');
                 } else {
                     $('.collection').empty();
                     for (let i = 0; i < res.length; i++) {
-                        let list = $('<li>').attr('class', 'collection-item searchable').attr('data-name', res[i].name).attr('data-price', res[i].dataPoints[0].value).html(`<h5>${res[i].name}</h5>`);
+                        let list = $('<li>')
+                            .attr('class', 'collection-item searchable')
+                            .attr('data-name', res[i].name)
+                            .attr('data-price', res[i].dataPoints[0].value)
+                            .html(`<h5>${res[i].name}</h5>`);
                         let cost = $('<h6>').html(res[i].dataPoints[0].value);
                         list.append(cost);
                         let calories = $('<h6>').html(res[i].dataPoints[1].value);
@@ -56,42 +60,39 @@ $(document).ready(function () {
                         // list.append('<a href="#!" class="secondary-content" id="addItem"><i class="material-icons">send</i></a>');
                         let button = $('<button>').attr('id', 'button' + i);
 
-                        button.attr('data-title', res[i].name)
-                        button.attr('data-price', res[i].dataPoints[0].value)
+                        button.attr('data-title', res[i].name);
+                        button.attr('data-price', res[i].dataPoints[0].value);
 
-                        button.text("Add To Cart");
+                        button.text('Add To Cart');
                         // button.html = "click me";
-                        button.addClass('save-button')
+                        button.addClass('save-button');
                         list.append(button);
                         $('.collection').append(list);
-                }
+                    }
                 }
 
-                $(document).ready(function () {
+                $(document).ready(function() {
                     var addItem = $('.save-button');
                     var removeItem = $('#remove');
-                    addItem.click(function () {
-
-                        var removeBtn = $("<button>remove</button>");
-                        removeBtn.attr('id', 'remove')
+                    addItem.click(function() {
+                        var removeBtn = $('<button>remove</button>');
+                        removeBtn.attr('id', 'remove');
 
                         // console.log('THIS IS THE BUTTPN I CLICKED!!!', $(this).data('title'));
-                        var h1 = $('<h1>')
-                        h1.text($(this).data('title'))
-                        var priceH1 = $('<h3>')
-                        priceH1.text($(this).data('price'))
+                        var h1 = $('<h1>');
+                        h1.text($(this).data('title'));
+                        var priceH1 = $('<h3>');
+                        priceH1.text($(this).data('price'));
 
-                        var div = $('<div>').append(h1)
-                        div.append(priceH1)
-                        div.append(removeBtn)
+                        var div = $('<div>').append(h1);
+                        div.append(priceH1);
+                        div.append(removeBtn);
 
                         $('#shoppingList').append(div);
 
-
-
-
+                        $('#textarea1').val('');
                     });
-                    removeItem.click(function () {
+                    removeItem.click(function() {
                         console.log(this);
 
                         // var toRemove = $('#remove').val();
@@ -114,16 +115,16 @@ $(document).ready(function () {
     }
 
     // arrow function will cause loss of functionality
-    $(document).on('click', '.searchable', function () {
+    $(document).on('click', '.searchable', function() {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: '/api/orders/',
             data: {
                 item: $(this).attr('data-name'),
                 price: $(this).attr('data-price'),
                 quantity: 1
             },
-            success: (res) => {
+            success: res => {
                 // intentionally empty
             }
         });
@@ -136,7 +137,7 @@ $(document).ready(function () {
 
     // $('#first-image-placeholder').replaceWith('#search-item-list');
 
-    $(document).on('click', '#cart', function () {
-        location.replace('/viewCart/')
+    $(document).on('click', '#cart', function() {
+        location.replace('/viewCart/');
     });
 });
