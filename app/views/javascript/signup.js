@@ -1,5 +1,6 @@
 $('#signupform').on('submit', function(event) {
     event.preventDefault();
+    alert('Hi');
     console.log('Start to add');
     var first_name = $('#first_name')
         .val()
@@ -30,7 +31,7 @@ $('#signupform').on('submit', function(event) {
 
     // 0. check for text
     if (!email || !password) {
-        alert('Please enter some information!');
+        alert('Please enter your information!');
         return;
     }
 
@@ -54,19 +55,21 @@ $('#signupform').on('submit', function(event) {
                 address: address,
                 picture: picture,
                 activeuser: true
-            }).then(role => {
-                // sequelize does the email validation - if this error comes in, show it
-                // if (data === null) {
-                location.replace(role);
-                // } else if (data.errors[0].message === 'Validation isEmail on email failed') {
-                //     alert('Please enter a valid email!');
-                // } else {
-                //     console.log(data.errors);
-                //     alert('Something went wrong - please try again!');
-                // }
-            }).catch(err => {
-                console.log(err);
-            });
+            })
+                .then(role => {
+                    // sequelize does the email validation - if this error comes in, show it
+                    // if (data === null) {
+                    location.replace(role);
+                    // } else if (data.errors[0].message === 'Validation isEmail on email failed') {
+                    //     alert('Please enter a valid email!');
+                    // } else {
+                    //     console.log(data.errors);
+                    //     alert('Something went wrong - please try again!');
+                    // }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         } else {
             console.log('How did you get here?');
         }
