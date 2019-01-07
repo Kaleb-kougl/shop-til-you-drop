@@ -6,6 +6,20 @@ require('dotenv').config();
 const client = new twilio(process.env.Twilio_accountSid, process.env.Twilio_authToken);
 
 module.exports = (app, db) => {
+    // display orders for a particular shopper
+    app.post("/api/findMyPickups", (req, res) => {
+        db.cart.findAll({
+            where: {
+                status: 'purchasing',
+                shopper: app.locals.user
+            }
+        }).then(order => {
+            res.json(order);
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+
     // send text
     app.post("/api/message", (req, res) => {
         // create message
