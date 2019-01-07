@@ -10,7 +10,17 @@
 
 $(document).ready(function () {
     // $("#search-text").val();
-    $("#search-btn").on("click", function () {
+
+    $("#textarea1").keypress(function (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            searchfn();
+        }
+    });
+
+
+    $("#search-btn").on("click", searchfn);
+
+    function searchfn() {
         // console.log("hello");
         var search = $("#textarea1").val()
         console.log(search);
@@ -45,10 +55,10 @@ $(document).ready(function () {
             }
         });
 
-    });
+    }
 
     // arrow function will cause loss of functionality
-    $(document).on('click', '.searchable', function() {
+    $(document).on('click', '.searchable', function () {
         $.ajax({
             type: "POST",
             url: '/api/orders/',
@@ -63,10 +73,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '#cart', function() {
+    $(document).on('click', '#cart', function () {
         location.replace('/viewCart/')
     });
 });
-
-// $('.tooltipped').tooltip();
-// });
