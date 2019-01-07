@@ -242,15 +242,22 @@ $('#details-btn').on('click', function (e) {
 
 // agree to order, send text to user
 $('#agree-order-details-modal-btn').on('click', function (e) {
+  console.log('click');
   let name = document.querySelector('#name').innerHTML;
-  let shopper = 'TempValue';
-  let message = `${name}, your food is currently being picked up by ${shopper}`
-  $.ajax({
-    type: "POST",
-    url: '/api/message',
-    data: { "Message": message },
-    success: success,
-  });
+  $.get("/api/getUser")
+    .done(data => {
+      console.log(data);
+      let shopper = data.firstName + ' ' + data.lastName;
+      let email = data.user;
+      let message = `${name}, your food is currently being picked up by ${shopper}. They can be contacted at ${email} if needed.`;
+      $.ajax({
+        type: "POST",
+        url: '/api/message',
+        data: { "Message": message },
+        success: success,
+      });
+    })
+    .fail(err => console.log(err));
 });
 
 function success(data) {
