@@ -53,6 +53,7 @@ $(document).ready(function () {
                     list.append(button);
                     $('.collection').append(list);
                 }
+              
                 $(document).ready(function () {
                     var addItem = $('.save-button');
                     var removeItem = $('#remove');
@@ -91,7 +92,7 @@ $(document).ready(function () {
                 //     data += "<img src='" + imageURL + "  '/>";
                 //     data += "  " + cost + " - ";
                 // };
-                // $('.results').html(ins);
+                // $('.results').html(ins)
             }
         });
 

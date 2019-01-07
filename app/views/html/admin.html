@@ -10,7 +10,6 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
-    <link rel="stylesheet" href="/stylesheets/admin.css" media="screen" title="no title">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,21 +17,37 @@
 </head>
 
 <body>
-    <h1>Administrator panel</h1>
-    <table id='userData'>
-        <thead id="table-head">
-            <tr>
-                <th>User e-mail</th>
-                <th>Role</th>
-                <th>Account status</th>
-                <th>Change Status</th>
-            </tr>
-        </thead>
+    <div class="container">
+        <h1>Administrator panel</h1>
+        <table id='userData'>
+            <thead id="table-head">
+                <tr>
+                    <th>User e-mail</th>
+                    <th>Role</th>
+                    <th>Account status</th>
+                </tr>
+            </thead>
 
-        <tbody id="table-body">
+            <tbody id="table-body">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <img style='float:left;margin:25px;' width='200px' height='200px' id='userImage'><img>
+                First Name :<h6 id='userFirstName'></h6>
+                Last Name :<h6 id='userLastName'></h6>
+                Address : <h6 id='userAddress'></h6>
+                Phone Number : <h6 id='userPhone'></h6>
+                Member since : <h6 id='createdAt'></h6>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                <a style='float:left;' id='action' class="waves-effect waves-light btn"></a>
+            </div>
+        </div>
+    </div>
+
     <script src="/javascript/admin.js"></script>
 </body>
 
