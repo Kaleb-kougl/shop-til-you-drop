@@ -20,11 +20,11 @@ module.exports = app => {
     app.get('/loggedin', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/loggedin.html'));
     });
-  
+
     app.get('/banned', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/banned.html'));
     });
-    
+
     app.get('/searchResults/:search', (req, res) => {
         res.send(app.locals[req.params.search]);
     });
@@ -43,6 +43,10 @@ module.exports = app => {
 
     app.get('/customer/', (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '/../../views/html/customer.html'));
+    });
+
+    app.get('/userprofile/', (req, res) => {
+        res.status(200).sendFile(path.join(__dirname, '/../../views/html/userprofile.html'));
     });
 
     app.get('/admin/', (req, res) => {
