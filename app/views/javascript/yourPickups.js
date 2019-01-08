@@ -25,43 +25,66 @@ $(document).ready(function () {
           data[i.orderNumber].push(i);
         }
       });
+      renderCarousel(data, false);
+      let transitData = {};
+      $.ajax({
+        type: "POST",
+        url: "/api/findMyPickups",
+        data: {},
+      }).done(res => {
+        res.map(i => {
+          if (transitData[i.orderNumber] === undefined) {
+            transitData[i.orderNumber] = [i]
+          } else {
+            transitData[i.orderNumber].push(i);
+          }
+        });
+        renderCarousel(transitData, true);
+      })
 
       // store data in a global var for later
       globalData = data;
       // Make a new card for carousel for each order
-      let colorIndex = 0;
-      for (let order in data) {
-        colorIndex++;
-        // create newDiv for each data Point
-        let newDiv = $("<div>");
-        newDiv.addClass(`carousel-item ${carouselColors[(colorIndex % carouselColors.length)]} white-text`);
-        newDiv.attr("href", '#no');
-        // add orderNumber for lookup later
-        newDiv.attr("data-orderNumber", data[order][0].orderNumber);
-        // query selectors can't start with a number
-        newDiv.attr("id", 'a' + data[order][0].orderNumber);
-        // Give header
-        let newHeader = $("<h2>")
-        newHeader.html(data[order][0].orderNumber);
-        newDiv.append(newHeader);
-        // create list of items to purchase
-        let newUl = $("<ul>");
-        data[order].map(item => {
-          let newLi = $("<li>");
-          newLi.html(`${item.item} : ${item.quantity}`);
-          newUl.append(newLi);
+      function renderCarousel(data, inTransit) {
+        let colorIndex = 0;
+        for (let order in data) {
+          colorIndex++;
+          // create newDiv for each data Point
+          let newDiv = $("<div>");
+          if (!inTransit) {
+            newDiv.addClass(`carousel-item ${carouselColors[(colorIndex % carouselColors.length)]} white-text`);
+          } else {
+            newDiv.addClass(`carousel-item orange darken-4 white-text`);
+          }
+          newDiv.attr("href", '#no');
+          // add orderNumber for lookup later
+          newDiv.attr("data-orderNumber", data[order][0].orderNumber);
+          // query selectors can't start with a number
+          newDiv.attr("id", 'a' + data[order][0].orderNumber);
+          // Give header
+          let newHeader = $("<h2>")
+          newHeader.html(data[order][0].orderNumber);
+          newDiv.append(newHeader);
+          // create list of items to purchase
+          let newUl = $("<ul>");
+          data[order].map(item => {
+            let newLi = $("<li>");
+            newLi.html(`${item.item} : ${item.quantity}`);
+            newUl.append(newLi);
+          });
+          newDiv.append(newUl);
+          $(".carousel").append(newDiv);
+        }
+        // initialize carousel so it moves
+        var instance = M.Carousel.init({
+          fullWidth: true,
+          indicators: true
         });
-        newDiv.append(newUl);
-        $(".carousel").append(newDiv);
+        var slider = $('.carousel');
+        slider.carousel();
       }
-      // initialize carousel so it moves
-      var instance = M.Carousel.init({
-        fullWidth: true,
-        indicators: true
-      });
-      var slider = $('.carousel');
-      slider.carousel();
     });
+
   }
 
   function prepareModal(orderNum) {
