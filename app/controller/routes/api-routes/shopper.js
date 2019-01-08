@@ -6,11 +6,25 @@ require('dotenv').config();
 const client = new twilio(process.env.Twilio_accountSid, process.env.Twilio_authToken);
 
 module.exports = (app, db) => {
-    // display orders for a particular shopper
+    // display orders for a particular shopper that are 'purchasing'
     app.post("/api/findMyPickups", (req, res) => {
         db.cart.findAll({
             where: {
                 status: 'purchasing',
+                shopper: app.locals.user || req.body.user
+            }
+        }).then(order => {
+            res.json(order);
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+
+    // display orders for a shopper that are 'in transit'
+    app.post("/api/findMyPickups", (req, res) => {
+        db.cart.findAll({
+            where: {
+                status: "inTransit",
                 shopper: app.locals.user || req.body.user
             }
         }).then(order => {
@@ -86,32 +100,22 @@ module.exports = (app, db) => {
     });
 
     // mark order as in transit
-    // app.put('/api/orders/', (req, res) => {
-    //     db.cart.update({
-    //         status: "inTransit",
-    //     }, {
-    //             where: {
-    //                 orderNumber: req.body.orderNumber
-    //             }
-    //         }).then(cartUpdate => {
-    //             axios({
-    //                 method: 'GET',
-    //                 url: 'https://maps.googleapis.com/maps/api/directions/json?',
-    //                 params: {
-    //                     origin: req.body.lat + ',' + req.body.lng,
-    //                     destination: 'Chicago Premium Outlets',
-    //                     key: process.env.GOOGLE_API_KEY,
-    //                 }
-    //             }).then(directions => {
-    //                 res.json(directions.data.routes[0]);
-    //             }).catch(err => {
-    //                 console.log(err);
-    //             });
-    //             res.status(200).json(cartUpdate);
-    //         }).catch(err => {
-    //             console.log(err);
-    //         });
-    // });
+    app.put('/api/orders/', (req, res) => {
+        db.cart.update({
+            status: "inTransit",
+        }, {
+                where: {
+                    orderNumber: req.body.orderNumber,
+                    shopper: app.locals.user || req.body.user
+                }
+            })
+            .then(directions => {
+                console.log(directions);
+                res.status(200).json(directions);
+            }).catch(err => {
+                console.log(err);
+            });
+    })
 
     // mark as delivered
     app.delete("/api/orders/", (req, res) => {
@@ -130,7 +134,24 @@ module.exports = (app, db) => {
             })
     });
 
+    // sends back the info of person currently logged in
     app.get("/api/getUser", (req, res) => {
         res.json(app.locals)
     });
-}
+
+    // sends back info of the user req
+    app.get("/api/getInfoOf/:userEmail", (req, res) => {
+        console.log(req.params.userEmail);
+        db.demo.findAll({
+            where: {
+                UserEmail: req.params.userEmail
+            }
+        }).then(order => {
+            res.json(order);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({ 'error': err })
+        });
+    });
+
+};
