@@ -24,3 +24,10 @@
 #agree-order-details-modal-btn {
   grid-area: 1 / 3 / 2 / 5;
 }
+
+#skip-to-first-modal {
+  position: absolute;
+  right: 1vw;
+  top: 1vh;
+  display: none;
+}
