@@ -199,6 +199,7 @@ $('#textarea1').keypress(function (e) {
 $('#search-btn').on('click', searchfn);
 
 function searchfn() {
+    $('.loader').css('display', 'block');
     $('.first-image-placeholder').hide();
     var search = $('#textarea1').val();
     $.ajax({
@@ -234,6 +235,7 @@ function searchfn() {
                     list.append(button);
                     $('.collection').append(list);
                 }
+                $('.loader').css('display', 'none');
             }
             var addItem = $('.save-button');
             var removeItem = $('.remove');
