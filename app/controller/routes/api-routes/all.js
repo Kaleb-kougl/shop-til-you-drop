@@ -166,8 +166,8 @@ module.exports = (app, db) => {
     });
 
     app.put('/api/user/info', (req, res) => {
-
-            db.demo.update({
+        db.demo.update(
+            {
                 address: req.body.address || app.locals.address,
                 phone: req.body.phone || app.locals.phone,
                 firstName: req.body.firstName || app.locals.firstName,
@@ -176,14 +176,14 @@ module.exports = (app, db) => {
             {
                 where: {
                     UserEmail: app.locals.user
-
                 }
-            )
-            .then(info => {
-                res.json(info);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            }
+                .then(info => {
+                    res.json(info);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        );
     });
 };
