@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
     $.ajax({
         type: 'GET',
         url: '/api/user/info/',
@@ -41,4 +42,4 @@ $(document).ready(() => {
         });
     })
 
-})
+});
