@@ -118,7 +118,7 @@ module.exports = (app, db) => {
     })
 
     // mark as delivered
-    app.delete("/api/orders/", (req, res) => {
+    app.patch("/api/orders/", (req, res) => {
         db.cart.update({
             status: "delivered",
         }, {

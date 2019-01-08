@@ -208,10 +208,11 @@ $(document).ready(function () {
     let customerRegex = /Order Number: /;
     let orderNumber = document.querySelector("#order-details-modal-header").innerHTML.replace(customerRegex, '');
     // should send an ajax request to update the order to 'DELIVERED';
+    console.log(orderNumber);
     $.ajax({
-      type: "DELETE",
+      type: "PATCH",
       url: '/api/orders/',
-      data: { "orderNumber": orderNumber },
+      data: { orderNumber: orderNumber },
       success: successDelivered,
     });
   }
@@ -220,5 +221,4 @@ $(document).ready(function () {
     console.log('successDelivered');
     location.reload();
   }
-
 });
