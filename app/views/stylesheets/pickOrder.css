@@ -1,3 +1,12 @@
+#pizza-container {
+  height: 100vh;
+  width: 100vw;
+  background: #0092FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* set Carousel to 100% view height */
 .carousel {
   height: 100vh;
