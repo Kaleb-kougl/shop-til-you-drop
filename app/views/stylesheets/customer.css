@@ -19,11 +19,6 @@
     color: black;
 }
 
-/* #account-icon {
-    width: 80px;
-    height: 65px;
-} */
-
 .btn {
     background-color: #e75a2c;
 }
@@ -97,10 +92,17 @@ label.active {
 #pizza-container {
     height: 100vh;
     width: 100vw;
-    background: #0092FF;
+    background: #0092ff;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.alignme {
+    margin-right: 0;
+    text-align: right;
+    float: right;
 }
 
 .loader {
@@ -118,3 +120,4 @@ label.active {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
