@@ -1,11 +1,3 @@
-#dummy-pic {
-    width: 100px;
-    height: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
 
 #logo-main {
     width: 80px;
@@ -41,6 +33,17 @@
 }
 .card.large {
     width: 70%;
+    margin: auto;
+}
+
+#grid-container {
+    display: grid;
+}
+
+#burger-pic {
+    justify-self: center;
+    height: 15vh;
+    width: auto;
     margin: auto;
 }
 
