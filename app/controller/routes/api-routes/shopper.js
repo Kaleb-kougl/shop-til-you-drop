@@ -86,32 +86,32 @@ module.exports = (app, db) => {
     });
 
     // mark order as in transit
-    app.put('/api/orders/', (req, res) => {
-        db.cart.update({
-            status: "inTransit",
-        }, {
-                where: {
-                    orderNumber: req.body.orderNumber
-                }
-            }).then(cartUpdate => {
-                axios({
-                    method: 'GET',
-                    url: 'https://maps.googleapis.com/maps/api/directions/json?',
-                    params: {
-                        origin: req.body.lat + ',' + req.body.lng,
-                        destination: 'Chicago Premium Outlets',
-                        key: process.env.GOOGLE_API_KEY,
-                    }
-                }).then(directions => {
-                    res.json(directions.data.routes[0]);
-                }).catch(err => {
-                    console.log(err);
-                });
-                res.status(200).json(cartUpdate);
-            }).catch(err => {
-                console.log(err);
-            });
-    });
+    // app.put('/api/orders/', (req, res) => {
+    //     db.cart.update({
+    //         status: "inTransit",
+    //     }, {
+    //             where: {
+    //                 orderNumber: req.body.orderNumber
+    //             }
+    //         }).then(cartUpdate => {
+    //             axios({
+    //                 method: 'GET',
+    //                 url: 'https://maps.googleapis.com/maps/api/directions/json?',
+    //                 params: {
+    //                     origin: req.body.lat + ',' + req.body.lng,
+    //                     destination: 'Chicago Premium Outlets',
+    //                     key: process.env.GOOGLE_API_KEY,
+    //                 }
+    //             }).then(directions => {
+    //                 res.json(directions.data.routes[0]);
+    //             }).catch(err => {
+    //                 console.log(err);
+    //             });
+    //             res.status(200).json(cartUpdate);
+    //         }).catch(err => {
+    //             console.log(err);
+    //         });
+    // });
 
     // mark as delivered
     app.delete("/api/orders/", (req, res) => {
@@ -119,7 +119,8 @@ module.exports = (app, db) => {
             status: "delivered",
         }, {
                 where: {
-                    orderNumber: req.body.orderNumber
+                    orderNumber: req.body.orderNumber,
+                    status: 'purchasing'
                 }
             }).then(cartUpdate => {
                 res.status(200).json(cartUpdate);

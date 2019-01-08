@@ -53,3 +53,8 @@ label.active {
 #account-icon {
     color: #5a9734;
 }
+
+#right {
+    position: absolute;
+    right: 10px;
+}
