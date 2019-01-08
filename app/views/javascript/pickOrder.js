@@ -3,8 +3,6 @@ $.get('/api/orders/active/', function (data) {
     alert('Please log in for access!');
     window.location.replace('/login/');
   } else {
-    // mock data for ui design
-    // console.log(data);
     renderCarousel(data);
   }
 });

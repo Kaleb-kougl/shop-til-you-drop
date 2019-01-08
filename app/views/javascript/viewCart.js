@@ -25,15 +25,13 @@ $.ajax({
     }
 });
 
-$(document).on('click', '#customer-home', function () {
-    location.replace('/customer/')
+$(document).on('click', '#add', function () {
+    location.replace('/customer/');
 });
 
 $(document).on('click', '#profile', function () {
     location.replace('/userprofile/')
 });
-
-
 
 $('#order').on('click', () => {
     $.ajax({
@@ -43,6 +41,7 @@ $('#order').on('click', () => {
             $('#orderConfirmation').empty();
             let list = $('<p>').html('Your items have been ordered!');
             $('#orderConfirmation').append(list);
+            $('#order').remove();
         }
     });
 });
