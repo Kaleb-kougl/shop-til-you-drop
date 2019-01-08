@@ -12,11 +12,11 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
-$(document).on('click', '#customer-home', function() {
+$(document).on('click', '#customer-home', function () {
     location.replace('/customer/');
 });
 
-$(document).on('click', '#profile', function() {
+$(document).on('click', '#profile', function () {
     location.replace('/userprofile/');
 });
 
@@ -51,7 +51,7 @@ $.ajax({
     }
 });
 
-$('#textarea1').keypress(function(e) {
+$('#textarea1').keypress(function (e) {
     if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
         searchfn();
     }
@@ -65,7 +65,7 @@ function searchfn() {
     $.ajax({
         type: 'GET',
         url: '/api/items/' + search,
-        success: function(res) {
+        success: function (res) {
             if (res === 'Access denied') {
                 alert('Please log in for access!');
                 window.location.replace('/login/');
@@ -89,6 +89,7 @@ function searchfn() {
                     let carbs = $('<h6>').html(res[i].dataPoints[4].value);
                     list.append(carbs);
                     let button = $('<button>').attr('id', 'button' + i);
+                    button.attr('class', 'add-button');
                     button.attr('data-title', res[i].name);
                     button.attr('data-price', res[i].dataPoints[0].value);
                     button.text('Add To Cart');
@@ -98,7 +99,7 @@ function searchfn() {
             }
             var addItem = $('.save-button');
             var removeItem = $('.remove');
-            addItem.click(function() {
+            addItem.click(function () {
                 if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
                     let index = cartItems.indexOf($(this).attr('data-title'));
                     cartQuantity[index]++;
@@ -131,7 +132,7 @@ function searchfn() {
     });
 }
 
-$(document).on('click', '.remove', function(event) {
+$(document).on('click', '.remove', function (event) {
     event.preventDefault();
     $.ajax({
         type: 'DELETE',
@@ -147,7 +148,7 @@ $(document).on('click', '.remove', function(event) {
 });
 
 // arrow function will cause loss of functionality
-$(document).on('click', '.searchable', function() {
+$(document).on('click', '.searchable', function () {
     $.ajax({
         type: 'POST',
         url: '/api/orders/',
@@ -162,6 +163,6 @@ $(document).on('click', '.searchable', function() {
     });
 });
 
-$(document).on('click', '#cart', function() {
+$(document).on('click', '#cart', function () {
     location.replace('/viewCart/');
 });

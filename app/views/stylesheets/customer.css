@@ -3,6 +3,18 @@
     height: 65px;
 }
 
+#shopping-cart-title {
+    color: #5a9734;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: x-large;
+    padding-bottom: 10px;
+}
+
+#shoppingList {
+    line-height: 1.6;
+}
+
 #search-text {
     color: black;
 }
@@ -19,6 +31,29 @@
 .btn:hover {
     background-color: #0092ff;
 }
+
+.remove {
+    background-color: #e75a2c;
+    color: white;
+}
+
+.remove:hover {
+    background-color: #0092ff;
+}
+
+.add-button {
+    background-color: #e75a2c;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #0092ff;
+}
+
+/* #button-0 {
+    font-weight: bolder;
+    font-size: 5px;
+} */
 
 input:not([type]):focus:not([readonly]),
 input[type='text']:not(.browser-default):focus:not([readonly]),
