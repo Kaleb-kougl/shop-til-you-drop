@@ -106,7 +106,7 @@ module.exports = (app, db) => {
         }, {
                 where: {
                     orderNumber: req.body.orderNumber,
-                    shopper: app.locals.user
+                    shopper: app.locals.user || req.body.user
                 }
             })
             .then(directions => {
