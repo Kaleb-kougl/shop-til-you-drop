@@ -1,4 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
+    //Model for a cart in our DB
     const Cart = sequelize.define('Cart', {
         id: {
             type: DataTypes.INTEGER,

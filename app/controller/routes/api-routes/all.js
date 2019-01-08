@@ -87,7 +87,7 @@ module.exports = (app, db) => {
         req.logout();
         res.redirect('/');
     });
-
+    // Route fo liggin in
     app.get('/api/login', function (req, res, next) {
         passport.authenticate('local', function (err, user, info) {
             if (err) {
@@ -122,7 +122,7 @@ module.exports = (app, db) => {
             });
         })(req, res, next);
     });
-
+    //get request to get user info
     app.get('/api/user/info', (req, res) => {
         if (app.locals.role === undefined) {
             console.log(app.locals.role);
@@ -133,7 +133,7 @@ module.exports = (app, db) => {
                     email: app.locals.user
                 }, include: [
                     {
-                        model:db.demo
+                        model: db.demo
                     }
                 ]
             }).then(info => {
@@ -148,14 +148,14 @@ module.exports = (app, db) => {
             })
         }
     })
-
+    //Route for changing user info in DB
     app.put('/api/user/info', (req, res) => {
-            db.demo.update({
-                address: req.body.address || app.locals.address,
-                phone: parseInt(req.body.phone) || app.local.phone,
-                firstName: req.body.firstName || app.locals.firstName,
-                lastName: req.body.lastName || app.locals.lastName
-            },
+        db.demo.update({
+            address: req.body.address || app.locals.address,
+            phone: parseInt(req.body.phone) || app.local.phone,
+            firstName: req.body.firstName || app.locals.firstName,
+            lastName: req.body.lastName || app.locals.lastName
+        },
             {
                 where: {
                     UserEmail: app.locals.user

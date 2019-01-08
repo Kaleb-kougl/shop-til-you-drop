@@ -1,4 +1,5 @@
-$('#login-btn').on('click', function(event) {
+//login functionality 
+$('#login-btn').on('click', function (event) {
     event.preventDefault();
     var email = $('#email-input')
         .val()
@@ -6,11 +7,11 @@ $('#login-btn').on('click', function(event) {
     var password = $('#password-input')
         .val()
         .trim();
-
+    //route for authentication of a user
     $.get('/api/login', {
         email: email,
         password: password
-    }).then(function(data) {
+    }).then(function (data) {
         if (data.message === 'Incorrect email.') {
             alert('User does not exist!');
             window.location.replace('/signup');

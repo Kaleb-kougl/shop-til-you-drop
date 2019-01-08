@@ -4,12 +4,12 @@ var status;
 
 $(document).ready(function () {
     getTableData()
-
+    // Loading the users data from DB
     $('body').on('click', 'tr', function () {
         chosenUserEmail = $(this).attr('data-email');
         openUserProfile();
     });
-
+    //Banning/Unbanning  the chosen user
     $('body').on('click', '#action', function () {
         console.log(status)
         if (status == 1) {
@@ -39,6 +39,7 @@ $(document).ready(function () {
     })
 
 })
+//AJAX call to get the data of a chosen user
 function openUserProfile() {
     $.ajax({
         url: '/api/admin/userData/' + chosenUserEmail,
@@ -64,6 +65,7 @@ function openUserProfile() {
         console.log(status)
     })
 }
+//AJAX call to get the users data from DB
 function getTableData() {
     $.get('/api/admin/users').then(res => {
         console.log(res)

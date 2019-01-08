@@ -1,3 +1,4 @@
+//AJAX call to view the users cart
 $.ajax({
     type: 'GET',
     url: '/api/orders/',
@@ -32,7 +33,7 @@ $(document).on('click', '#add', function () {
 $(document).on('click', '#profile', function () {
     location.replace('/userprofile/')
 });
-
+//AJAX call to post an order in DB
 $('#order').on('click', () => {
     $.ajax({
         type: 'POST',

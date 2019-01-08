@@ -132,7 +132,7 @@ let pizza = new Pizza('pizza');
   pizza.update()
 
 }())
-
+//call for loading the active ordersfrom our db
 $.get('/api/orders/active/', function (data) {
   if (data === 'Access denied') {
     alert('Please log in for access!');
@@ -260,7 +260,7 @@ $('#agree-order-details-modal-btn').on('click', function (e) {
     })
     .fail(err => console.log(err));
 });
-
+//AJAX call for deleting an prder from DB
 function success(data) {
   let orderNumber = document.querySelector("#order-details-modal-header").innerHTML;
   $.ajax({

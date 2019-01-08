@@ -12,14 +12,14 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
-$(document).on('click', '#customer-home', function() {
+$(document).on('click', '#customer-home', function () {
     location.replace('/customer/');
 });
 
-$(document).on('click', '#profile', function() {
+$(document).on('click', '#profile', function () {
     location.replace('/userprofile/');
 });
-
+//AJAX call to get the orders of the user
 $.ajax({
     type: 'GET',
     url: '/api/orders/',
@@ -51,21 +51,21 @@ $.ajax({
     }
 });
 
-$('#textarea1').keypress(function(e) {
+$('#textarea1').keypress(function (e) {
     if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
         searchfn();
     }
 });
 
 $('#search-btn').on('click', searchfn);
-
+//AJAX call for api call with params when user searches for a product
 function searchfn() {
     $('.first-image-placeholder').hide();
     var search = $('#textarea1').val();
     $.ajax({
         type: 'GET',
         url: '/api/items/' + search,
-        success: function(res) {
+        success: function (res) {
             if (res === 'Access denied') {
                 alert('Please log in for access!');
                 window.location.replace('/login/');
@@ -98,7 +98,7 @@ function searchfn() {
             }
             var addItem = $('.save-button');
             var removeItem = $('.remove');
-            addItem.click(function() {
+            addItem.click(function () {
                 if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
                     let index = cartItems.indexOf($(this).attr('data-title'));
                     cartQuantity[index]++;
@@ -130,8 +130,8 @@ function searchfn() {
         }
     });
 }
-
-$(document).on('click', '.remove', function(event) {
+//AJAX call for removing a product
+$(document).on('click', '.remove', function (event) {
     event.preventDefault();
     $.ajax({
         type: 'DELETE',
@@ -147,7 +147,7 @@ $(document).on('click', '.remove', function(event) {
 });
 
 // arrow function will cause loss of functionality
-$(document).on('click', '.searchable', function() {
+$(document).on('click', '.searchable', function () {
     $.ajax({
         type: 'POST',
         url: '/api/orders/',
@@ -162,6 +162,6 @@ $(document).on('click', '.searchable', function() {
     });
 });
 
-$(document).on('click', '#cart', function() {
+$(document).on('click', '#cart', function () {
     location.replace('/viewCart/');
 });

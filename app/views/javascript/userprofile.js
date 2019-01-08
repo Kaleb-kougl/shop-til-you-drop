@@ -1,3 +1,4 @@
+//AJAX call to get the logged in user
 $.ajax({
     type: 'GET',
     url: '/api/user/info/',
@@ -23,7 +24,7 @@ $(document).on('click', '#customer-home', function () {
 $(document).on('click', '#profile', function () {
     location.replace('/userprofile/')
 });
-
+//AJAX call for updating users info 
 $(document).on('click', '#update', () => {
     $.ajax({
         type: 'PUT',

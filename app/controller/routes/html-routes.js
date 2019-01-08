@@ -1,5 +1,5 @@
 const path = require('path');
-
+//routes for our html pages
 module.exports = app => {
     app.get('/', (req, res) => {
         res.status(300).sendFile(path.join(__dirname, '/../../views/html/index.html'));

@@ -1,4 +1,5 @@
 navigator.geolocation.getCurrentPosition(pos => {
+    //AJAX call for posting an order 
     $.ajax({
         method: 'PUT',
         url: '/api/orders/',
