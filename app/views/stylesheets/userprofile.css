@@ -1,6 +1,10 @@
 #dummy-pic {
     width: 100px;
     height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 #logo-main {
@@ -10,9 +14,29 @@
 
 #title {
     text-align: center;
+    color: #5a9734;
+    font-display: bold;
 }
 
 #profile-view {
     text-align: center;
 
+}
+
+#account-icon {
+    color: #5a9734;
+}
+
+.account-header-text {
+    font-weight: bold;
+}
+
+#account-body {
+    text-align: center;
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
