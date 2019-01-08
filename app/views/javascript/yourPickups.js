@@ -38,6 +38,8 @@ $(document).ready(function () {
         newDiv.attr("href", '#no');
         // add orderNumber for lookup later
         newDiv.attr("data-orderNumber", data[order][0].orderNumber);
+        // query selectors can't start with a number
+        newDiv.attr("id", 'a' + data[order][0].orderNumber);
         // Give header
         let newHeader = $("<h2>")
         newHeader.html(data[order][0].orderNumber);
@@ -141,8 +143,21 @@ $(document).ready(function () {
   });
 
   function success(data) {
-    let orderNumber = document.querySelector("#order-details-modal-header").innerHTML;
+    let customerRegex = /Order Number: /;
+    let orderNumber = document.querySelector("#order-details-modal-header").innerHTML.replace(customerRegex, '');
     // should send an ajax request to update the order to 'inTransit';
+    $.ajax({
+      type: "PUT",
+      url: '/api/orders/',
+      data: { "orderNumber": orderNumber },
+      success: successUpdate,
+    });
+  }
+
+  function successUpdate(data) {
+    let customerRegex = /Order Number: /;
+    let orderNumber = document.querySelector("#order-details-modal-header").innerHTML.replace(customerRegex, '');
+    document.querySelector(`#a${orderNumber}`).className = 'carousel-item orange darken-4 white-text';
   }
 
 });
