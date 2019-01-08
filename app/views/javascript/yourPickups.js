@@ -123,4 +123,26 @@ $(document).ready(function () {
     instance.open();
   });
 
+  $('#agree-order-details-modal-btn').on('click', function (e) {
+    let name = document.querySelector('#name').innerHTML;
+    $.get("/api/getUser")
+      .done(data => {
+        let shopper = data.firstName + ' ' + data.lastName;
+        let email = data.user;
+        let message = `${name}, your food is currently in transit! ${shopper} will be there soon. They can be contacted at ${email} if needed.`;
+        $.ajax({
+          type: "POST",
+          url: '/api/message',
+          data: { "Message": message },
+          success: success,
+        });
+      })
+      .fail(err => console.log(err));
+  });
+
+  function success(data) {
+    let orderNumber = document.querySelector("#order-details-modal-header").innerHTML;
+    // should send an ajax request to update the order to 'inTransit';
+  }
+
 });
