@@ -124,14 +124,46 @@ module.exports = (app, db) => {
     });
 
     app.get('/api/user/info', (req, res) => {
-        db.user.findAll({
-            where: {
-                email: app.locals.user
-            }
-        }).then(info => {
-            
-        }).catch(err => {
-            console.log(err);
-        })
+        if (app.locals.role === undefined) {
+            console.log(app.locals.role);
+            res.send('Access denied');
+        } else {
+            db.user.findAll({
+                where: {
+                    email: app.locals.user
+                }, include: [
+                    {
+                        model:db.demo
+                    }
+                ]
+            }).then(info => {
+                app.locals.firstName = info[0].Demo.firstName;
+                app.locals.lastName = info[0].Demo.lastName;
+                app.locals.address = info[0].Demo.address;
+                app.locals.phone = info[0].Demo.phone;
+
+                res.json(info);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    })
+
+    app.put('/api/user/info', (req, res) => {
+            db.demo.update({
+                address: req.body.address || app.locals.address,
+                phone: parseInt(req.body.phone) || app.local.phone,
+                firstName: req.body.firstName || app.locals.firstName,
+                lastName: req.body.lastName || app.locals.lastName
+            },
+            {
+                where: {
+                    UserEmail: app.locals.user
+                }
+            }).then(info => {
+                res.json(info);
+            }).catch(err => {
+                console.log(err);
+            })
     })
 };
