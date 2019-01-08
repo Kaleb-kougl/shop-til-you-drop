@@ -1,61 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Deliver!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- reset -->
-        <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title" />
-        <!-- materialize cdn -->
-        <!-- Compiled and minified CSS -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Deliver!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- Compiled and minified JavaScript -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- reset -->
+    <link rel="stylesheet" href="/stylesheets/reset.css" media="screen" title="no title" />
+    <!-- materialize cdn -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-        <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/pickOrder.css" />
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
-    </head>
+    <!-- Compiled and minified JavaScript -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery.js"></script>
 
-    <body>
-        <div class="carousel carousel-slider center">
-            <div class="carousel-fixed-item center">
-                <button
-                    data-target="modal1"
-                    class="waves-effect white grey-text darken-text-2 btn modal-trigger"
-                    id="details-btn"
-                >
-                    Order Details and Selection
-                </button>
-            </div>
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/pickOrder.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
+
+<body>
+    <div class="carousel carousel-slider center">
+        <div class="carousel-fixed-item center">
+            <button data-target="modal1" class="waves-effect white grey-text darken-text-2 btn modal-trigger" id="details-btn">
+                Order Details and Selection
+            </button>
         </div>
+    </div>
 
-        <!-- Modal Order details -->
-        <div id="modal1" class="modal">
-            <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a
-                    href="#!"
-                    class="modal-close waves-effect waves-red btn-flat"
-                    id="close-order-details-modal-btn"
-                    >Reject Order</a
-                >
-                <a
-                    href="#!"
-                    class="modal-close waves-effect waves-green btn-flat"
-                    id="agree-order-details-modal-btn"
-                    >Accept Order</a
-                >
-            </div>
+    <!-- Modal Order details -->
+    <div id="modal1" class="modal">
+        <div class="modal-content"></div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat" id="close-order-details-modal-btn">Reject
+                Order</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agree-order-details-modal-btn">Accept
+                Order</a>
         </div>
-        <!-- Leave this at the bottom of the body -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="/javascript/pickOrder.js"></script>
-    </body>
+    </div>
+    <!-- Leave this at the bottom of the body -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/javascript/pickOrder.js"></script>
+</body>
+
 </html>
