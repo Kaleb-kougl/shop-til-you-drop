@@ -147,6 +147,7 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
+
 $(document).ready(function () {
     setTimeout(function () { $('#pizza-container').remove() }, 1000);
 })
@@ -228,6 +229,7 @@ function searchfn() {
                     let carbs = $('<h6>').html(res[i].dataPoints[4].value);
                     list.append(carbs);
                     let button = $('<button>').attr('id', 'button' + i);
+                    button.attr('class', 'add-button');
                     button.attr('data-title', res[i].name);
                     button.attr('data-price', res[i].dataPoints[0].value);
                     button.text('Add To Cart');
