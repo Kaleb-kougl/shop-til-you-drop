@@ -1,6 +1,6 @@
 $('#signupform').on('submit', function(event) {
     event.preventDefault();
-   
+
     var first_name = $('#first_name')
         .val()
         .trim();
@@ -44,7 +44,6 @@ $('#signupform').on('submit', function(event) {
     }
 
     var phone = '+' + phoneNum;
-    alert(phone);
 
     // 1. check for duplication
     $.post('/api/check', {
