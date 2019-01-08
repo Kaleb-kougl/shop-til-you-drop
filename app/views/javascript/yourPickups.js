@@ -63,47 +63,55 @@ $(document).ready(function () {
   }
 
   function prepareModal(orderNum) {
-    // empty modal
-    let modalCont = $('.modal-content');
-    modalCont.empty();
-    // header
-    let header = $('<h4>');
-    header.attr("id", "order-details-modal-header");
-    header.html(`Order Number: ${orderNum}`);
-    modalCont.append(header);
-    // grab relevant order data
-    console.log(globalData[orderNum]);
-    let dataToShow = globalData[orderNum];
-    // create list of items
-    let newUl = $('<ul>');
-    newUl.css('float', 'left');
-    dataToShow.map(dataToShow => {
-      let newLi = $('<li>');
-      newLi.html(`${dataToShow.item} : ${dataToShow.quantity}`);
-      newUl.append(newLi);
+    // get userinfo 
+    $.ajax({
+      type: "GET",
+      url: "/api/getInfoOf/" + globalData[orderNum][0].username,
+      data: {},
+    }).done(res => {
+      console.log(res[0]);
+      // empty modal
+      let modalCont = $('.modal-content');
+      modalCont.empty();
+      // header
+      let header = $('<h4>');
+      header.attr("id", "order-details-modal-header");
+      header.html(`Order Number: ${orderNum}`);
+      modalCont.append(header);
+      // grab relevant order data
+      console.log(globalData[orderNum]);
+      let dataToShow = globalData[orderNum];
+      // create list of items
+      let newUl = $('<ul>');
+      newUl.css('float', 'left');
+      dataToShow.map(dataToShow => {
+        let newLi = $('<li>');
+        newLi.html(`${dataToShow.item} : ${dataToShow.quantity}`);
+        newUl.append(newLi);
+      });
+      modalCont.append(newUl);
+      // img float right
+      let newImg = $('<img>');
+      newImg.attr('src', res[0].imageUrl);
+      newImg.css('width', '8vw');
+      newImg.css('height', '24vh');
+      newImg.css('float', 'right');
+      modalCont.append(newImg);
+      // name
+      let nameDiv = $('<p>');
+      nameDiv.attr('id', 'name');
+      nameDiv.html(`${res[0].firstName} ${res[0].lastName}`);
+      nameDiv.css('clear', 'both');
+      nameDiv.css('float', 'right');
+      modalCont.append(nameDiv);
+      // address
+      let addressDiv = $('<p>');
+      addressDiv.attr('id', 'address');
+      addressDiv.html(res[0].address);
+      addressDiv.css('clear', 'both');
+      addressDiv.css('float', 'right');
+      modalCont.append(addressDiv);
     });
-    modalCont.append(newUl);
-    // img float right
-    // let newImg = $('<img>');
-    // newImg.attr('src', dataToShow[0].Demo.imageUrl);
-    // newImg.css('width', '8vw');
-    // newImg.css('height', '24vh');
-    // newImg.css('float', 'right');
-    // modalCont.append(newImg);
-    // name
-    // let nameDiv = $('<p>');
-    // nameDiv.attr('id', 'name');
-    // nameDiv.html(`${dataToShow[0].Demo.firstName} ${dataToShow[0].Demo.lastName}`);
-    // nameDiv.css('clear', 'both');
-    // nameDiv.css('float', 'right');
-    // modalCont.append(nameDiv);
-    // address
-    // let addressDiv = $('<p>');
-    // addressDiv.attr('id', 'address');
-    // addressDiv.html(dataToShow[0].Demo.address);
-    // addressDiv.css('clear', 'both');
-    // addressDiv.css('float', 'right');
-    // modalCont.append(addressDiv);
   }
 
   $('#details-btn').on('click', function (e) {
