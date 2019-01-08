@@ -8,8 +8,32 @@
 
 // Or with jQuery
 
-$(document).ready(function () {
-    // $("#search-text").val();
+let cartCount = 0;
+let cartQuantity = [];
+let cartItems = [];
+
+    $.ajax({
+        type: "GET",
+        url: '/api/orders/',
+        success: cart => {
+            for (let i = 0; i < cart.length; i++) {
+                var removeBtn = $("<button>Remove</button>").attr('class', 'remove').attr('data-title', cart[i].item).attr('id', `${cartCount}`);
+                var h1 = $('<h1>');
+                h1.text(cart[i].item);
+                var priceH1 = $('<h3>');
+                priceH1.text(`$${cart[i].price} per serving`);
+                let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
+                var div = $(`<div id='div${cartCount}'>`).append(h1);
+                div.append(priceH1);
+                div.append(quantity);
+                div.append(removeBtn);
+                cartCount++;
+                cartQuantity.push(cart[i].quantity);
+                cartItems.push(cart[i].item);
+                $('#shoppingList').append(div);
+            }
+        }
+    });
 
     $("#textarea1").keypress(function (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
@@ -20,10 +44,8 @@ $(document).ready(function () {
     $("#search-btn").on("click", searchfn);
 
     function searchfn() {
-        // console.log("hello");
         $('.first-image-placeholder').hide();
         var search = $("#textarea1").val()
-        console.log(search);
         $.ajax({
             type: "GET",
             url: '/api/items/' + search,
@@ -43,89 +65,82 @@ $(document).ready(function () {
                         list.append(protein);
                         let fat = $('<h6>').html(res[i].dataPoints[3].value);
                         list.append(fat);
-                        let carbs = $('<h6>').html(res[i].dataPoints[3].value);
+                        let carbs = $('<h6>').html(res[i].dataPoints[4].value);
                         list.append(carbs);
-                        // list.append('<a href="#!" class="secondary-content" id="addItem"><i class="material-icons">send</i></a>');
                         let button = $('<button>').attr('id', 'button' + i);
 
                         button.attr('data-title', res[i].name)
                         button.attr('data-price', res[i].dataPoints[0].value)
 
                         button.text("Add To Cart");
-                        // button.html = "click me";
                         button.addClass('save-button')
                         list.append(button);
                         $('.collection').append(list);
-                }
+                    }
                 }
               
-                $(document).ready(function () {
-                    var addItem = $('.save-button');
-                    var removeItem = $('#remove');
-                    addItem.click(function () {
+                var addItem = $('.save-button');
+                var removeItem = $('.remove');
+                addItem.click(function () {
+                    if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
+                        let index = cartItems.indexOf($(this).attr('data-title'));
+                        cartQuantity[index]++;
+                        $(`#div${index} h4`).html(`${cartQuantity[index]} serving(s)`)
+                    } else {
+                        var removeBtn = $("<button>Remove</button>").attr('class', 'remove').attr('data-title', $(this).attr('data-title')).attr('id', `${cartCount}`);
 
-                        var removeBtn = $("<button>remove</button>");
-                        // button.attr('id', 'remove')
-
-                        // console.log('THIS IS THE BUTTPN I CLICKED!!!', $(this).data('title'));
                         var h1 = $('<h1>')
                         h1.text($(this).data('title'))
                         var priceH1 = $('<h3>')
                         priceH1.text($(this).data('price'))
+                        var div = $(`<div id='div${cartCount}'>`).append(h1);
+                        
+                        let quantity = $('<h4>').html('1 serving(s)');
 
-                        var div = $('<div>').append(h1)
                         div.append(priceH1)
+                        div.append(quantity);
                         div.append(removeBtn)
-
+                        cartCount++;
+                        cartQuantity.push(1);
+                        cartItems.push($(this).attr('data-title'));
                         $('#shoppingList').append(div);
-
-
-
-
-                    });
-                    removeItem.click(function () {
-                        // var toRemove = $('#remove').val();
-                        $('#remove').remove();
-
-                        // $('li:contains(' + toRemove + ')').remove();
-                    });
-                });
-                // var items = res.findCompletedItemsResponse[0].searchResult[0].item;
-                // var data = "";
-                // for (var i = 0; i < results.data.Recipes.length; i++) {
-                //     data += "<div>";
-                //     data += "<img src='" + imageURL + "  '/>";
-                //     data += "  " + cost + " - ";
-                // };
-                // $('.results').html(ins)
+                    }
+                });  
             }
         });
     }
 
-    // arrow function will cause loss of functionality
-    $(document).on('click', '.searchable', function () {
-        $.ajax({
-            type: "POST",
-            url: '/api/orders/',
-            data: {
-                item: $(this).attr('data-name'),
-                price: $(this).attr('data-price'),
-                quantity: 1
-            },
-            success: (res) => {
-                // intentionally empty
-            }
-        });
+$(document).on('click', '.remove', function (event) {
+    event.preventDefault();
+    $.ajax({
+        type: "DELETE",
+        url: '/api/orders/',
+        data: {
+            item: $(this).attr('data-title')
+        },
+        // this has to be arrow
+        success: res => {
+            $(`#div${$(this).attr('id')}`).remove();   
+        }
     });
+});
 
-    // $("#search-btn").on('click', function () {
-    //     console.log('click');
-    //     // $("#first-image-placeholder").replaceWith(".collection");
-    // });
-
-    // $('#first-image-placeholder').replaceWith('#search-item-list');
-
-    $(document).on('click', '#cart', function () {
-        location.replace('/viewCart/')
+// arrow function will cause loss of functionality
+$(document).on('click', '.searchable', function () {
+    $.ajax({
+        type: "POST",
+        url: '/api/orders/',
+        data: {
+            item: $(this).attr('data-name'),
+            price: $(this).attr('data-price'),
+            quantity: 1
+        },
+        success: (res) => {
+            // intentionally empty
+        }
     });
+});
+
+$(document).on('click', '#cart', function () {
+    location.replace('/viewCart/')
 });
