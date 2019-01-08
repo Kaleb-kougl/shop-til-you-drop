@@ -126,7 +126,7 @@ let pizza = new Pizza('pizza');
     pizza.update();
 })();
 
-$.get('/api/orders/active/', function(data) {
+$.get('/api/orders/active/', function (data) {
     if (data === 'Access denied') {
         alert('Please log in for access!');
         window.location.replace('/login/');
@@ -154,30 +154,39 @@ function renderCarousel(data) {
     globalData = data;
     // Make a new card for carousel for each order
     let colorIndex = 0;
-    for (let order in data) {
-        colorIndex++;
-        // create newDiv for each data Point
-        let newDiv = $('<div>');
-        newDiv.addClass(
-            `carousel-item ${carouselColors[colorIndex % carouselColors.length]} white-text`
-        );
-        newDiv.attr('href', '#no');
-        // add orderNumber for lookup later
-        newDiv.attr('data-orderNumber', order);
-        // Give header
-        let newHeader = $('<h2>');
-        newHeader.html('Order #' + order);
-        newDiv.append(newHeader);
-        // create list of items to purchase
-        let newUl = $('<ul>');
-        data[order].map(item => {
-            let newLi = $('<li>');
-            newLi.html(`${item.item} : ${item.quantity}`);
-            newUl.append(newLi);
-        });
-        newDiv.append(newUl);
-        $('.carousel').append(newDiv);
+    let arrayOfKeys = Object.keys(data);
+    let doTwice = 1;
+    if (arrayOfKeys.length === 1) {
+        doTwice = 2;
     }
+    // prevents carousel from only having one slide
+    for (let i = 0; i < doTwice; i++) {
+        for (let order in data) {
+            colorIndex++;
+            // create newDiv for each data Point
+            let newDiv = $('<div>');
+            newDiv.addClass(
+                `carousel-item ${carouselColors[colorIndex % carouselColors.length]} white-text`
+            );
+            newDiv.attr('href', '#no');
+            // add orderNumber for lookup later
+            newDiv.attr('data-orderNumber', order);
+            // Give header
+            let newHeader = $('<h2>');
+            newHeader.html('Order #' + order);
+            newDiv.append(newHeader);
+            // create list of items to purchase
+            let newUl = $('<ul>');
+            data[order].map(item => {
+                let newLi = $('<li>');
+                newLi.html(`${item.item} : ${item.quantity}`);
+                newUl.append(newLi);
+            });
+            newDiv.append(newUl);
+            $('.carousel').append(newDiv);
+        }
+    }
+
     // initialize carousel so it moves
     var instance = M.Carousel.init({
         fullWidth: true,
@@ -188,8 +197,9 @@ function renderCarousel(data) {
 
     // initialize modal
     $('.modal').modal();
-    setTimeout(function() {
+    setTimeout(function () {
         $('#pizza-container').remove();
+        $('#skip-to-second-modal').css('display', "block");
     }, 1000);
 }
 
@@ -237,7 +247,7 @@ function prepareModal(orderNum) {
 }
 
 // grab the div with .active for the button then render a model
-$('#details-btn').on('click', function(e) {
+$('#details-btn').on('click', function (e) {
     let activeOrder = $('.active').attr('data-orderNumber');
     prepareModal(activeOrder);
     let modal = $('.modal');
@@ -247,7 +257,7 @@ $('#details-btn').on('click', function(e) {
 });
 
 // agree to order, send text to user
-$('#agree-order-details-modal-btn').on('click', function(e) {
+$('#agree-order-details-modal-btn').on('click', function (e) {
     let name = document.querySelector('#name').innerHTML;
     $.get('/api/getUser')
         .done(data => {
@@ -278,3 +288,7 @@ function success(data) {
 function showOrder(data) {
     console.log(data);
 }
+
+$('#skip-to-second-modal').on('click', function () {
+    window.location.replace('/yourPickups');
+})

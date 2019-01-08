@@ -166,18 +166,17 @@ module.exports = (app, db) => {
     });
 
     app.put('/api/user/info', (req, res) => {
-        db.demo
-            .update(
-                {
-                    address: req.body.address || app.locals.address,
-                    phone: parseInt(req.body.phone) || app.local.phone,
-                    firstName: req.body.firstName || app.locals.firstName,
-                    lastName: req.body.lastName || app.locals.lastName
-                },
-                {
-                    where: {
-                        UserEmail: app.locals.user
-                    }
+
+            db.demo.update({
+                address: req.body.address || app.locals.address,
+                phone: req.body.phone || app.locals.phone,
+                firstName: req.body.firstName || app.locals.firstName,
+                lastName: req.body.lastName || app.locals.lastName
+            },
+            {
+                where: {
+                    UserEmail: app.locals.user
+
                 }
             )
             .then(info => {

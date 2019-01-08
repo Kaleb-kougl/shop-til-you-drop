@@ -219,7 +219,10 @@ $(document).ready(function () {
         instance = M.Carousel.getInstance(document.querySelector('.carousel'));
         var slider = $('.carousel');
         slider.carousel();
-        setTimeout(function () { $('#pizza-container').remove() }, 1000)
+        setTimeout(function () {
+          $('#pizza-container').remove();
+          $('#skip-to-first-modal').css('display', "block");
+        }, 1000)
       }
     });
 
@@ -357,4 +360,9 @@ $(document).ready(function () {
     console.log('successDelivered');
     location.reload();
   }
+
+  $('#skip-to-first-modal').on('click', function () {
+    window.location.replace('/pickOrder');
+  })
+
 });

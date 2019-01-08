@@ -140,11 +140,12 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
-$(document).ready(function() {
-    setTimeout(function() {
-        $('#pizza-container').remove();
-    }, 1000);
-});
+
+
+$(document).ready(function () {
+    setTimeout(function () { $('#pizza-container').remove() }, 1000);
+})
+
 
 $(document).on('click', '#customer-home', function() {
     location.replace('/customer/');
@@ -194,6 +195,7 @@ $('#textarea1').keypress(function(e) {
 $('#search-btn').on('click', searchfn);
 
 function searchfn() {
+    $('.loader').css('display', 'block');
     $('.first-image-placeholder').hide();
     var search = $('#textarea1').val();
     $.ajax({
@@ -229,12 +231,14 @@ function searchfn() {
                     let carbs = $('<h6>').html(res[i].dataPoints[4].value);
                     list.append(carbs);
                     let button = $('<button>').attr('id', 'button' + i);
+                    button.attr('class', 'add-button');
                     button.attr('data-title', res[i].name);
                     button.attr('data-price', res[i].dataPoints[0].value);
                     button.text('Add To Cart');
                     list.append(button);
                     $('.collection').append(list);
                 }
+                $('.loader').css('display', 'none');
             }
             var addItem = $('.save-button');
             var removeItem = $('.remove');
@@ -248,7 +252,6 @@ function searchfn() {
                         .attr('class', 'remove')
                         .attr('data-title', $(this).attr('data-title'))
                         .attr('id', `${cartCount}`);
-
                     var h1 = $('<h1>');
                     h1.text($(this).data('title'));
                     var priceH1 = $('<h3>');
@@ -304,6 +307,7 @@ $(document).on('click', '.searchable', function() {
 
 $(document).on('click', '#cart', function() {
     location.replace('/viewCart/');
+
 });
 
 $('#logout').on('click', function(event) {
@@ -325,3 +329,4 @@ $('#logout').on('click', function(event) {
     //     window.location.replace('/');
     // });
 });
+
