@@ -1,5 +1,3 @@
-
-
 #logo-main {
     width: 80px;
     height: 65px;
@@ -7,6 +5,10 @@
 
 #title {
     text-align: center;
+}
+
+#account-icon {
+    color: #5a9734;
 }
 
 .btn {

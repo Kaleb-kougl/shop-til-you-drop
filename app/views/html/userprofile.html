@@ -20,36 +20,73 @@
 
 <body>
     <div class="row">
-        <div class="col s2">
+        <div class="col s4">
             <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
         </div>
-        <div class="col s8">
+        <div class="col s4">
             <div class="row">
                 <div class="input-field col s6">
-                    <h1 id="title">Welcome to Your Account Page</h1>
+                    <!-- <h1 id="title"> Welcome to Your Account</h1> -->
                 </div>
                 <!-- <a><i class="material-icons">search</i></a> -->
             </div>
         </div>
-        <div class="col s2">
-            <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
+        <div class="row">
+            <div class="col s4">
+                <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
+            </div>
         </div>
-    </div>
-    <div class="card" id="profile-view">
-        <div class="card-image waves-effect waves-block waves-light" id="dummy-pic">
-            <img class="activator" src="../images/user-dummy-pic.png">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Your Name<i class="material-icons right">more_vert</i></span>
-            <p><a href="#" id='userName'>Your Username</a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Your Info<i class="material-icons right">close</i></span>
-            <p>Here is some more information about you</p>
+        <div class="row">
+            <div class="col s4"></div>
+            <div class="col s4">
+                <div class="card-image">
+                    <img class="activator" id="dummy-pic" src="../images/user-dummy-pic.png">
+                    <!-- <span class="card-title">Your Name</span> -->
+                </div>
+            </div>
+            <div class="col s4"></div>
+
+            <div class="col s12 m7" id="account-body">
+                <div class="card large">
+
+                    <div class="card-action">
+                        <a href="#">Your Profile</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Name</h5>
+                            <p>John Doe</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your username</h5>
+                            <p>JohnDoe97</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Number</h5>
+                            <p>(000)000-0000</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Address</h5>
+                            <p>1234 Main St, Chicago, IL 60611</p>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <a class="waves-effect waves-light btn">SAVE CHANGES</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <script src="userprofile.js"></script>
+
+
+    </div>
+    <script src="../javascript/userprofile.js"></script>
 </body>
 
 </html>
