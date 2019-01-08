@@ -187,7 +187,7 @@ function renderCarousel(data) {
 
   // initialize modal
   $('.modal').modal();
-  setTimeout(function () { $('#pizza-container').remove() }, 1000)
+  setTimeout(function () { $('#pizza-container').remove() }, 1000);
 }
 
 function prepareModal(orderNum) {
