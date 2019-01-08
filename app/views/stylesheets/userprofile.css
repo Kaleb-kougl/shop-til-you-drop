@@ -44,6 +44,16 @@
     margin: auto;
 }
 
+#grid-container {
+    display: grid;
+}
+
+#burger-pic {
+    justify-self: center;
+    width: 100%;
+    margin: auto;
+    height: auto;
+}
 .btn {
     background-color: #e75a2c;
 }

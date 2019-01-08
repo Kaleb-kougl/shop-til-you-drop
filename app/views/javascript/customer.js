@@ -251,7 +251,6 @@ function searchfn() {
                         .attr('class', 'remove')
                         .attr('data-title', $(this).attr('data-title'))
                         .attr('id', `${cartCount}`);
-
                     var h1 = $('<h1>');
                     h1.text($(this).data('title'));
                     var priceH1 = $('<h3>');
