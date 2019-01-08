@@ -16,8 +16,9 @@ $.ajax({
                 list.append(cost);
                 let quantity = $('<h6>').html(`${cart[i].quantity} serving(s)`);
                 list.append(quantity);
-                // let foodImage = $('<h6>').html(`<img id="right" height="150px" width="auto" alt="foodImage" src="${cart[i].image}">`);
-                // list.append(foodImage);
+                list.append(
+                    '<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>'
+                );
                 $('.collection').append(list);
             }
         }
