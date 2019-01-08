@@ -12,6 +12,14 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
+$(document).on('click', '#customer-home', function() {
+    location.replace('/customer/');
+});
+
+$(document).on('click', '#profile', function() {
+    location.replace('/userprofile/');
+});
+
     $.ajax({
         type: "GET",
         url: '/api/orders/',
@@ -35,28 +43,32 @@ let cartItems = [];
         }
     });
 
-    $("#textarea1").keypress(function (e) {
+    $('#textarea1').keypress(function(e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
             searchfn();
         }
     });
 
-    $("#search-btn").on("click", searchfn);
+    $('#search-btn').on('click', searchfn);
 
     function searchfn() {
         $('.first-image-placeholder').hide();
         var search = $("#textarea1").val()
         $.ajax({
-            type: "GET",
+            type: 'GET',
             url: '/api/items/' + search,
-            success: function (res) {
+            success: function(res) {
                 if (res === 'Access denied') {
                     alert('Please log in for access!');
                     window.location.replace('/login/');
                 } else {
                     $('.collection').empty();
                     for (let i = 0; i < res.length; i++) {
-                        let list = $('<li>').attr('class', 'collection-item searchable').attr('data-name', res[i].name).attr('data-price', res[i].dataPoints[0].value).html(`<h5>${res[i].name}</h5>`);
+                        let list = $('<li>')
+                            .attr('class', 'collection-item searchable')
+                            .attr('data-name', res[i].name)
+                            .attr('data-price', res[i].dataPoints[0].value)
+                            .html(`<h5>${res[i].name}</h5>`);
                         let cost = $('<h6>').html(res[i].dataPoints[0].value);
                         list.append(cost);
                         let calories = $('<h6>').html(res[i].dataPoints[1].value);
@@ -69,16 +81,15 @@ let cartItems = [];
                         list.append(carbs);
                         let button = $('<button>').attr('id', 'button' + i);
 
-                        button.attr('data-title', res[i].name)
-                        button.attr('data-price', res[i].dataPoints[0].value)
-
-                        button.text("Add To Cart");
-                        button.addClass('save-button')
+                        button.attr('data-title', res[i].name);
+                        button.attr('data-price', res[i].dataPoints[0].value);
+                        button.text('Add To Cart');
+                        // button.html = "click me";
+                        button.addClass('save-button');
                         list.append(button);
                         $('.collection').append(list);
                     }
-                }
-              
+                }              
                 var addItem = $('.save-button');
                 var removeItem = $('.remove');
                 addItem.click(function () {

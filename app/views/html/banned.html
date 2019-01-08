@@ -5,19 +5,54 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>banned</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <link rel="stylesheet" href="../stylesheets/banned.css" media="screen" title="no title" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"
+        ></script>
         <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
     </head>
     <body>
-        banned :c <br />
-        <p>
-            If you would like us to review your account, please leave a message with your email
-            address you used to sign up for the service and a message.
-        </p>
-        <input type="email" id="email-input" /> <label for="email-input">Email</label>
+        <div class="container">
+            <div class="row">
+                <p>
+                    Your account has been banned and you do not have access to any of the
+                    functionality.
+                </p>
+                <p>
+                    If you would like us to review your account, please leave a message with your
+                    email address you used to sign up for the service and a message.
+                </p>
+            </div>
+            <form class="col s12" id="bannedform">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email-input" type="email" class="validate" required />
+                        <label for="email-input">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea
+                            id="message-input"
+                            class="materialize-textarea"
+                            required
+                        ></textarea>
+                        <label for="message-input">Enter your message</label>
+                    </div>
+                </div>
 
-        <textarea name="Text1" cols="40" rows="25"></textarea>
-
-        <button type="button" id="submitmsg">Click Me!</button>
+                <button class="waves-effect waves-light btn" type="submit" id="signup">
+                    Submit For Review
+                </button>
+            </form>
+        </div>
     </body>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
