@@ -93,20 +93,24 @@ module.exports = (app, db) => {
 
     // display user's cart
     app.get("/api/orders/", (req, res) => {
-        db.cart.findAll({
-            where: {
-                username: app.locals.user,
-                status: 'inCart'
-            }
-        }).then(myCart => {
-            if (myCart) {
-                res.status(200).json(myCart);
-            } else {
-                res.status(404).send('Nothing is in your cart');
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+        if (app.locals.role !== 'Customer') {
+            res.send('Access denied')
+        } else {
+            db.cart.findAll({
+                where: {
+                    username: app.locals.user,
+                    status: 'inCart'
+                }
+            }).then(myCart => {
+                if (myCart) {
+                    res.status(200).json(myCart);
+                } else {
+                    res.status(404).send('Nothing is in your cart');
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     });
 
     // place order
