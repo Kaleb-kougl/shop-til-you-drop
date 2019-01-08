@@ -3,6 +3,18 @@
     height: 65px;
 }
 
+#shopping-cart-title {
+    color: #5a9734;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: x-large;
+    padding-bottom: 10px;
+}
+
+#shoppingList {
+    line-height: 1.6;
+}
+
 #search-text {
     color: black;
 }
@@ -19,6 +31,29 @@
 .btn:hover {
     background-color: #0092ff;
 }
+
+.remove {
+    background-color: #e75a2c;
+    color: white;
+}
+
+.remove:hover {
+    background-color: #0092ff;
+}
+
+.add-button {
+    background-color: #e75a2c;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #0092ff;
+}
+
+/* #button-0 {
+    font-weight: bolder;
+    font-size: 5px;
+} */
 
 input:not([type]):focus:not([readonly]),
 input[type='text']:not(.browser-default):focus:not([readonly]),
@@ -67,3 +102,19 @@ label.active {
     align-items: center;
     justify-content: center;
 }
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    display: none;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
