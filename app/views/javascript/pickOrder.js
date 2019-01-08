@@ -199,6 +199,7 @@ function renderCarousel(data) {
     $('.modal').modal();
     setTimeout(function () {
         $('#pizza-container').remove();
+        $('#skip-to-second-modal').css('display', "block");
     }, 1000);
 }
 
@@ -287,3 +288,7 @@ function success(data) {
 function showOrder(data) {
     console.log(data);
 }
+
+$('#skip-to-second-modal').on('click', function () {
+    window.location.replace('/yourPickups');
+})
