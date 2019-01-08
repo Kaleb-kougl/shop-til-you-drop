@@ -24,24 +24,29 @@ $.ajax({
     type: 'GET',
     url: '/api/orders/',
     success: cart => {
-        for (let i = 0; i < cart.length; i++) {
-            var removeBtn = $('<button>Remove</button>')
-                .attr('class', 'remove')
-                .attr('data-title', cart[i].item)
-                .attr('id', `${cartCount}`);
-            var h1 = $('<h1>');
-            h1.text(cart[i].item);
-            var priceH1 = $('<h3>');
-            priceH1.text(`$${cart[i].price} per serving`);
-            let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
-            var div = $(`<div id='div${cartCount}'>`).append(h1);
-            div.append(priceH1);
-            div.append(quantity);
-            div.append(removeBtn);
-            cartCount++;
-            cartQuantity.push(cart[i].quantity);
-            cartItems.push(cart[i].item);
-            $('#shoppingList').append(div);
+        if (cart === 'Access denied') {
+            alert('Please log in for access!');
+            window.location.replace('/login/');
+        } else {
+            for (let i = 0; i < cart.length; i++) {
+                var removeBtn = $('<button>Remove</button>')
+                    .attr('class', 'remove')
+                    .attr('data-title', cart[i].item)
+                    .attr('id', `${cartCount}`);
+                var h1 = $('<h1>');
+                h1.text(cart[i].item);
+                var priceH1 = $('<h3>');
+                priceH1.text(`$${cart[i].price} per serving`);
+                let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
+                var div = $(`<div id='div${cartCount}'>`).append(h1);
+                div.append(priceH1);
+                div.append(quantity);
+                div.append(removeBtn);
+                cartCount++;
+                cartQuantity.push(cart[i].quantity);
+                cartItems.push(cart[i].item);
+                $('#shoppingList').append(div);
+            }
         }
     }
 });
