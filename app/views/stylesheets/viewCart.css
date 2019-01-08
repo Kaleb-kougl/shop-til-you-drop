@@ -5,6 +5,11 @@
 
 #title {
     text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #5a9734;
+    padding-left: 80%;
+
 }
 
 #account-icon {
@@ -14,6 +19,13 @@
 .btn {
     background-color: #e75a2c;
 }
+
 .btn:hover {
     background-color: #0092ff;
 }
+
+
+
+/* #orderConfirmation {
+    text-align: center;
+} */
