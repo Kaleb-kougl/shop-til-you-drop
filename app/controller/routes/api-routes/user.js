@@ -36,13 +36,54 @@ module.exports = (app, db) => {
 
     // add item to cart
     app.post("/api/orders/", (req, res) => {
-        let price = req.body.price.replace('$', '').split(' ')[0];
-        db.cart.create({
-            item: req.body.item,
-            price: price,
-            quantity: parseInt(req.body.quantity),
-            username: app.locals.user,
-            UserEmail: app.locals.user
+        db.cart.findAll({
+            where: {
+                username: app.locals.user,
+                status: 'inCart',
+                item: req.body.item
+            }
+        }).then(myCart => {
+            if (myCart.length !== 0) {
+                db.cart.update({
+                    quantity: myCart[0].dataValues.quantity + 1,
+                }, {
+                    where: {
+                        username: app.locals.user,
+                        status: 'inCart',
+                        item: req.body.item
+                    }
+                }).then(cartItem => {
+                    res.json(cartItem);
+                }).catch(err => {
+                    console.log(err);
+                })
+            } else {
+                let price = req.body.price.replace('$', '').split(' ')[0];
+                db.cart.create({
+                    item: req.body.item,
+                    price: price,
+                    quantity: parseInt(req.body.quantity),
+                    username: app.locals.user,
+                    UserEmail: app.locals.user
+                }).then(cartItem => {
+                    res.json(cartItem);
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    });
+
+    // delete an item from cart
+    app.delete("/api/orders/", (req, res) => {
+        db.cart.destroy({
+            where: {
+                username: app.locals.user,
+                item: req.body.item,
+                status: 'inCart'
+            }
         }).then(cartItem => {
             res.json(cartItem);
         }).catch(err => {
@@ -75,7 +116,6 @@ module.exports = (app, db) => {
             for (let i = 0; i < 7; i++) {
                 randNbr += Math.floor(Math.random() * 10);
             }
-            console.log(randNbr);
             db.cart.findAll({
                 where: {
                     status: 'ordered'
