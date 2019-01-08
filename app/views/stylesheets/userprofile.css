@@ -1,11 +1,3 @@
-#dummy-pic {
-    width: 100px;
-    height: 100px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
 
 #logo-main {
     width: 80px;
@@ -50,10 +42,11 @@
 
 #burger-pic {
     justify-self: center;
-    width: 100%;
+    height: 15vh;
+    width: auto;
     margin: auto;
-    height: auto;
 }
+
 .btn {
     background-color: #e75a2c;
 }
