@@ -59,6 +59,7 @@ $(document).ready(function () {
           newDiv.attr("href", '#no');
           // add orderNumber for lookup later
           newDiv.attr("data-orderNumber", data[order][0].orderNumber);
+          newDiv.attr("data-inTransit", inTransit);
           // query selectors can't start with a number
           newDiv.attr("id", 'a' + data[order][0].orderNumber);
           // Give header
@@ -76,10 +77,11 @@ $(document).ready(function () {
           $(".carousel").append(newDiv);
         }
         // initialize carousel so it moves
-        var instance = M.Carousel.init({
+        instance = M.Carousel.init({
           fullWidth: true,
           indicators: true
         });
+        instance = M.Carousel.getInstance(document.querySelector('.carousel'));
         var slider = $('.carousel');
         slider.carousel();
       }
@@ -150,19 +152,37 @@ $(document).ready(function () {
 
   $('#agree-order-details-modal-btn').on('click', function (e) {
     let name = document.querySelector('#name').innerHTML;
-    $.get("/api/getUser")
-      .done(data => {
-        let shopper = data.firstName + ' ' + data.lastName;
-        let email = data.user;
-        let message = `${name}, your food is currently in transit! ${shopper} will be there soon. They can be contacted at ${email} if needed.`;
-        $.ajax({
-          type: "POST",
-          url: '/api/message',
-          data: { "Message": message },
-          success: success,
-        });
-      })
-      .fail(err => console.log(err));
+    let inTransit = document.querySelector('.active').getAttribute('data-inTransit');
+    console.log(inTransit);
+    if (inTransit) {
+      $.get("/api/getUser")
+        .done(data => {
+          let shopper = data.firstName + ' ' + data.lastName;
+          let email = data.user;
+          let message = `${name}, ${shopper} is here to deliver your food!`;
+          $.ajax({
+            type: "POST",
+            url: '/api/message',
+            data: { "Message": message },
+            success: here,
+          });
+        })
+        .fail(err => console.log(err));
+    } else {
+      $.get("/api/getUser")
+        .done(data => {
+          let shopper = data.firstName + ' ' + data.lastName;
+          let email = data.user;
+          let message = `${name}, your food is currently in transit! ${shopper} will be there soon. They can be contacted at ${email} if needed.`;
+          $.ajax({
+            type: "POST",
+            url: '/api/message',
+            data: { "Message": message },
+            success: success,
+          });
+        })
+        .fail(err => console.log(err));
+    }
   });
 
   function success(data) {
@@ -181,6 +201,24 @@ $(document).ready(function () {
     let customerRegex = /Order Number: /;
     let orderNumber = document.querySelector("#order-details-modal-header").innerHTML.replace(customerRegex, '');
     document.querySelector(`#a${orderNumber}`).className = 'carousel-item orange darken-4 white-text';
+  }
+
+  function here(data) {
+    console.log('here');
+    let customerRegex = /Order Number: /;
+    let orderNumber = document.querySelector("#order-details-modal-header").innerHTML.replace(customerRegex, '');
+    // should send an ajax request to update the order to 'DELIVERED';
+    $.ajax({
+      type: "DELETE",
+      url: '/api/orders/',
+      data: { "orderNumber": orderNumber },
+      success: successDelivered,
+    });
+  }
+
+  function successDelivered(data) {
+    console.log('successDelivered');
+    location.reload();
   }
 
 });
