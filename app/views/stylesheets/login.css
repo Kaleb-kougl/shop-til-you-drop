@@ -1,6 +1,8 @@
 body,
 html {
     height: 100vh;
+    width: 100vw;
+    overflow: scroll;
 }
 
 body {
@@ -14,7 +16,11 @@ body {
 }
 
 #signup-container {
-    margin-top: 18vh;
+    margin-top: 5vh;
+}
+
+#signup-text {
+    text-align: right;
 }
 
 .txt {
