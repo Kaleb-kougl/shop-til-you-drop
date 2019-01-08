@@ -75,8 +75,9 @@ function searchfn() {
                     let list = $('<li>')
                         .attr('class', 'collection-item searchable')
                         .attr('data-name', res[i].name)
-                        .attr('data-price', res[i].dataPoints[0].value)
-                        .html(`<h5>${res[i].name}</h5>`);
+                        .attr('data-price', res[i].dataPoints[0].value);
+                    list.append($(`<img id="right" height="150px" width="auto" alt="foodImage" src="${res[i].image}">`));
+                    list.append(`<h5>${res[i].name}</h5>`);
                     let cost = $('<h6>').html(res[i].dataPoints[0].value);
                     list.append(cost);
                     let calories = $('<h6>').html(res[i].dataPoints[1].value);
@@ -88,12 +89,9 @@ function searchfn() {
                     let carbs = $('<h6>').html(res[i].dataPoints[4].value);
                     list.append(carbs);
                     let button = $('<button>').attr('id', 'button' + i);
-
                     button.attr('data-title', res[i].name);
                     button.attr('data-price', res[i].dataPoints[0].value);
                     button.text('Add To Cart');
-                    // button.html = "click me";
-                    button.addClass('save-button');
                     list.append(button);
                     $('.collection').append(list);
                 }

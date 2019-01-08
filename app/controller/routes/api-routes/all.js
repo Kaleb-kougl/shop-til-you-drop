@@ -122,4 +122,16 @@ module.exports = (app, db) => {
             });
         })(req, res, next);
     });
+
+    app.get('/api/user/info', (req, res) => {
+        db.user.findAll({
+            where: {
+                email: app.locals.user
+            }
+        }).then(info => {
+            
+        }).catch(err => {
+            console.log(err);
+        })
+    })
 };

@@ -33,8 +33,6 @@ $(document).on('click', '#profile', function () {
     location.replace('/userprofile/')
 });
 
-
-
 $('#order').on('click', () => {
     $.ajax({
         type: 'POST',
