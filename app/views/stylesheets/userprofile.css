@@ -1,13 +1,10 @@
-#grid-container {
-    display: grid;
-    width: 100vw;
-    height: 15vh;
-}
-
-#burger-pic {
-    justify-self: center;
-    height: 100%;
-    width: auto;
+#dummy-pic {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 #logo-main {
