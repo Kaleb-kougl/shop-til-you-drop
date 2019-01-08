@@ -34,7 +34,8 @@ $('#signupform').on('submit', function(event) {
 
     // 0.5 phone number validation
     // remove all dashes and spaces
-    var phonehalf = phoneRaw.replace(/-/g, '');
+    var phoneStart = phoneRaw.replace(/\D/g, '');
+    var phonehalf = phoneStart.replace(/-/g, '');
     var phoneNum = phonehalf.replace(/\s/g, '');
 
     // check for length
