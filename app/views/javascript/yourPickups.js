@@ -1,5 +1,7 @@
 $(document).ready(function () {
   $.get("/api/getUser", (data) => postData(data));
+  // initialize modal
+  $('.modal').modal();
 
   var carouselColors = ['light-blue lighten-4',
     'light-blue lighten-3', 'light-blue lighten-2',
@@ -24,6 +26,8 @@ $(document).ready(function () {
         }
       });
 
+      // store data in a global var for later
+      globalData = data;
       // Make a new card for carousel for each order
       let colorIndex = 0;
       for (let order in data) {
@@ -33,10 +37,10 @@ $(document).ready(function () {
         newDiv.addClass(`carousel-item ${carouselColors[(colorIndex % carouselColors.length)]} white-text`);
         newDiv.attr("href", '#no');
         // add orderNumber for lookup later
-        newDiv.attr("data-orderNumber", order[0].orderNumber);
+        newDiv.attr("data-orderNumber", data[order][0].orderNumber);
         // Give header
         let newHeader = $("<h2>")
-        newHeader.html(order[0].orderNumber);
+        newHeader.html(data[order][0].orderNumber);
         newDiv.append(newHeader);
         // create list of items to purchase
         let newUl = $("<ul>");
@@ -57,5 +61,58 @@ $(document).ready(function () {
       slider.carousel();
     });
   }
+
+  function prepareModal(orderNum) {
+    // empty modal
+    let modalCont = $('.modal-content');
+    modalCont.empty();
+    // header
+    let header = $('<h4>');
+    header.attr("id", "order-details-modal-header");
+    header.html(`Order Number: ${orderNum}`);
+    modalCont.append(header);
+    // grab relevant order data
+    console.log(globalData[orderNum]);
+    let dataToShow = globalData[orderNum];
+    // create list of items
+    let newUl = $('<ul>');
+    newUl.css('float', 'left');
+    dataToShow.map(dataToShow => {
+      let newLi = $('<li>');
+      newLi.html(`${dataToShow.item} : ${dataToShow.quantity}`);
+      newUl.append(newLi);
+    });
+    modalCont.append(newUl);
+    // img float right
+    // let newImg = $('<img>');
+    // newImg.attr('src', dataToShow[0].Demo.imageUrl);
+    // newImg.css('width', '8vw');
+    // newImg.css('height', '24vh');
+    // newImg.css('float', 'right');
+    // modalCont.append(newImg);
+    // name
+    // let nameDiv = $('<p>');
+    // nameDiv.attr('id', 'name');
+    // nameDiv.html(`${dataToShow[0].Demo.firstName} ${dataToShow[0].Demo.lastName}`);
+    // nameDiv.css('clear', 'both');
+    // nameDiv.css('float', 'right');
+    // modalCont.append(nameDiv);
+    // address
+    // let addressDiv = $('<p>');
+    // addressDiv.attr('id', 'address');
+    // addressDiv.html(dataToShow[0].Demo.address);
+    // addressDiv.css('clear', 'both');
+    // addressDiv.css('float', 'right');
+    // modalCont.append(addressDiv);
+  }
+
+  $('#details-btn').on('click', function (e) {
+    let activeOrder = $('.active').attr('data-orderNumber');
+    prepareModal(activeOrder);
+    let modal = $(".modal");
+    // carousel doesn't play nice with modals, have to manual call open()
+    var instance = M.Modal.getInstance(modal);
+    instance.open();
+  });
 
 });
