@@ -109,29 +109,13 @@ module.exports = (app, db) => {
                     shopper: app.locals.user
                 }
             })
-            // THIS WAS THE GOOGLE MAPS API
-            // .then(cartUpdate => {
-            //     axios({
-            //         method: 'GET',
-            //         url: 'https://maps.googleapis.com/maps/api/directions/json?',
-            //         params: {
-            //             origin: req.body.lat + ',' + req.body.lng,
-            //             destination: 'Chicago Premium Outlets',
-            //             key: process.env.GOOGLE_API_KEY,
-            //         }
-            //     })
             .then(directions => {
                 console.log(directions);
                 res.status(200).json(directions);
-                // res.json(directions.data.routes[0]);
             }).catch(err => {
                 console.log(err);
             });
-        // res.status(200).json(cartUpdate);
     })
-    // .catch(err => {
-    //     console.log(err);
-    // });
 
     // mark as delivered
     app.delete("/api/orders/", (req, res) => {
