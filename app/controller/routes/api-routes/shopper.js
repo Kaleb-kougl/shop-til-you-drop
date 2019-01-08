@@ -150,7 +150,24 @@ module.exports = (app, db) => {
             })
     });
 
+    // sends back the info of person currently logged in
     app.get("/api/getUser", (req, res) => {
         res.json(app.locals)
     });
+
+    // sends back info of the user req
+    app.get("/api/getInfoOf/:userEmail", (req, res) => {
+        console.log(req.params.userEmail);
+        db.demo.findAll({
+            where: {
+                UserEmail: req.params.userEmail
+            }
+        }).then(order => {
+            res.json(order);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({ 'error': err })
+        });
+    });
+
 };
