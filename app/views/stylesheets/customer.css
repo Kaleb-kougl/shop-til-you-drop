@@ -121,3 +121,6 @@ label.active {
     100% { transform: rotate(360deg); }
   }
 
+#collection-list {
+    display: none;
+}

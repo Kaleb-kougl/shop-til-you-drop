@@ -147,11 +147,11 @@ $(document).ready(function () {
 })
 
 
-$(document).on('click', '#customer-home', function() {
+$(document).on('click', '#customer-home', function () {
     location.replace('/customer/');
 });
 
-$(document).on('click', '#profile', function() {
+$(document).on('click', '#profile', function () {
     location.replace('/userprofile/');
 });
 
@@ -186,7 +186,7 @@ $.ajax({
     }
 });
 
-$('#textarea1').keypress(function(e) {
+$('#textarea1').keypress(function (e) {
     if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
         searchfn();
     }
@@ -201,7 +201,7 @@ function searchfn() {
     $.ajax({
         type: 'GET',
         url: '/api/items/' + search,
-        success: function(res) {
+        success: function (res) {
             if (res === 'Access denied') {
                 alert('Please log in for access!');
                 window.location.replace('/login/');
@@ -215,7 +215,7 @@ function searchfn() {
                     list.append(
                         $(
                             `<img id="right" height="150px" width="auto" alt="foodImage" src="${
-                                res[i].image
+                            res[i].image
                             }">`
                         )
                     );
@@ -239,10 +239,11 @@ function searchfn() {
                     $('.collection').append(list);
                 }
                 $('.loader').css('display', 'none');
+                $('#collection-list').css('display', 'block');
             }
             var addItem = $('.save-button');
             var removeItem = $('.remove');
-            addItem.click(function() {
+            addItem.click(function () {
                 if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
                     let index = cartItems.indexOf($(this).attr('data-title'));
                     cartQuantity[index]++;
@@ -274,7 +275,7 @@ function searchfn() {
     });
 }
 
-$(document).on('click', '.remove', function(event) {
+$(document).on('click', '.remove', function (event) {
     event.preventDefault();
     $.ajax({
         type: 'DELETE',
@@ -290,7 +291,7 @@ $(document).on('click', '.remove', function(event) {
 });
 
 // arrow function will cause loss of functionality
-$(document).on('click', '.searchable', function() {
+$(document).on('click', '.searchable', function () {
     $.ajax({
         type: 'POST',
         url: '/api/orders/',
@@ -305,12 +306,12 @@ $(document).on('click', '.searchable', function() {
     });
 });
 
-$(document).on('click', '#cart', function() {
+$(document).on('click', '#cart', function () {
     location.replace('/viewCart/');
 
 });
 
-$('#logout').on('click', function(event) {
+$('#logout').on('click', function (event) {
     event.preventDefault();
 
     $.ajax({
@@ -319,7 +320,7 @@ $('#logout').on('click', function(event) {
         data: {
             msg: 'logout'
         },
-        success: function(res) {
+        success: function (res) {
             // console.log(res);
             window.location.replace('/');
         }
