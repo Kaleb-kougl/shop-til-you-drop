@@ -45,5 +45,6 @@ Back End: Ry
 
 
 # credits
-https://www.favicon-generator.org/ - For hamburger favicon
-https://codepen.io/arcs/pen/pbPkPL - For pizza loader
+[hamburger favicon](https://www.favicon-generator.org/) 
+[pizza loader](https://codepen.io/arcs/pen/pbPkPL) 
+[Pineapple Animation](https://codepen.io/AngelaVelasquez/pen/yVEOpY)
