@@ -195,6 +195,7 @@ $('#textarea1').keypress(function (e) {
 $('#search-btn').on('click', searchfn);
 
 function searchfn() {
+    $('#collection-list').css('display', 'none');
     $('.loader').css('display', 'block');
     $('.first-image-placeholder').hide();
     var search = $('#textarea1').val();
