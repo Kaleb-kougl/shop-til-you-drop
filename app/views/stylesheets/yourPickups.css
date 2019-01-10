@@ -6,16 +6,6 @@ body {
   animation: animatedBackground 1.2s cubic-bezier(0.61, -0.64, 0.58, 1.46) forwards;
 }
 
-/* Animation */
-@keyframes animatedBackground {
-  from {
-    background-position: 0 50%;
-  }
-  to {
-    background-position: 0 0;
-  }
-}   
-
 #pizza-container {
   height: 100vh;
   width: 100vw;

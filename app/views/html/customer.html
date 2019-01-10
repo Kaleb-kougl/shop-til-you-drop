@@ -28,6 +28,7 @@
         <div class="col s2">
             <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
         </div>
+
         <div class="col s8">
             <div class="row">
                 <div class="input-field col s6">
@@ -40,6 +41,7 @@
                 <!-- <a><i class="material-icons">search</i></a> -->
             </div>
         </div>
+
         <div class="col s2">
             <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
             <button class="btn waves-effect waves-light alignme" id="logout" type="logout" name="logout">
@@ -48,7 +50,6 @@
         </div>
     </div>
 
-    </div>
     <div class="row">
         <!-- <div class="col s12">This div is 12-columns wide on all screen sizes</div> -->
         <div class="col s6">
@@ -58,21 +59,30 @@
 
                 </div>
             </ul>
+            <button class="btn waves-effect waves-light" id="cart" type="submit" name="action">
+                View Cart <i class="material-icons right">send</i>
+            </button>
         </div>
+
         <div class="col s6">
             <div class="first-image-placeholder">
                 <img id="placeholder" src="../images/dancing-vegetables-cucumber-broccoli.jpg" alt="Search Placeholder">
             </div>
-            <div class="loader"></div>
+
+            <div class="loader">
+                <canvas id="other-pizza"></canvas>
+            </div>
+
             <ul class="collection with-header" id="collection-list">
                 <li class="collection-header">
                 </li>
             </ul>
+
         </div>
-        <button class="btn waves-effect waves-light" id="cart" type="submit" name="action">
-            View Cart <i class="material-icons right">send</i>
-        </button>
-        <script src="../javascript/customer.js"></script>
+
+
+    </div>
+    <script src="../javascript/customer.js"></script>
 </body>
 
 </html>

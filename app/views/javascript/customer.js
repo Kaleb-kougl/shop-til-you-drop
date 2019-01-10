@@ -129,11 +129,17 @@ function cheese(ctx, rad, multi, ii, sliceSize, sliceDegree) {
     ctx.lineWidth = map(d, 0, 100, 20, 2);
     ctx.stroke();
 }
-
+// loading pizza loader
 let pizza = new Pizza('pizza');
 (function update() {
     requestAnimationFrame(update);
     pizza.update();
+})();
+// searching pizza loader
+let pizza2 = new Pizza('other-pizza');
+(function update() {
+    requestAnimationFrame(update);
+    pizza2.update();
 })();
 
 let cartCount = 0;
@@ -195,6 +201,7 @@ $('#textarea1').keypress(function (e) {
 $('#search-btn').on('click', searchfn);
 
 function searchfn() {
+    $('#collection-list').css('display', 'none');
     $('.loader').css('display', 'block');
     $('.first-image-placeholder').hide();
     var search = $('#textarea1').val();
