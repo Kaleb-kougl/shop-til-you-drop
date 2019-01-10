@@ -1,103 +1,94 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Account Profile</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
 
-        <!-- Compiled and minified JavaScript -->
-        <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
-        <link
-            rel="stylesheet"
-            href="../stylesheets/userprofile.css"
-            media="screen"
-            title="no title"
-        />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Account Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-    <body>
+    <!-- Compiled and minified JavaScript -->
+    <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    <link rel="stylesheet" href="../stylesheets/userprofile.css" media="screen" title="no title" />
+</head>
+
+<body>
+    <!-- Loading icon -->
+    <div id="pizza-container">
+        <canvas id="pizza"></canvas>
+    </div>
+
+    <div class="row">
+        <div class="col s4">
+            <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
+        </div>
+        <div class="col s4">
+            <div class="row">
+                <div class="input-field col s6">
+                    <!-- <h1 id="title"> Welcome to Your Account</h1> -->
+                </div>
+                <!-- <a><i class="material-icons">search</i></a> -->
+            </div>
+        </div>
         <div class="row">
             <div class="col s4">
-                <a class="brand-logo" id="customer-home"
-                    ><img id="logo-main" src="../images/logo1.png" alt="Logo"
-                /></a>
+                <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
             </div>
-            <div class="col s4">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <!-- <h1 id="title"> Welcome to Your Account</h1> -->
-                    </div>
-                    <!-- <a><i class="material-icons">search</i></a> -->
-                </div>
+        </div>
+        <div class="row">
+            <div id="grid-container">
+                <img class="activator" id="burger-pic" src="../images/Burger-PNG-Image.png" />
             </div>
-            <div class="row">
-                <div class="col s4">
-                    <a id="account-icon" class="secondary-content"
-                        ><i class="medium material-icons" id="profile">account_circle</i></a
-                    >
-                </div>
-            </div>
-            <div class="row">
-                <div id="grid-container">
-                    <img class="activator" id="burger-pic" src="../images/Burger-PNG-Image.png" />
-                </div>
-                <div class="col s12 m7" id="account-body">
-                    <div class="card large">
-                        <div class="card-action"><a href="#" id="profilePic">Your Profile</a></div>
-                        <div class="card-content">
-                            <div class="divider"></div>
-                            <div class="section">
-                                <h5 class="account-header-text">Your First Name</h5>
-                                <div class="input-field col s12">
-                                    <textarea class="first-name-input materialize-textarea"></textarea>
-                                    <label for="first-name-input" id="first-name">John</label>
-                                </div>
+            <div class="col s12 m7" id="account-body">
+                <div class="card large">
+                    <div class="card-action"><a href="#" id="profilePic">Your Profile</a></div>
+                    <div class="card-content">
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your First Name</h5>
+                            <div class="input-field col s12">
+                                <textarea class="first-name-input materialize-textarea"></textarea>
+                                <label for="first-name-input" id="first-name">John</label>
                             </div>
-                            <div class="divider"></div>
-                            <div class="section">
-                                <h5 class="account-header-text">Your Last Name</h5>
-                                <div class="input-field col s12">
-                                    <textarea class="last-name-input materialize-textarea"></textarea>
-                                    <label for="last-name-input" id="last-name">Doe</label>
-                                </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Last Name</h5>
+                            <div class="input-field col s12">
+                                <textarea class="last-name-input materialize-textarea"></textarea>
+                                <label for="last-name-input" id="last-name">Doe</label>
                             </div>
-                            <div class="section">
-                                <h5 class="account-header-text">Your Number</h5>
-                                <div class="input-field col s12">
-                                    <textarea class="phone-input materialize-textarea"></textarea>
-                                    <label for="phone-input" id="phone">+1(000)000-0000</label>
-                                </div>
+                        </div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Number</h5>
+                            <div class="input-field col s12">
+                                <textarea class="phone-input materialize-textarea"></textarea>
+                                <label for="phone-input" id="phone">+1(000)000-0000</label>
                             </div>
-                            <div class="divider"></div>
-                            <div class="section">
-                                <h5 class="account-header-text">Your Address</h5>
-                                <div class="input-field col s12">
-                                    <textarea class="address-input materialize-textarea"></textarea>
-                                    <label for="address-input" id="address">1234 Main St, Chicago, IL 60611</label>
-                                </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            <h5 class="account-header-text">Your Address</h5>
+                            <div class="input-field col s12">
+                                <textarea class="address-input materialize-textarea"></textarea>
+                                <label for="address-input" id="address">1234 Main St, Chicago, IL 60611</label>
                             </div>
-                            <div class="section">
-                                <a class="waves-effect waves-light btn" id="update">SAVE CHANGES</a>
-                            </div>
+                        </div>
+                        <div class="section">
+                            <a class="waves-effect waves-light btn" id="update">SAVE CHANGES</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="../javascript/userprofile.js"></script>
+    </div>
+    <script src="../javascript/userprofile.js"></script>
 </body>
 
 </html>

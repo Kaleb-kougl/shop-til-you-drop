@@ -1,3 +1,13 @@
+/* PIZZA LOADER */
+#pizza-container {
+    height: 100vh;
+    width: 100vw;
+    background: #0092FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Background styles */
 body {
     background: radial-gradient(circle closest-side at 50px 50px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 40px 60px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 60px 60px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 50px 70px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 150px 165px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 140px 175px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 160px 175px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 150px 185px, #FB8B24 3px, transparent 0), radial-gradient(ellipse closest-side at 50px 60px, #F9A734 18px, transparent 0), radial-gradient(ellipse closest-side at 150px 175px, #F9A734 18px, transparent 0), radial-gradient(circle closest-side at 30px 40px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 40px 35px, #36964C 15px, transparent 0), radial-gradient(circle closest-side at 70px 40px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 60px 35px, #286E38 15px, transparent 0), radial-gradient(circle closest-side at 130px 155px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 140px 150px, #36964C 15px, transparent 0), radial-gradient(circle at 170px 155px, #FFFFFF 15px, transparent 0), radial-gradient(circle at 160px 150px, #286E38 15px, transparent 0);
