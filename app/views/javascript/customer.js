@@ -1,13 +1,3 @@
-// $('#textarea1').val('New Text');
-// M.textareaAutoResize($('#textarea1'));
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     var elems = document.querySelectorAll('.tooltipped');
-//     var instances = M.Tooltip.init(elems, options);
-// });
-
-// Or with jQuery
-
 // renders pizza loader
 // Borrowed from Patrick Stillhart
 // https://codepen.io/arcs/pen/pbPkPL
@@ -147,7 +137,7 @@ let cartQuantity = [];
 let cartItems = [];
 
 
-
+// removes pizza loader
 $(document).ready(function () {
     setTimeout(function () { $('#pizza-container').remove() }, 1000);
 })
@@ -174,15 +164,12 @@ $.ajax({
                     .attr('class', 'remove')
                     .attr('data-title', cart[i].item)
                     .attr('id', `${cartCount}`);
-                var h1 = $('<h1>');
-                h1.text(cart[i].item);
-                var priceH1 = $('<h3>');
-                priceH1.text(`$${cart[i].price} per serving`);
+                var h2 = $('<h2>');
+                h2.text(cart[i].item);
+                var priceH3 = $('<h3>');
+                priceH3.text(`$${cart[i].price} per serving`);
                 let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
-                var div = $(`<div id='div${cartCount}'>`).append(h1);
-                div.append(priceH1);
-                div.append(quantity);
-                div.append(removeBtn);
+                var div = $(`<div id='div${cartCount}'>`).append(h2, priceH3, quantity, removeBtn);
                 cartCount++;
                 cartQuantity.push(cart[i].quantity);
                 cartItems.push(cart[i].item);
@@ -192,6 +179,7 @@ $.ajax({
     }
 });
 
+// checks if the user has clicked the enter key
 $('#textarea1').keypress(function (e) {
     if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
         searchfn();
@@ -248,39 +236,38 @@ function searchfn() {
                 $('.loader').css('display', 'none');
                 $('#collection-list').css('display', 'block');
             }
-            var addItem = $('.save-button');
-            var removeItem = $('.remove');
-            addItem.click(function () {
-                if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
-                    let index = cartItems.indexOf($(this).attr('data-title'));
-                    cartQuantity[index]++;
-                    $(`#div${index} h4`).html(`${cartQuantity[index]} serving(s)`);
-                } else {
-                    var removeBtn = $('<button>Remove</button>')
-                        .attr('class', 'remove')
-                        .attr('data-title', $(this).attr('data-title'))
-                        .attr('id', `${cartCount}`);
-                    var h1 = $('<h1>');
-                    h1.text($(this).data('title'));
-                    var priceH1 = $('<h3>');
-                    priceH1.text($(this).data('price'));
-                    var div = $(`<div id='div${cartCount}'>`).append(h1);
-
-                    let quantity = $('<h4>').html('1 serving(s)');
-
-                    div.append(priceH1);
-                    div.append(quantity);
-                    div.append(removeBtn);
-                    cartCount++;
-                    cartQuantity.push(1);
-                    cartItems.push($(this).attr('data-title'));
-                    $('#shoppingList').append(div);
-                    $('#textarea1').val('');
-                }
-            });
         }
     });
 }
+
+$(document).on('click', '.add-button', function () {
+    if (cartItems.indexOf($(this).attr('data-title')) !== -1) {
+        let index = cartItems.indexOf($(this).attr('data-title'));
+        cartQuantity[index]++;
+        $(`#div${index} h4`).html(`${cartQuantity[index]} serving(s)`);
+    } else {
+        var removeBtn = $('<button>Remove</button>')
+            .attr('class', 'remove')
+            .attr('data-title', $(this).attr('data-title'))
+            .attr('id', `${cartCount}`);
+        var h2 = $('<h2>');
+        h2.text($(this).data('title'));
+        var priceH3 = $('<h3>');
+        priceH3.text($(this).data('price'));
+        var div = $(`<div id='div${cartCount}'>`).append(h2);
+
+        let quantity = $('<h4>').html('1 serving(s)');
+
+        div.append(priceH3);
+        div.append(quantity);
+        div.append(removeBtn);
+        cartCount++;
+        cartQuantity.push(1);
+        cartItems.push($(this).attr('data-title'));
+        $('#shoppingList').append(div);
+        $('#textarea1').val('');
+    }
+});
 
 $(document).on('click', '.remove', function (event) {
     event.preventDefault();
@@ -297,6 +284,7 @@ $(document).on('click', '.remove', function (event) {
     });
 });
 
+// THIS NEEDS TO BE FIXED. CURRENTLY RUNS ANYTIME YOU CLICK THE LI WHICH IS THE ENTIRE RIGHT HALF OF THE SCREEN
 // arrow function will cause loss of functionality
 $(document).on('click', '.searchable', function () {
     $.ajax({
@@ -332,9 +320,5 @@ $('#logout').on('click', function (event) {
             window.location.replace('/');
         }
     });
-    // $.get('/logout', {}).then(function(data) {
-    //     console.log(data);
-    //     window.location.replace('/');
-    // });
 });
 
