@@ -110,3 +110,23 @@ label.active {
 .active {
     color: #5a9734 !important;
 }
+
+nav {
+    color: black;
+    background-color: white;
+}
+
+.card .card-action {
+    border-top: none;
+}
+
+#profile {
+    font-size: 4rem;
+}
+
+#title {
+    text-align: center;
+    font-size: 10vh;
+    font-weight: bold;
+    color: black;
+}

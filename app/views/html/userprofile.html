@@ -24,70 +24,62 @@
         <canvas id="pizza"></canvas>
     </div>
 
-    <div class="row">
+    <nav class="row">
         <div class="col s4">
             <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
         </div>
         <div class="col s4">
-            <div class="row">
-                <div class="input-field col s6">
-                    <!-- <h1 id="title"> Welcome to Your Account</h1> -->
-                </div>
-                <!-- <a><i class="material-icons">search</i></a> -->
-            </div>
+            <h1 id="title">Account Information</h1>
         </div>
-        <div class="row">
-            <div class="col s4">
-                <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
-            </div>
+        <div class="col s4">
+            <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
         </div>
-        <div class="row">
-            <div id="grid-container">
-                <img class="activator" id="burger-pic" src="../images/Burger-PNG-Image.png" />
-            </div>
-            <div class="col s12 m7" id="account-body">
-                <div class="card large">
-                    <div class="card-action"><a href="#" id="profilePic">Your Profile</a></div>
-                    <div class="card-content">
-                        <div class="divider"></div>
-                        <div class="section">
-                            <h5 class="account-header-text">Your First Name</h5>
-                            <div class="input-field col s12">
-                                <textarea class="first-name-input materialize-textarea"></textarea>
-                                <label for="first-name-input" id="first-name">John</label>
-                            </div>
+    </nav>
+
+    <div class="row">
+        <div id="grid-container">
+            <img class="activator" id="burger-pic" src="../images/Burger-PNG-Image.png" />
+        </div>
+        <div class="col s12 m7" id="account-body">
+            <div class="card large">
+                <div class="card-action"><a class="waves-effect waves-light btn" id="update">SAVE CHANGES</a></div>
+                <div class="card-content">
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h5 class="account-header-text">Your First Name</h5>
+                        <div class="input-field col s12">
+                            <textarea class="first-name-input materialize-textarea"></textarea>
+                            <label for="first-name-input" id="first-name">John</label>
                         </div>
-                        <div class="divider"></div>
-                        <div class="section">
-                            <h5 class="account-header-text">Your Last Name</h5>
-                            <div class="input-field col s12">
-                                <textarea class="last-name-input materialize-textarea"></textarea>
-                                <label for="last-name-input" id="last-name">Doe</label>
-                            </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h5 class="account-header-text">Your Last Name</h5>
+                        <div class="input-field col s12">
+                            <textarea class="last-name-input materialize-textarea"></textarea>
+                            <label for="last-name-input" id="last-name">Doe</label>
                         </div>
-                        <div class="section">
-                            <h5 class="account-header-text">Your Number</h5>
-                            <div class="input-field col s12">
-                                <textarea class="phone-input materialize-textarea"></textarea>
-                                <label for="phone-input" id="phone">+1(000)000-0000</label>
-                            </div>
+                    </div>
+                    <div class="section">
+                        <h5 class="account-header-text">Your Number</h5>
+                        <div class="input-field col s12">
+                            <textarea class="phone-input materialize-textarea"></textarea>
+                            <label for="phone-input" id="phone">+1(000)000-0000</label>
                         </div>
-                        <div class="divider"></div>
-                        <div class="section">
-                            <h5 class="account-header-text">Your Address</h5>
-                            <div class="input-field col s12">
-                                <textarea class="address-input materialize-textarea"></textarea>
-                                <label for="address-input" id="address">1234 Main St, Chicago, IL 60611</label>
-                            </div>
-                        </div>
-                        <div class="section">
-                            <a class="waves-effect waves-light btn" id="update">SAVE CHANGES</a>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <h5 class="account-header-text">Your Address</h5>
+                        <div class="input-field col s12">
+                            <textarea class="address-input materialize-textarea"></textarea>
+                            <label for="address-input" id="address">1234 Main St, Chicago, IL 60611</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="../javascript/userprofile.js"></script>
 </body>
 

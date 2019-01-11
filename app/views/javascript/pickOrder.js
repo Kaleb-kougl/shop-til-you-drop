@@ -187,11 +187,6 @@ function renderCarousel(data) {
         }
     }
 
-    // initialize carousel so it moves
-    var instance = M.Carousel.init({
-        fullWidth: true,
-        indicators: true
-    });
     var slider = $('.carousel');
     slider.carousel();
 
@@ -291,4 +286,17 @@ function showOrder(data) {
 
 $('#skip-to-second-modal').on('click', function () {
     window.location.replace('/yourPickups');
-})
+});
+
+$('.moveNextCarousel').click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.carousel').carousel('next');
+});
+
+// move prev carousel
+$('.movePrevCarousel').click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.carousel').carousel('prev');
+});

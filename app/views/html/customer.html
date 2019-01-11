@@ -29,17 +29,12 @@
             <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
         </div>
 
-        <div class="col s8">
-            <div class="row">
-                <div class="input-field col s6">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Item Search (i.e. Apple)</label>
-                </div>
-                <div class="col s6">
-                    <a class="waves-effect waves-light btn" id="search-btn"><i class="material-icons left">search</i>Search</a>
-                </div>
-                <!-- <a><i class="material-icons">search</i></a> -->
+        <div class="col s8" id="search-container">
+            <div>
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Item Search (i.e. Apple)</label>
             </div>
+            <a class="waves-effect waves-light btn" id="search-btn"><i class="material-icons left">search</i>Search</a>
         </div>
 
         <div class="col s2">
@@ -53,12 +48,12 @@
     <div class="row">
         <!-- <div class="col s12">This div is 12-columns wide on all screen sizes</div> -->
         <div class="col s6">
-            <ul>
+            <article>
                 <h1 id="shopping-cart-title">Shopping Cart</h1>
                 <div id="shoppingList">
 
                 </div>
-            </ul>
+            </article>
             <button class="btn waves-effect waves-light" id="cart" type="submit" name="action">
                 View Cart <i class="material-icons right">send</i>
             </button>

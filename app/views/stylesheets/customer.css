@@ -45,10 +45,9 @@
     background-color: #0092ff;
 }
 
-/* #button-0 {
-    font-weight: bolder;
-    font-size: 5px;
-} */
+.add-button:focus {
+    background-color: #0092ff;
+}
 
 input:not([type]):focus:not([readonly]),
 input[type='text']:not(.browser-default):focus:not([readonly]),
@@ -119,4 +118,13 @@ label.active {
 
 #collection-list {
     display: none;
+}
+
+#search-container {
+    display: grid;
+    grid-template-columns: 80% 1fr;
+}
+
+#search-btn {
+    margin: auto;
 }

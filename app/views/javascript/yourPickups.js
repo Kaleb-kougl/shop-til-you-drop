@@ -365,4 +365,17 @@ $(document).ready(function () {
     window.location.replace('/pickOrder');
   })
 
+  $('.moveNextCarousel').click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.carousel').carousel('next');
+  });
+
+  // move prev carousel
+  $('.movePrevCarousel').click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.carousel').carousel('prev');
+  });
+
 });

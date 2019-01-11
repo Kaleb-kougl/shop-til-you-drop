@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,13 +16,13 @@
 </head>
 
 <body>
-    <div class="row">
+    <nav class="row">
         <div class="col s2">
             <a class="brand-logo" id="customer-home"><img id="logo-main" src="../images/logo1.png" alt="Logo" /></a>
         </div>
         <div class="col s8">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <h1 id="title">Welcome to Your Cart</h1>
                 </div>
                 <!-- <a><i class="material-icons">search</i></a> -->
@@ -30,11 +31,11 @@
         <div class="col s2">
             <a id="account-icon" class="secondary-content"><i class="medium material-icons" id="profile">account_circle</i></a>
         </div>
-    </div>
+    </nav>
 
     <div class="container">
         <div class="row">
-            <div class="col s6" id="orderConfirmation">
+            <div class="col s12" id="orderConfirmation">
                 <ul class="collection with-header">
                     <li class="collection-header">
                         <h4>Cart</h4>
@@ -42,12 +43,18 @@
                 </ul>
             </div>
         </div>
-        <button id="order" class="btn waves-effect waves-light" type="submit" name="action">
-            Place Order <i class="material-icons right">send</i>
-        </button>
-        <button id="add" class="btn waves-effect waves-light" type="submit" name="action">
-            Search for More Items <i class="material-icons right">send</i>
-        </button>
+        <div class="row">
+            <div class="col s6">
+                <button id="order" class="btn waves-effect waves-light" type="submit" name="action">
+                    Place Order <i class="material-icons right">send</i>
+                </button>
+            </div>
+            <div class="col s6" id="right-btn-container">
+                <button id="add" class="btn waves-effect waves-light" type="submit" name="action">
+                    Search for More Items <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
     </div>
 </body>
 <script src="../javascript/viewCart.js"></script>
