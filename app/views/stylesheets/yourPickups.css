@@ -18,6 +18,7 @@ body {
 /* set Carousel to 100% view height */
 .carousel {
   height: 100vh;
+  opacity: 0.9;
 }
 
 .modal-footer {
