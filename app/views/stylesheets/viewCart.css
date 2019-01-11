@@ -44,3 +44,17 @@ body {
     font-size: 10vh;
     font-weight: bold;
 }
+
+nav {
+    color: black;
+    background-color: white;
+}
+
+#profile {
+    font-size: 4rem;
+}
+
+#right-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
