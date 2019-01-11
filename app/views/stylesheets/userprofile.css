@@ -123,3 +123,10 @@ nav {
 #profile {
     font-size: 4rem;
 }
+
+#title {
+    text-align: center;
+    font-size: 10vh;
+    font-weight: bold;
+    color: black;
+}
