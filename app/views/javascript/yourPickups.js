@@ -218,7 +218,14 @@ $(document).ready(function () {
         });
         instance = M.Carousel.getInstance(document.querySelector('.carousel'));
         var slider = $('.carousel');
-        slider.carousel();
+        try {
+          slider.carousel();
+        }
+        catch (error) {
+          console.error(error);
+          console.log('catch, block!');
+          noContent();
+        }
         setTimeout(function () {
           $('#pizza-container').remove();
           $('#skip-to-first-modal').css('display', "block");
@@ -226,6 +233,28 @@ $(document).ready(function () {
       }
     });
 
+  }
+
+  function noContent() {
+    let img = $('<img>');
+    img.attr('src', './images/shrug.png');
+    $('.modal-content').empty();
+    $('.modal-content').css('display', 'flex');
+    $('.modal-content').css('justify-content', 'center');
+    $('.modal-content').append(img);
+    let modal = $(".modal");
+    // carousel doesn't play nice with modals, have to manual call open()
+    var instance = M.Modal.getInstance(modal);
+    let footer = $('.modal-footer');
+    footer.empty();
+    let newBtn = $('<a>');
+    newBtn.attr('href', '/pickOrder');
+    newBtn.attr('class', 'modal-close waves-effect waves-red btn-flat');
+    newBtn.text('Looks like you have no Pickups currently.')
+    newBtn.css('grid-column', 'span 4');
+    newBtn.css('text-align', 'center');
+    footer.append(newBtn);
+    instance.open();
   }
 
   function prepareModal(orderNum) {
