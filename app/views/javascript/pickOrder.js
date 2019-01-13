@@ -166,7 +166,7 @@ function renderCarousel(data) {
             // create newDiv for each data Point
             let newDiv = $('<div>');
             newDiv.addClass(
-                `carousel-item ${carouselColors[colorIndex % carouselColors.length]} white-text`
+                `carousel-item ${carouselColors[colorIndex % carouselColors.length]}`
             );
             newDiv.attr('href', '#no');
             // add orderNumber for lookup later

@@ -36,59 +36,69 @@ module.exports = (app, db) => {
 
     // add item to cart
     app.post("/api/orders/", (req, res) => {
-        db.cart.findAll({
-            where: {
-                username: app.locals.user,
-                status: 'inCart',
-                item: req.body.item
-            }
-        }).then(myCart => {
-            if (myCart.length !== 0) {
-                db.cart.update({
-                    quantity: myCart[0].dataValues.quantity + 1,
-                }, {
-                    where: {
-                        username: app.locals.user,
-                        status: 'inCart',
-                        item: req.body.item
-                    }
-                }).then(cartItem => {
-                    res.json(cartItem);
-                }).catch(err => {
-                    console.log(err);
-                })
-            } else {
-                let price = req.body.price.replace('$', '').split(' ')[0];
-                db.cart.create({
-                    item: req.body.item,
-                    price: price,
-                    quantity: parseInt(req.body.quantity),
+        if (app.locals.role === undefined) {
+            console.log(app.locals.role);
+            res.send('Access denied');
+        } else {
+            db.cart.findAll({
+                where: {
                     username: app.locals.user,
-                    UserEmail: app.locals.user
-                }).then(cartItem => {
-                    res.json(cartItem);
-                }).catch(err => {
-                    console.log(err);
-                })
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+                    status: 'inCart',
+                    item: req.body.item
+                }
+            }).then(myCart => {
+                if (myCart.length !== 0) {
+                    db.cart.update({
+                        quantity: myCart[0].dataValues.quantity + 1,
+                    }, {
+                            where: {
+                                username: app.locals.user,
+                                status: 'inCart',
+                                item: req.body.item
+                            }
+                        }).then(cartItem => {
+                            res.json(cartItem);
+                        }).catch(err => {
+                            console.log(err);
+                        })
+                } else {
+                    let price = req.body.price.replace('$', '').split(' ')[0];
+                    db.cart.create({
+                        item: req.body.item,
+                        price: price,
+                        quantity: parseInt(req.body.quantity),
+                        username: app.locals.user,
+                        UserEmail: app.locals.user
+                    }).then(cartItem => {
+                        res.json(cartItem);
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     });
 
     // delete an item from cart
     app.delete("/api/orders/", (req, res) => {
-        db.cart.destroy({
-            where: {
-                username: app.locals.user,
-                item: req.body.item,
-                status: 'inCart'
-            }
-        }).then(cartItem => {
-            res.json(cartItem);
-        }).catch(err => {
-            console.log(err);
-        })
+        if (app.locals.role === undefined) {
+            console.log(app.locals.role);
+            res.send('Access denied');
+        } else {
+            db.cart.destroy({
+                where: {
+                    username: app.locals.user,
+                    item: req.body.item,
+                    status: 'inCart'
+                }
+            }).then(cartItem => {
+                res.json(cartItem);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     });
 
     // display user's cart
