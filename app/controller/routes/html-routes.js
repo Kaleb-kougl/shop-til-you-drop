@@ -26,11 +26,21 @@ module.exports = app => {
     });
 
     app.get('/pickOrder', (req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
+        if (app.locals.role === undefined) {
+            console.log(app.locals.role);
+            res.status(401).redirect('/login');
+        } else {
+            res.status(200).sendFile(path.join(__dirname, '/../../views/html/pickOrder.html'));
+        }
     });
 
     app.get('/yourPickups', (req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '/../../views/html/yourPickups.html'));
+        if (app.locals.role === undefined) {
+            console.log(app.locals.role);
+            res.status(401).redirect('/login');
+        } else {
+            res.status(200).sendFile(path.join(__dirname, '/../../views/html/yourPickups.html'));
+        }
     });
 
     app.get('/directions/', (req, res) => {
