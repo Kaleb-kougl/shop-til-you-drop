@@ -1,70 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Login</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- reset -->
-        <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
-        <!-- materialize cdn -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery.js"></script>
 
-        <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/login.css" />
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- reset -->
+    <link rel="stylesheet" href="../stylesheets/reset.css" media="screen" title="no title" />
+    <!-- materialize cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery.js"></script>
 
-    <body>
-        <article class="container">
-            <h1>Log In!</h1>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">textsms</i>
-                    <input type="email" id="email-input" /> <label for="email-input">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">textsms</i>
-                    <input type="password" id="password-input" />
-                    <label for="password-input">Password</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12" id="login-btn-container">
-                    <a class="waves-effect waves-light btn" id="login-btn"
-                        ><i class="material-icons left">cloud</i>Login</a
-                    >
-                </div>
-            </div>
-            <div class="row" id="signup-container">
-                <!-- <div class="col s4"></div> -->
-                <div class="input-field col s9 txt">
-                    <h5 id="signup-text">
-                        Don't have an account? Click to sign up!
-                        <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam ipsam soluta
-        recusandae non voluptates -->
-                        <!-- facere corrupti magnam! Perspiciatis incidunt sunt maiores id? Magni aut -->
-                        <!-- totam officiis, quo cum perferendis impedit. -->
-                    </h5>
-                </div>
-                <div class="col s3">
-                    <!-- <h2>Don't have an account?</h2> -->
-                    <a class="waves-effect waves-light btn" id="signup-btn" href="/signup"
-                        >Sign Up!<i class="material-icons left">cloud</i></a
-                    >
-                </div>
-                <!-- </div> -->
-            </div>
-        </article>
-        <!-- leave at bottom -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/login.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+</head>
 
-        <script src="/javascript/login.js"></script>
-    </body>
+<body>
+    <article class="container">
+        <h1>Log In!</h1>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="email" id="email-input" /> <label for="email-input">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="password" id="password-input" />
+                <label for="password-input">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12" id="login-btn-container">
+                <a class="waves-effect waves-light btn" id="login-btn"><i class="material-icons left">cloud</i>Login</a>
+            </div>
+        </div>
+        <div class="row" id="signup-container">
+            <div class="input-field col s9 txt">
+                <h5 id="signup-text">
+                    Don't have an account? Click to sign up!
+                </h5>
+            </div>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn" id="signup-btn" href="/signup">Sign Up!<i class="material-icons left">cloud</i></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- leave at bottom -->
+    <script src="/javascript/login.js"></script>
+</body>
+
 </html>
