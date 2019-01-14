@@ -1,6 +1,7 @@
 #logo-main {
     width: 80px;
-    height: 65px;
+    height: 4rem;
+    max-height: 62px;  
 }
 
 #shopping-cart-title {

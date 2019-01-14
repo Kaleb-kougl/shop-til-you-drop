@@ -1,9 +1,14 @@
+:root {
+    font-size: calc(1vw + 1vh + 1vmin);
+}
+
 /*background style*/
 body {
     background: radial-gradient(circle closest-side at 50px 50px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 40px 60px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 60px 60px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 50px 70px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 150px 165px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 140px 175px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 160px 175px, #FB8B24 3px, transparent 0), radial-gradient(circle closest-side at 150px 185px, #FB8B24 3px, transparent 0), radial-gradient(ellipse closest-side at 50px 60px, #F9A734 18px, transparent 0), radial-gradient(ellipse closest-side at 150px 175px, #F9A734 18px, transparent 0), radial-gradient(circle closest-side at 30px 40px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 40px 35px, #36964C 15px, transparent 0), radial-gradient(circle closest-side at 70px 40px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 60px 35px, #286E38 15px, transparent 0), radial-gradient(circle closest-side at 130px 155px, #FFFFFF 15px, transparent 0), radial-gradient(circle closest-side at 140px 150px, #36964C 15px, transparent 0), radial-gradient(circle at 170px 155px, #FFFFFF 15px, transparent 0), radial-gradient(circle at 160px 150px, #286E38 15px, transparent 0);
     background-color: #FFFFFF;
     background-size: 180px 210px;
     animation: animatedBackground 1.2s cubic-bezier(0.61, -0.64, 0.58, 1.46) forwards;
+    overflow-x: hidden;
   }
   
   /* Animation */
@@ -22,13 +27,19 @@ body {
 
 #logo-main {
     width: 80px;
-    height: 65px;
+    height: 4rem;
+    max-height: 62px;
+    font-size: 1.5rem;
+    margin-top: 0.3rem;
+    font-weight: bold;
+    color: black;  
 }
 
 #title {
     text-align: center;
-    font-size: 10vh;
+    font-size: 2rem;
     font-weight: bold;
+    margin-top: 0.4rem;
 }
 
 #account-icon {
@@ -49,9 +60,17 @@ nav {
 
 #profile {
     font-size: 4rem;
+    max-height: 62px;
 }
 
 #right-btn-container {
     display: flex;
     justify-content: flex-end;
+}
+
+@media (max-width: 992px) {
+    #customer-home {
+        left: 1%;
+        -webkit-transform: translateX(1%);
+    }
 }
