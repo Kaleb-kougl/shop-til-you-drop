@@ -38,3 +38,9 @@ label.active {
 h1 {
     color: #5a9734;
 }
+
+@media (max-width: 425px){
+    label[for=phone-input]{
+        font-size: 8pt;
+    }
+}
