@@ -84,3 +84,12 @@ a.middle-indicator-text{
 visibility: hidden;
 }
 /* End arrows */
+
+@media (max-width: 768px){
+
+  #skip-to-second-modal {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+}

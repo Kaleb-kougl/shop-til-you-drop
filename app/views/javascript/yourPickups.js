@@ -160,7 +160,9 @@ $(document).ready(function () {
           data[i.orderNumber].push(i);
         }
       });
-      renderCarousel(data, false);
+      if (!isEmpty(data)) {
+        renderCarousel(data, false);
+      }
       let transitData = {};
       $.ajax({
         type: "POST",
@@ -174,7 +176,13 @@ $(document).ready(function () {
             transitData[i.orderNumber].push(i);
           }
         });
-        renderCarousel(transitData, true);
+        try {
+          if (!isEmpty(transitData)) {
+            renderCarousel(transitData, true);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       })
 
       // store data in a global var for later
@@ -237,10 +245,12 @@ $(document).ready(function () {
   function noContent() {
     let img = $('<img>');
     img.attr('src', './images/shrug.png');
+    img.attr('id', 'no-orders-img');
     $('.modal-content').empty();
     $('.modal-content').css('display', 'flex');
     $('.modal-content').css('justify-content', 'center');
     $('.modal-content').append(img);
+    $('.modal-content').css('padding-top', 0);
     let modal = $(".modal");
     // carousel doesn't play nice with modals, have to manual call open()
     var instance = M.Modal.getInstance(modal);
@@ -249,7 +259,7 @@ $(document).ready(function () {
     let newBtn = $('<a>');
     newBtn.attr('href', '/pickOrder');
     newBtn.attr('class', 'modal-close waves-effect waves-red btn-flat');
-    newBtn.text('Looks like you have no Pickups currently.')
+    newBtn.text('You have no Pickups currently.')
     newBtn.css('grid-column', 'span 4');
     newBtn.css('text-align', 'center');
     footer.append(newBtn);
@@ -406,4 +416,11 @@ $(document).ready(function () {
     $('.carousel').carousel('prev');
   });
 
+  function isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
+        return false;
+    }
+    return true;
+  }
 });

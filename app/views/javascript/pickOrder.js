@@ -126,15 +126,6 @@ let pizza = new Pizza('pizza');
     pizza.update();
 })();
 
-$.get('/api/orders/active/', function (data) {
-    if (data === 'Access denied') {
-        alert('Please log in for access!');
-        window.location.replace('/login/');
-    } else {
-        renderCarousel(data);
-    }
-});
-
 var globalData;
 var carouselColors = [
     'green lighten-5',
@@ -149,6 +140,15 @@ var carouselColors = [
     'green darken-4'
 ];
 
+$.get('/api/orders/active/', function (data) {
+    if (data === 'Access denied') {
+        alert('Please log in for access!');
+        window.location.replace('/login/');
+    } else {
+        renderCarousel(data);
+    }
+});
+
 function renderCarousel(data) {
     // store data in a global var for later
     globalData = data;
@@ -159,42 +159,40 @@ function renderCarousel(data) {
     if (arrayOfKeys.length === 1) {
         doTwice = 2;
     }
-    // prevents carousel from only having one slide
-    for (let i = 0; i < doTwice; i++) {
-        for (let order in data) {
-            colorIndex++;
-            // create newDiv for each data Point
-            let newDiv = $('<div>');
-            newDiv.addClass(
-                `carousel-item ${carouselColors[colorIndex % carouselColors.length]}`
-            );
-            newDiv.attr('href', '#no');
-            // add orderNumber for lookup later
-            newDiv.attr('data-orderNumber', order);
-            // Give header
-            let newHeader = $('<h2>');
-            newHeader.html('Order #' + order);
-            newDiv.append(newHeader);
-            // create list of items to purchase
-            let newUl = $('<ul>');
-            data[order].map(item => {
-                let newLi = $('<li>');
-                newLi.html(`${item.item} : ${item.quantity}`);
-                newUl.append(newLi);
-            });
-            newDiv.append(newUl);
-            $('.carousel').append(newDiv);
+    if (!isEmpty(data)) {
+        // prevents carousel from only having one slide
+        for (let i = 0; i < doTwice; i++) {
+            for (let order in data) {
+                colorIndex++;
+                // create newDiv for each data Point
+                let newDiv = $('<div>');
+                newDiv.addClass(
+                    `carousel-item ${carouselColors[colorIndex % carouselColors.length]}`
+                );
+                newDiv.attr('href', '#no');
+                // add orderNumber for lookup later
+                newDiv.attr('data-orderNumber', order);
+                // Give header
+                let newHeader = $('<h2>');
+                newHeader.html('Order #' + order);
+                newDiv.append(newHeader);
+                // create list of items to purchase
+                let newUl = $('<ul>');
+                data[order].map(item => {
+                    let newLi = $('<li>');
+                    newLi.html(`${item.item} : ${item.quantity}`);
+                    newUl.append(newLi);
+                });
+                newDiv.append(newUl);
+                $('.carousel').append(newDiv);
+            }
         }
+    } else {
+        $('#details-btn').css('display', 'none');
+        alert('There are no orders currently that need a shopper!');
     }
 
     var slider = $('.carousel');
-    try {
-        slider.carousel();
-    }
-    catch (error) {
-        console.error(error);
-        noContent();
-    }
 
     // initialize modal
     $('.modal').modal();
@@ -247,28 +245,6 @@ function prepareModal(orderNum) {
     modalCont.append(addressDiv);
 }
 
-function noContent() {
-    let img = $('<img>');
-    img.attr('src', './images/shrug.png');
-    $('.modal-content').empty();
-    $('.modal-content').css('display', 'flex');
-    $('.modal-content').css('justify-content', 'center');
-    $('.modal-content').append(img);
-    let modal = $(".modal");
-    // carousel doesn't play nice with modals, have to manual call open()
-    var instance = M.Modal.getInstance(modal);
-    let footer = $('.modal-footer');
-    footer.empty();
-    let newBtn = $('<a>');
-    newBtn.attr('href', '/');
-    newBtn.attr('class', 'modal-close waves-effect waves-red btn-flat');
-    newBtn.text('Looks like you have no Pickups currently.')
-    newBtn.css('grid-column', 'span 4');
-    newBtn.css('text-align', 'center');
-    footer.append(newBtn);
-    instance.open();
-}
-
 // grab the div with .active for the button then render a model
 $('#details-btn').on('click', function (e) {
     let activeOrder = $('.active').attr('data-orderNumber');
@@ -310,6 +286,14 @@ function success(data) {
 
 function showOrder(data) {
     console.log(data);
+}
+
+function isEmpty(obj) {
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
 }
 
 $('#skip-to-second-modal').on('click', function () {
