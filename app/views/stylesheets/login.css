@@ -1,3 +1,7 @@
+:root {
+    font-size: calc(1vw + 1vh + 1vmin);
+}
+
 body,
 html {
     height: 100vh;
@@ -5,30 +9,22 @@ html {
     overflow: scroll;
 }
 
-body {
-    position: fixed;
-    top: 5vh;
+h1 {
+    font-size: 2.8rem;
 }
 
 #login-btn-container {
     display: flex;
     justify-content: flex-end;
+    margin-top: 0;
 }
 
 #signup-container {
     margin-top: 5vh;
 }
 
-#signup-text {
-    text-align: right;
-}
-
 .txt {
     margin: 0;
-}
-
-h2 {
-    font-size: 24px;
 }
 
 .btn {
@@ -54,6 +50,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #5a9734;
     -webkit-box-shadow: 0 1px 0 0 #5a9734;
     box-shadow: 0 1px 0 0 #5a9734;
+    height: 2.5rem;
 }
 
 label.focus {
@@ -70,4 +67,55 @@ label.active {
 
 h1 {
     color: #5a9734;
+}
+
+#signup-text {
+    text-align: right;
+}
+
+#signup-btn {
+    margin-top: 35%;
+}
+
+#email-input {
+    height: 2rem;
+}
+
+#password-input {
+    height: 2rem;
+}
+
+@media (max-width: 425px){
+    h1 {
+        text-align: center;
+        font-size: 4rem;
+    }
+
+    #password-row {
+        margin-bottom: 0;
+    }
+    #password-col {
+        margin-bottom: 0.5rem;
+    }
+
+    #signup-container {
+        margin-top: 5rem;
+        /* max-height: 100px; */
+    }
+
+    #signup-text {
+        text-align: center;
+    }
+
+    #signup-btn {
+        margin-top: 20%;
+    }
+
+    #email-input {
+        height: 2.5rem;
+    }
+    
+    #password-input {
+        height: 2.5rem;
+    }
 }

@@ -21,14 +21,14 @@
 <body>
     <article class="container">
         <h1>Log In!</h1>
-        <div class="row">
+        <div class="row" id="email-row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">textsms</i>
                 <input type="email" id="email-input" /> <label for="email-input">Email</label>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
+        <div class="row" id="password-row">
+            <div class="input-field col s12" id="password-col">
                 <i class="material-icons prefix">textsms</i>
                 <input type="password" id="password-input" />
                 <label for="password-input">Password</label>
@@ -40,12 +40,12 @@
             </div>
         </div>
         <div class="row" id="signup-container">
-            <div class="input-field col s9 txt">
+            <div class="input-field col s8 m9 txt">
                 <h5 id="signup-text">
                     Don't have an account? Click to sign up!
                 </h5>
             </div>
-            <div class="col s3">
+            <div class="col s4 m3">
                 <a class="waves-effect waves-light btn" id="signup-btn" href="/signup">Sign Up!<i class="material-icons left">cloud</i></a>
             </div>
         </div>
