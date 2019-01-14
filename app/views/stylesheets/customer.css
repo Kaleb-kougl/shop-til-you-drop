@@ -128,3 +128,40 @@ label.active {
 #search-btn {
     margin: auto;
 }
+
+@media (max-width: 768px){
+    .s0 {
+        display: none;
+    }
+
+    img {
+        position: absolute;
+        z-index: -1000;
+        width: 100vw;
+        height: auto;
+        left: 0;
+    }
+
+    #nav-row {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #search-container {
+        grid-area: 2 / 1 / 3 / 4;
+    }
+
+    #nav-icon-container {
+        grid-area: 1 / 1 / 2 / 4;
+    }
+
+    #logout {
+        float: left;
+        margin-top: 1rem;
+    }
+     
+    #search-textlabel {
+        margin-right: 10px;
+    }
+}
