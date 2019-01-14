@@ -72,11 +72,7 @@ body {
 .card.large {
     width: 70%;
     margin: auto;
-<<<<<<< HEAD
     height: 110vh;
-=======
-    height: 140vh;
->>>>>>> 6ac95425af35eab949d5e59b10392c1a80ccd6ed
 }
 
 #grid-container {
