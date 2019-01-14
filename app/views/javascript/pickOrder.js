@@ -188,7 +188,13 @@ function renderCarousel(data) {
     }
 
     var slider = $('.carousel');
-    slider.carousel();
+    try {
+        slider.carousel();
+    }
+    catch (error) {
+        console.error(error);
+        noContent();
+    }
 
     // initialize modal
     $('.modal').modal();
@@ -239,6 +245,28 @@ function prepareModal(orderNum) {
     addressDiv.css('clear', 'both');
     addressDiv.css('float', 'right');
     modalCont.append(addressDiv);
+}
+
+function noContent() {
+    let img = $('<img>');
+    img.attr('src', './images/shrug.png');
+    $('.modal-content').empty();
+    $('.modal-content').css('display', 'flex');
+    $('.modal-content').css('justify-content', 'center');
+    $('.modal-content').append(img);
+    let modal = $(".modal");
+    // carousel doesn't play nice with modals, have to manual call open()
+    var instance = M.Modal.getInstance(modal);
+    let footer = $('.modal-footer');
+    footer.empty();
+    let newBtn = $('<a>');
+    newBtn.attr('href', '/');
+    newBtn.attr('class', 'modal-close waves-effect waves-red btn-flat');
+    newBtn.text('Looks like you have no Pickups currently.')
+    newBtn.css('grid-column', 'span 4');
+    newBtn.css('text-align', 'center');
+    footer.append(newBtn);
+    instance.open();
 }
 
 // grab the div with .active for the button then render a model
