@@ -1,5 +1,6 @@
 :root {
     font-size: calc(1vw + 1vh + 1vmin);
+    --green: #5a9734
 }
 
 /* PIZZA LOADER */
@@ -39,7 +40,7 @@ body {
 
 #title {
     text-align: center;
-    color: #5a9734;
+    color: var(--green);
     font-display: bold;
     font-size: 1.5rem;
     margin-top: 0.3rem;
@@ -52,7 +53,7 @@ body {
 }
 
 #account-icon {
-    color: #5a9734;
+    color: var(--green);
 }
 
 .account-header-text {
@@ -106,21 +107,21 @@ input[type='tel']:not(.browser-default):focus:not([readonly]),
 input[type='number']:not(.browser-default):focus:not([readonly]),
 input[type='search']:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #5a9734;
-    -webkit-box-shadow: 0 1px 0 0 #5a9734;
-    box-shadow: 0 1px 0 0 #5a9734;
+    border-bottom: 1px solid var(--green);
+    -webkit-box-shadow: 0 1px 0 0 var(--green);
+    box-shadow: 0 1px 0 0 var(--green);
 }
 
 label.focus {
-    color: #5a9734;
+    color: var(--green);
 }
 
 label.active {
-    color: #5a9734;
+    color: var(--green);
 }
 
 .active {
-    color: #5a9734 !important;
+    color: var(--green) !important;
 }
 
 nav {
@@ -137,7 +138,10 @@ nav {
     max-height: 62px;
 }
 
-#address, #first-name, #last-name, #phone {
+#address, 
+#first-name, 
+#last-name, 
+#phone {
     font-size: 1rem;
     top: 0px;
 }
@@ -152,7 +156,10 @@ nav {
         font-size: 2.0rem;
     }
 
-    #address, #first-name, #last-name, #phone {
+    #address, 
+    #first-name, 
+    #last-name, 
+    #phone {
         font-size: 0.7rem;
         top: 0px;
     }

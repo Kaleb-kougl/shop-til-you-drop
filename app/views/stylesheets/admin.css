@@ -1,3 +1,7 @@
+:root {
+    --green: #5a9734
+}
+
 .ban,
 .unban {
     cursor: pointer;
@@ -23,23 +27,23 @@ input[type='tel']:not(.browser-default):focus:not([readonly]),
 input[type='number']:not(.browser-default):focus:not([readonly]),
 input[type='search']:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #5a9734;
-    -webkit-box-shadow: 0 1px 0 0 #5a9734;
-    box-shadow: 0 1px 0 0 #5a9734;
+    border-bottom: 1px solid var(--green);
+    -webkit-box-shadow: 0 1px 0 0 var(--green);
+    box-shadow: 0 1px 0 0 var(--green);
 }
 
 label.focus {
-    color: #5a9734;
+    color: var(--green);
 }
 
 label.active {
-    color: #5a9734;
+    color: var(--green);
 }
 
 .active {
-    color: #5a9734 !important;
+    color: var(--green) !important;
 }
 
 h1 {
-    color: #5a9734;
+    color: var(--green);
 }

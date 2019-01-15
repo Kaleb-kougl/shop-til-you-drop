@@ -1,11 +1,11 @@
 :root {
     --fade-in-time: fadein 1.7s;
+    font-size: calc(1vw + 1vh + 1vmin);
 }
 
 body,
 html {
     height: 100%;
-    font-size: calc(1vw + 1vh + 1vmin);
 }
 
 h1 {

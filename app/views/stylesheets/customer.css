@@ -1,3 +1,9 @@
+:root{
+    --green: #5a9734;
+    --blue: #0092ff;
+    --red: #e75a2c;
+}
+
 #logo-main {
     width: 80px;
     height: 4rem;
@@ -5,7 +11,7 @@
 }
 
 #shopping-cart-title {
-    color: #5a9734;
+    color: var(--green);
     text-decoration: underline;
     font-weight: bold;
     font-size: x-large;
@@ -21,33 +27,33 @@
 }
 
 .btn {
-    background-color: #e75a2c;
+    background-color: var(--red);
 }
 
 .btn:hover {
-    background-color: #0092ff;
+    background-color: var(--blue);
 }
 
 .remove {
-    background-color: #e75a2c;
+    background-color: var(--red);
     color: white;
 }
 
 .remove:hover {
-    background-color: #0092ff;
+    background-color: var(--blue);
 }
 
 .add-button {
-    background-color: #e75a2c;
+    background-color: var(--red);
     color: white;
 }
 
 .add-button:hover {
-    background-color: #0092ff;
+    background-color: var(--blue);
 }
 
 .add-button:focus {
-    background-color: #0092ff;
+    background-color: var(--blue);
 }
 
 input:not([type]):focus:not([readonly]),
@@ -63,25 +69,25 @@ input[type='tel']:not(.browser-default):focus:not([readonly]),
 input[type='number']:not(.browser-default):focus:not([readonly]),
 input[type='search']:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #5a9734;
-    -webkit-box-shadow: 0 1px 0 0 #5a9734;
-    box-shadow: 0 1px 0 0 #5a9734;
+    border-bottom: 1px solid var(--green);
+    -webkit-box-shadow: 0 1px 0 0 var(--green);
+    box-shadow: 0 1px 0 0 var(--green);
 }
 
 label.focus {
-    color: #5a9734;
+    color: var(--green);
 }
 
 label.active {
-    color: #5a9734;
+    color: var(--green);
 }
 
 .active {
-    color: #5a9734 !important;
+    color: var(--green) !important;
 }
 
 #account-icon {
-    color: #5a9734;
+    color: var(--green);
 }
 
 #right {
@@ -92,7 +98,7 @@ label.active {
 #pizza-container {
     height: 100vh;
     width: 100vw;
-    background: #0092ff;
+    background: var(--blue);
     display: flex;
     align-items: center;
     justify-content: center;

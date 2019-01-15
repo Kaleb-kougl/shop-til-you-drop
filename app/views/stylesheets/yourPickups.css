@@ -58,20 +58,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.middle-indicator{
+.middle-indicator {
    position:absolute;
    top:50%;
 }
 
-.middle-indicator-text{
+.middle-indicator-text {
   font-size: 4.2rem;
 }
 
-a.middle-indicator-text{
+a.middle-indicator-text {
   color:white !important;
 }
 
-.content-indicator{
+.content-indicator {
   width: 64px;
   height: 64px;
   background: none;
@@ -80,7 +80,7 @@ a.middle-indicator-text{
   border-radius: 50px; 
 }
 
-.indicators{
+.indicators {
 visibility: hidden;
 }
 /* End arrows */

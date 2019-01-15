@@ -9,17 +9,17 @@ body {
     background-size: 180px 210px;
     animation: animatedBackground 1.2s cubic-bezier(0.61, -0.64, 0.58, 1.46) forwards;
     overflow-x: hidden;
-  }
+}
   
-  /* Animation */
-  @keyframes animatedBackground {
+/* Animation */
+@keyframes animatedBackground {
     from {
-      background-position: 0 50%;
+        background-position: 0 50%;
     }
     to {
-      background-position: 0 0;
+        background-position: 0 0;
     }
-  }
+}
 
 #orderConfirmation {
     background: white;
