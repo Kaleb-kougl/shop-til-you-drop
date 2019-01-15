@@ -1,4 +1,4 @@
-$('#signupform').on('submit', function(event) {
+$('#signupform').on('submit', function (event) {
     event.preventDefault();
     var first_name = $('#first_name')
         .val()
@@ -46,7 +46,7 @@ $('#signupform').on('submit', function(event) {
     // 1. check for duplication
     $.post('/api/check', {
         email: email
-    }).then(function(data) {
+    }).then(function (data) {
         // 2. if user isn't in the db, add them
         if (data !== null) {
             // 3. if user is in db, alert saying email exists
@@ -70,9 +70,9 @@ $('#signupform').on('submit', function(event) {
                     location.replace(role);
                 }
             })
-            .catch(err => {
-                console.log(err);
-            });
+                .catch(err => {
+                    console.log(err);
+                });
         } else {
             console.log('How did you get here?');
         }
