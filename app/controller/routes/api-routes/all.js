@@ -2,19 +2,19 @@ const passport = require('passport');
 
 module.exports = (app, db) => {
     // used in signup -- checks for email existence before allowing you to enter a new email
-    app.post('/api/check', function(req, res) {
+    app.post('/api/check', function (req, res) {
         db.User.findOne({
             attributes: ['email', 'role', 'activeuser'],
             where: {
                 email: req.body.email
             }
-        }).then(function(project) {
+        }).then(function (project) {
             res.json(project);
         });
     });
 
     // Sign up functionality
-    app.post('/api/signup/', function(req, res) {
+    app.post('/api/signup/', function (req, res) {
         if (req.body.role === 'Admin') {
             if (req.body.accessCode === process.env.ACCESS_CODE) {
                 db.User.create({
@@ -91,14 +91,14 @@ module.exports = (app, db) => {
     });
 
     // Route for logging user out
-    app.get('/logout', function(req, res) {
+    app.get('/logout', function (req, res) {
         console.log(req.body);
         req.logout();
         res.send('complete');
     });
 
-    app.get('/api/login', function(req, res, next) {
-        passport.authenticate('local', function(err, user, info) {
+    app.get('/api/login', function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
             if (err) {
                 return next(err);
             }
@@ -107,7 +107,7 @@ module.exports = (app, db) => {
                 console.log(info);
                 return res.json(info);
             }
-            req.logIn(user, function(err) {
+            req.logIn(user, function (err) {
                 if (err) {
                     console.log(err);
                     return next(err);

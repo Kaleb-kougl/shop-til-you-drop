@@ -40,10 +40,10 @@ db.demo = require('./demo.js')(sequelize, Sequelize);
 
 // user to demo:
 db.user.hasOne(db.demo);
-db.demo.belongsTo(db.user, {foreignKey: 'username', targetKey: 'email'});
+db.demo.belongsTo(db.user, { foreignKey: 'username', targetKey: 'email' });
 
 // demo to cart
 db.demo.hasMany(db.cart);
-db.cart.belongsTo(db.demo, {foreignKey: 'username', targetKey: 'username'});
+db.cart.belongsTo(db.demo, { foreignKey: 'username', targetKey: 'username' });
 
 module.exports = db;

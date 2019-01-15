@@ -1,10 +1,10 @@
 module.exports = (app, db) => {
     // display all users 
     app.get('/api/admin/users/', (req, res) => {
-        if (app.locals.role !== 'Admin'){
+        if (app.locals.role !== 'Admin') {
             res.send('Access denied')
         } else {
-            if (app.locals.role !== 'Admin'){
+            if (app.locals.role !== 'Admin') {
                 res.send('Access denied')
             } else {
                 db.user.findAll().then(users => {
