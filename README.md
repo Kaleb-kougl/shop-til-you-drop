@@ -1,6 +1,7 @@
 # shop-til-you-drop
 Our App's Goal
 Our app allow clients to order products that will be pushed to a cloud database. For the worker base, the app allow workers to access cloud database and pull down orders. There is user validation, authentication, administrative abilities
+[Live Link](https://shop-until-you-drop.herokuapp.com/)
 
 ## Our App Pages:
 
