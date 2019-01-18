@@ -1,27 +1,28 @@
+/**
+ * This function will take an HTML element and return the trimmed value
+ * @param {obj} element - DOM element that value needs to be extracted from
+ * @returns {string} - The trimmed value of the DOM element
+ */
+function getTrimmedValue(element) {
+    return element.val().trim();
+}
+
+/** 
+ * This function will run when HTML element with ID of #signupform is clicked.
+ * Check for valid input that fits necessary format
+ * Check that it's not already in the database and let the user know if it's already there. 
+ * It will put the new values into the database if not there. 
+ */
 $('#signupform').on('submit', function (event) {
     event.preventDefault();
-    var first_name = $('#first_name')
-        .val()
-        .trim();
-    var last_name = $('#last_name')
-        .val()
-        .trim();
-    var password = $('#password-input')
-        .val()
-        .trim();
-    var email = $('#email-input')
-        .val()
-        .trim();
-    var phoneRaw = $('#phone-input')
-        .val()
-        .trim();
-    var address = $('#address-input')
-        .val()
-        .trim();
-    var picture = $('#picture-link')
-        .val()
-        .trim();
-    var accessCode = $('#access-code-input').val().trim();
+    var first_name = getTrimmedValue($('#first_name'));
+    var last_name = getTrimmedValue($('#last_name'));
+    var password = getTrimmedValue($('#password-input'));
+    var email = getTrimmedValue($('#email-input'));
+    var phoneRaw = getTrimmedValue($('#phone-input'));
+    var address = getTrimmedValue($('#address-input'));
+    var picture = getTrimmedValue($('#picture-link'));
+    var accessCode = getTrimmedValue($('#access-code-input'));
 
     // 0. check for text
     if (!email || !password) {
