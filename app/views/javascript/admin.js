@@ -20,8 +20,6 @@ $(document).ready(function () {
             }).then(
                 console.log('hello'),
                 window.location.reload(),
-                // getTableData(),
-                // openUserProfile()
             )
         } else {
             $.ajax({
@@ -31,8 +29,6 @@ $(document).ready(function () {
             }).then(
                 console.log('hello'),
                 window.location.reload(),
-                // getTableData(),
-                // openUserProfile()
             )
         }
         console.log(status)
