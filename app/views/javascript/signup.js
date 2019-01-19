@@ -8,14 +8,15 @@ function getTrimmedValue(element) {
 }
 
 /**
- * This function will take a string and remove spaces, dashes, and ().
+ * This function will take a string and remove spaces, dashes, and () then add '+' to the front.
  * @param {string} phoneNumber - This is a string of numbers entered by the user
  * @returns {string} - The reformated string without spaces, dashes, and (). 
  */
 function formatPhoneNumber(phoneNumber) {
-    var phoneStart = phoneNumber.replace(/\D/g, '');
-    var phonehalf = phoneStart.replace(/-/g, '');
-    return phonehalf.replace(/\s/g, '');
+    let formattedPhoneNumber = phoneNumber.replace(/\D/g, '');
+    formattedPhoneNumber = formattedPhoneNumber.replace(/-/g, '');
+    formattedPhoneNumber = formattedPhoneNumber.replace(/\s/g, '');
+    return '+' + formattedPhoneNumber;
 }
 
 /**
@@ -24,27 +25,30 @@ function formatPhoneNumber(phoneNumber) {
  * @param {string} email - This is a string that represents the user's email
  * @return {boolean} - returns true if email already exists in DB and false if not. 
  */
-function checkIfEmailInDb(email) {
-    $.post('/api/check', {
-        email: email
-    }).then(function (data) {
-        if (data !== null) {
-            //if user is in db, alert saying email exists
-            alert('Email exists!');
-            return true;
-        }
-        // if user NOT in db, return false;
-        else if (data === null) {
-            // addUser(first_name, last_name, password, email, phone, address, picture, role);
-            return false;
-        } else {
-            alert('Something went wrong!');
-            return true;
-        }
-    }).catch((err) => {
-        console.error(err);
-        alert('Something went wrong fetching from the database.');
-    });
+async function checkIfEmailInDb(email) {
+    let emailsMatching;
+    try {
+        emailsMatching = await $.post('/api/check', { email: email });
+    } catch (error) {
+        console.error(error);
+        alert('Something went wrong check the database for duplicates!');
+    } finally {
+        (function (emailsMatching) {
+            if (emailsMatching !== null) {
+                //if user is in db, alert saying email exists
+                alert('Email exists!');
+                return true;
+            }
+            // if user NOT in db, return false;
+            else if (emailsMatching === null) {
+                // addUser(first_name, last_name, password, email, phone, address, picture, role);
+                return false;
+            } else {
+                alert('Something went wrong!');
+                return true;
+            }
+        })(emailsMatching);
+    }
 }
 
 /**
@@ -66,7 +70,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
         role: role,
         first_name: first_name,
         last_name: last_name,
-        phone: phone,
+        phone: phoneNum,
         address: address,
         picture: picture,
         activeuser: true
@@ -104,18 +108,16 @@ $('#signupform').on('submit', function (event) {
         return;
     }
 
-    let phoneNum = formatPhoneNumber(phoneRaw);
+    let formattedPhoneNumber = formatPhoneNumber(phoneRaw);
 
-    // Check phoneNum for valid length
-    if (phoneNum.length != 11) {
+    // Check phone number for valid length
+    if (formattedPhoneNumber.length != 12) {
         alert('Please insert a valid phone number');
         return;
     }
 
-    phoneNum = '+' + phoneNum;
-
     // If NOT in db, add user
     if (!checkIfEmailInDb(email)) {
-        addUser(first_name, last_name, password, email, phoneNum, address, picture, role);
+        addUser(first_name, last_name, password, email, formattedPhoneNumber, address, picture, role);
     }
 });
