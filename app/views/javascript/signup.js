@@ -79,6 +79,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
             alert("Something went wrong adding you to the database.");
         });
 }
+
 /**
  * This function will run when the DOM element with the ID of 'signupform' is submitted
  * It will grab the values of the form, call functions to validate the form, check the database
