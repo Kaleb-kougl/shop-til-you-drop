@@ -136,7 +136,7 @@ label.active {
     margin: auto;
 }
 
-@media (max-width: 768px){
+@media (max-width: 978px){
     .s0 {
         display: none;
     }
