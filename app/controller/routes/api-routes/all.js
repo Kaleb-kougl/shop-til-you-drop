@@ -177,13 +177,12 @@ module.exports = (app, db) => {
                 where: {
                     UserEmail: app.locals.user
                 }
-            }
-                .then(info => {
-                    res.json(info);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        );
+            })
+            .then(info => {
+                res.json(info);
+            })
+            .catch(err => {
+                console.error(err);
+            });
     });
 };
