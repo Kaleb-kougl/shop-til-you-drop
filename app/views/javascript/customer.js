@@ -137,19 +137,29 @@ let cartQuantity = [];
 let cartItems = [];
 
 
-// removes pizza loader
+/**
+ * This function will remove the loader when the document has loaded. 
+ */
 $(document).ready(function () {
     setTimeout(function () { $('#pizza-container').remove() }, 1000);
 })
 
-
+/**
+ * When the DOM element with the id 'customer-home' is clicked it will 
+ * redirect the user to the customer page
+ */
 $(document).on('click', '#customer-home', function () {
-    location.replace('/customer/');
+    location.assign('/customer/');
 });
 
+/**
+ * When the DOM element with the id 'profile' is clicked it will 
+ * redirect the user to the userprofile page
+ */
 $(document).on('click', '#profile', function () {
-    location.replace('/userprofile/');
+    location.assign('/userprofile/');
 });
+
 
 $.ajax({
     type: 'GET',
