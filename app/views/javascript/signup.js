@@ -33,21 +33,18 @@ async function checkIfEmailInDb(email) {
         console.error(error);
         alert('Something went wrong check the database for duplicates!');
     } finally {
-        (function (emailsMatching) {
-            if (emailsMatching !== null) {
-                //if user is in db, alert saying email exists
-                alert('Email exists!');
-                return true;
-            }
-            // if user NOT in db, return false;
-            else if (emailsMatching === null) {
-                // addUser(first_name, last_name, password, email, phone, address, picture, role);
-                return false;
-            } else {
-                alert('Something went wrong!');
-                return true;
-            }
-        })(emailsMatching);
+        if (emailsMatching !== null) {
+            //if user is in db, alert saying email exists
+            alert('Email already exists!');
+            return true;
+        }
+        // if user NOT in db, return false;
+        else if (emailsMatching === null) {
+            return false;
+        } else {
+            alert('Something went wrong!');
+            return true;
+        }
     }
 }
 
