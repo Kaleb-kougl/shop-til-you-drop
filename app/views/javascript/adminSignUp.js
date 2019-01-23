@@ -77,7 +77,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
             if (role === 'Access Denied') {
                 alert(role);
             } else {
-                location.assign(role);
+                window.location.assign(role);
             }
         })
         .catch(err => {
@@ -91,7 +91,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
  * Validates text in email and password textarea
  * Calls checkEmailInDB function and if false is returned, calls addUser function
  */
-$('#signupform').on('submit', async function (event) {
+$('#signupform').on('submit', async (event) => {
     event.preventDefault();
     const first_name = getTrimmedValue($('#first_name'));
     const last_name = getTrimmedValue($('#last_name'));
@@ -116,8 +116,12 @@ $('#signupform').on('submit', async function (event) {
         return;
     }
 
-    const emailAlreadyExists = await checkIfEmailInDb(email);
-    if (emailAlreadyExists === false) {
-        addUser(first_name, last_name, password, email, formattedPhoneNumber, address, picture, accessCode);
+    try {
+        const emailAlreadyExists = await checkIfEmailInDb(email);
+        if (emailAlreadyExists === false) {
+            addUser(first_name, last_name, password, email, formattedPhoneNumber, address, picture, accessCode);
+        }
+    } catch (err) {
+        console.error(err);
     }
 });

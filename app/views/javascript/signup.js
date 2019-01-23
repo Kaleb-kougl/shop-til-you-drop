@@ -73,7 +73,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
         activeuser: true
     })
         .then(role => {
-            location.replace(role);
+            window.location.replace(role);
         })
         .catch(err => {
             console.error(err);
@@ -87,7 +87,7 @@ function addUser(first_name, last_name, password, email, phoneNum, address, pict
  * for previous accounts with their email, and add the user to the database.
  * @returns {void} - This function doesn't return anything
  */
-$('#signupform').on('submit', function (event) {
+$('#signupform').on('submit', async (event) => {
     event.preventDefault();
 
     let first_name = getTrimmedValue($('#first_name'));
@@ -113,8 +113,13 @@ $('#signupform').on('submit', function (event) {
         return;
     }
 
-    // If NOT in db, add user
-    if (!checkIfEmailInDb(email)) {
-        addUser(first_name, last_name, password, email, formattedPhoneNumber, address, picture, role);
+    try {
+        const emailInDb = await checkIfEmailInDb(email);
+        if (!emailInDb) {
+            console.log(await checkIfEmailInDb(email));
+            addUser(first_name, last_name, password, email, formattedPhoneNumber, address, picture, role);
+        }
+    } catch (err) {
+        console.error(err);
     }
 });
