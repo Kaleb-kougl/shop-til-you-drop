@@ -136,58 +136,72 @@ let cartCount = 0;
 let cartQuantity = [];
 let cartItems = [];
 
+/**
+ * This ajax call will be made prior to checking to checking for document ready state
+ * to try and load previous cart data as fast as possible
+ */
+$.ajax({
+    type: 'GET',
+    url: '/api/orders/',
+    success: (cart) => onGetPreviousCart(cart)
+});
+
+/**
+ * This function will remove the pizza loader 1 second after being called
+ * Time length of 1 sec to ensure client sees asethetically pleasing loader
+ */
+function removeLoader() {
+    setTimeout(function () { $('#pizza-container').remove() }, 1000);
+}
+
 
 /**
  * This function will remove the loader when the document has loaded. 
  */
 $(document).ready(function () {
-    setTimeout(function () { $('#pizza-container').remove() }, 1000);
-})
+    removeLoader();
 
-/**
- * When the DOM element with the id 'customer-home' is clicked it will 
- * redirect the user to the customer page
- */
-$(document).on('click', '#customer-home', function () {
-    location.assign('/customer/');
+    /**
+     * When the DOM element with the id 'customer-home' is clicked it will 
+     * redirect the user to the customer page
+     */
+    $(document).on('click', '#customer-home', function () {
+        location.assign('/customer/');
+    });
+
+    /**
+     * When the DOM element with the id 'profile' is clicked it will 
+     * redirect the user to the userprofile page
+     */
+    $(document).on('click', '#profile', function () {
+        location.assign('/userprofile/');
+    });
 });
 
-/**
- * When the DOM element with the id 'profile' is clicked it will 
- * redirect the user to the userprofile page
- */
-$(document).on('click', '#profile', function () {
-    location.assign('/userprofile/');
-});
-
-
-$.ajax({
-    type: 'GET',
-    url: '/api/orders/',
-    success: cart => {
-        if (cart === 'Access denied') {
-            alert('Please log in for access!');
-            window.location.replace('/login/');
-        } else {
-            for (let i = 0; i < cart.length; i++) {
-                var removeBtn = $('<button>Remove</button>')
-                    .attr('class', 'remove')
-                    .attr('data-title', cart[i].item)
-                    .attr('id', `${cartCount}`);
-                var h2 = $('<h2>');
-                h2.text(cart[i].item);
-                var priceH3 = $('<h3>');
-                priceH3.text(`$${cart[i].price} per serving`);
-                let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
-                var div = $(`<div id='div${cartCount}'>`).append(h2, priceH3, quantity, removeBtn);
-                cartCount++;
-                cartQuantity.push(cart[i].quantity);
-                cartItems.push(cart[i].item);
-                $('#shoppingList').append(div);
-            }
+// 
+function onGetPreviousCart(cart) {
+    if (cart === 'Access denied') {
+        alert('Please log in for access!');
+        window.location.replace('/login/');
+    } else {
+        for (let i = 0; i < cart.length; i++) {
+            var removeBtn = $('<button>Remove</button>')
+                .attr('class', 'remove')
+                .attr('data-title', cart[i].item)
+                .attr('id', `${cartCount}`);
+            var h2 = $('<h2>');
+            h2.text(cart[i].item);
+            var priceH3 = $('<h3>');
+            priceH3.text(`$${cart[i].price} per serving`);
+            let quantity = $('<h4>').html(`${cart[i].quantity} serving(s)`);
+            var div = $(`<div id='div${cartCount}'>`).append(h2, priceH3, quantity, removeBtn);
+            cartCount++;
+            cartQuantity.push(cart[i].quantity);
+            cartItems.push(cart[i].item);
+            $('#shoppingList').append(div);
         }
     }
-});
+}
 
 // checks if the user has clicked the enter key
 $('#textarea1').keypress(function (e) {
@@ -279,21 +293,34 @@ $(document).on('click', '.add-button', function () {
     }
 });
 
-$(document).on('click', '.remove', function (event) {
-    event.preventDefault();
+/**
+ * This function will execute a DELETE http request to '/api/orders/' with the DOM element attr 'data-title'
+ * This function should be called using '.call(this)' to ensure the scope of 'this' is correct
+ * @callback - This function will remove the DOM element from the DOM. 
+ */
+function httpDeleteItem() {
     $.ajax({
         type: 'DELETE',
         url: '/api/orders/',
         data: {
             item: $(this).attr('data-title')
         },
-        // this has to be arrow
         success: res => {
             $(`#div${$(this).attr('id')}`).remove();
         }
     });
+}
+
+/**
+ * This function will execute when DOM element with the class 'remove' emits a click event
+ * It will call the httpDeleteItem with context for the 'this' keyword
+ */
+$(document).on('click', '.remove', function (event) {
+    event.preventDefault();
+    httpDeleteItem.call(this);
 });
 
+// TODO
 // THIS NEEDS TO BE FIXED. CURRENTLY RUNS ANYTIME YOU CLICK THE LI WHICH IS THE ENTIRE RIGHT HALF OF THE SCREEN
 // arrow function will cause loss of functionality
 $(document).on('click', '.searchable', function () {
@@ -311,24 +338,42 @@ $(document).on('click', '.searchable', function () {
     });
 });
 
+/**
+ * When the DOM element with the id of 'cart' emits the event 'click' the function will execute
+ * It will replace the client window location to '/viewCart/'
+ */
 $(document).on('click', '#cart', function () {
     location.replace('/viewCart/');
-
 });
 
-$('#logout').on('click', function (event) {
-    event.preventDefault();
+/**
+ * This will change the window to the root url 
+ */
+function changeWindowToRoot() {
+    window.location.replace('/');
+}
 
+/**
+ * Will make a GET HTTP request to '/logout'
+ * @callback changeWindowToRoot - Will call window to go to root url
+ */
+function httpLogout() {
     $.ajax({
         type: 'GET',
         url: '/logout',
         data: {
             msg: 'logout'
         },
-        success: function (res) {
-            // console.log(res);
-            window.location.replace('/');
-        }
+        success: changeWindowToRoot
     });
+}
+
+/**
+ * This function will execute when the DOM element with the id 'logout' emits a 'click' event
+ * It will prevent page reload and call the httpLogout function
+ */
+$('#logout').on('click', function (event) {
+    event.preventDefault();
+    httpLogout();
 });
 
